@@ -15,12 +15,6 @@
             android:name=".view.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".planmeals.view.PlanMealsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".favoritemeals.view.FavoriteMealsActivity"
-            android:exported="false" />
-        <activity
             android:name=".authentication.signup.view.SignupActivity"
             android:exported="false" />
         <activity
