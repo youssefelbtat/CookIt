@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="16dp"
+    tools:context=".itemPage.view.ItemPageActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <TextView
+            android:id="@+id/itemPageMealName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/fettuccine_alfredo"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fav_meal_img" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fav_meal_img"
+            android:layout_width="290dp"
+            android:layout_height="292dp"
+            android:layout_margin="25dp"
+            android:src="@drawable/ic_launcher_background"
+            app:civ_border_color="@color/item_border"
+            app:civ_border_width="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemPageMealCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/egyp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/itemPageMealName"
+            app:layout_constraintHorizontal_bias="0.375"
+            app:layout_constraintStart_toStartOf="@+id/itemPageMealName"
+            app:layout_constraintTop_toBottomOf="@+id/itemPageMealName" />
+
+        <ImageButton
+            android:id="@+id/add_to_calender"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/add_to_calender_solid"
+            app:layout_constraintStart_toEndOf="@+id/itemPageMealName"
+            app:layout_constraintTop_toBottomOf="@+id/fav_meal_img" />
+
+        <ImageButton
+            android:id="@+id/add_to_favorite"
+            android:layout_width="30dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/add_favorite_solid_icon"
+            app:layout_constraintEnd_toEndOf="@+id/fav_meal_img"
+            app:layout_constraintHorizontal_bias="0.72"
+            app:layout_constraintStart_toEndOf="@+id/add_to_calender"
+            app:layout_constraintTop_toBottomOf="@+id/fav_meal_img" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
