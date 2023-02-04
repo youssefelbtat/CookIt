@@ -20,7 +20,8 @@
             android:theme="@style/Theme.CookIt.NoActionBar" />
         <activity
             android:name=".view.MainActivity"
-            android:exported="false" />
+            android:exported="true" />
+
         <activity
             android:name=".authentication.signup.view.SignupActivity"
             android:exported="false" />
@@ -36,6 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

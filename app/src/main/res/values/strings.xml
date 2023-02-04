@@ -15,4 +15,13 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="egyp">Egyption</string>
+    <string name="userName">UserName</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="singup">SignUp</string>
+    <string name="or">Or</string>
+    <string name="haveAccount">Have an acount</string>
+    <string name="login">Login</string>
+    <string name="forgot">FORGOT  PASSWORD</string>
 </resources>
