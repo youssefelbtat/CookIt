@@ -7,7 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="MainButtonBG">#F73E0D</color>
     <color name="itemBG">#F4E6D0</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#3C3B3B</color>
     <color name="white">#FFFFFFFF</color>
     <color name="maincolor">#419F7D</color>
+    <color name="background">#6B6969</color>
+
 </resources>

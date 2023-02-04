@@ -13,4 +13,8 @@
     <string name="haveAccount">Have an acount</string>
     <string name="login">Login</string>
     <string name="forgot">FORGOT  PASSWORD</string>
+    <string name="skip">SKIP</string>
+    <string name="categories">Categories</string>
+    <string name="country">Country</string>
+    <string name="daily_inspiration">Daily Inspiration</string>
 </resources>
