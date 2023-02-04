@@ -1,6 +1,7 @@
 package com.example.cookit.favoritemeals.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.model.MealModel;
 
 import java.util.List;
@@ -50,7 +53,16 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
             @Override
             public void onClick(View v) {
                 model.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
 //                onListener.onRemoveFavClick(model.get(holder.getAdapterPosition()));
+            }
+        });
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, ItemPageActivity.class);
+                intent.putExtra("mealName",model.get(holder.getAdapterPosition()).getMealName());
+                context.startActivity(intent);
             }
         });
 
@@ -65,11 +77,13 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
         TextView meal_name;
         CircleImageView meal_image;
         ImageButton remove_from_fav;
+        CardView item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             meal_name =itemView.findViewById(R.id.fav_meal_name);
             meal_image =itemView.findViewById(R.id.fav_meal_img);
             remove_from_fav =itemView.findViewById(R.id.remove_from_fav);
+            item=itemView.findViewById(R.id.favoriteItemCard);
         }
     }
 }
