@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:fabCradleMargin="20dp"
+        app:fabCradleMargin="15dp"
         app:fabCradleRoundedCornerRadius="15dp"
         app:fabCradleVerticalOffset="10dp"/>
 
@@ -33,6 +33,8 @@
         android:src="@drawable/calendar_icon"
         app:backgroundTint="@color/MainButtonBG"
         app:layout_anchor="@id/bottomAppBar" />
+
+
 
 
     <fragment
