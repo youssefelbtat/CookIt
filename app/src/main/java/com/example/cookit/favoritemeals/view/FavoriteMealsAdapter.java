@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -80,8 +78,8 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
         CardView item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            meal_name =itemView.findViewById(R.id.fav_meal_name);
-            meal_image =itemView.findViewById(R.id.fav_meal_img);
+            meal_name =itemView.findViewById(R.id.ingredient_meal_name);
+            meal_image =itemView.findViewById(R.id.ingredient_meal_img);
             remove_from_fav =itemView.findViewById(R.id.remove_from_fav);
             item=itemView.findViewById(R.id.favoriteItemCard);
         }

@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/signlogo" />
+                app:srcCompat="@drawable/ic_launcher_background" />
 
             <EditText
                 android:id="@+id/editTextName"
@@ -139,7 +139,7 @@
                 android:layout_marginBottom="12dp"
                 android:src="@drawable/google"
                 app:layout_constraintBottom_toBottomOf="@+id/facebook"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/facebook"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -151,6 +151,10 @@
                 android:layout_marginEnd="140dp"
                 android:src="@drawable/facebook"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/facebook"
+                app:layout_constraintStart_toEndOf="@+id/google"
                 app:layout_constraintTop_toBottomOf="@+id/tableRow2" />
 
             <TextView
@@ -169,7 +173,7 @@
                 android:id="@+id/textLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="84dp"
+                android:layout_marginEnd="96dp"
                 android:layout_marginBottom="20dp"
                 android:text="@string/login"
                 android:textColor="@color/maincolor"
