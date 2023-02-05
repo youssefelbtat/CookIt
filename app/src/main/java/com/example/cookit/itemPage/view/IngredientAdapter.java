@@ -1,7 +1,6 @@
 package com.example.cookit.itemPage.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             meal_name =itemView.findViewById(R.id.ingredient_meal_name);
-            meal_image =itemView.findViewById(R.id.ingredient_meal_img);
+            meal_image =itemView.findViewById(R.id.profileImage);
 
         }
     }

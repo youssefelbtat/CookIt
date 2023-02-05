@@ -34,4 +34,8 @@
     <string name="preparation_video">Preparation Video:</string>
     <string name="search">Search</string>
     <string name="ingredients">Ingredients</string>
+    <string name="profileName">Youssef Elbtat</string>
+    <string name="profileemail">yelbtat@gmail.com</string>
+    <string name="logout">Log out</string>
+    <string name="editprofile">Edit Profile</string>
 </resources>
