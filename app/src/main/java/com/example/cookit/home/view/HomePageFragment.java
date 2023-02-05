@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import com.example.cookit.R;
 import com.example.cookit.model.Category;
 import com.example.cookit.model.Meal;
+import com.example.cookit.model.MealModel;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class HomePageFragment extends Fragment {
     RecyclerView viewPager2;
     RecyclerView category;
     RecyclerView country;
+
+    RecyclerView meal;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +97,23 @@ public class HomePageFragment extends Fragment {
         RecycleCountryAdepter recycleCountryAdepter = new RecycleCountryAdepter(view.getContext(),countries);
         country.setAdapter(recycleCountryAdepter);
 
+
+        meal = view.findViewById(R.id.mealRecycler);
+        meal.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager4 = new LinearLayoutManager(view.getContext());
+        linearLayoutManager4.setOrientation(RecyclerView.HORIZONTAL);
+        meal.setLayoutManager(linearLayoutManager4);
+        List<MealModel> mealsAll = Arrays.asList(
+                new MealModel("beef","https://www.themealdb.com/images/media/meals/1548772327.jpg")
+                ,new MealModel("beef","https://www.themealdb.com/images/media/meals/1548772327.jpg"),
+                new MealModel("beef","https://www.themealdb.com/images/media/meals/1548772327.jpg"),
+                new MealModel("beef","https://www.themealdb.com/images/media/meals/1548772327.jpg"),
+                new MealModel("beef","https://www.themealdb.com/images/media/meals/1548772327.jpg"),
+                new MealModel("beef","https://www.themealdb.com/images/media/meals/1548772327.jpg"),
+                new MealModel("beef","https://www.themealdb.com/images/media/meals/1548772327.jpg"),
+                new MealModel("beef","https://www.themealdb.com/images/media/meals/1548772327.jpg"));
+        RecyclerMealsAdepter recyclerMealsAdepter = new RecyclerMealsAdepter(view.getContext(),mealsAll);
+        meal.setAdapter(recyclerMealsAdepter);
 
 
 

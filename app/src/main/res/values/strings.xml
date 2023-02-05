@@ -28,4 +28,5 @@
     <string name="categories">Categories</string>
     <string name="country">Country</string>
     <string name="daily_inspiration">Daily Inspiration</string>
+    <string name="meals">Meals</string>
 </resources>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/favoriteItemCard"
+    android:id="@+id/mealItemCard"
     app:cardBackgroundColor="@color/itemBG"
     app:cardCornerRadius="15dp"
     app:cardElevation="8dp"
@@ -22,7 +22,7 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/fav_meal_img"
+            android:id="@+id/mealImage"
             android:layout_width="140dp"
             android:layout_height="150dp"
             android:layout_margin="25dp"
@@ -48,7 +48,7 @@
             app:layout_constraintGuide_end="16dp" />
 
         <TextView
-            android:id="@+id/fav_meal_name"
+            android:id="@+id/mealName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -58,17 +58,17 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/fav_meal_img"
+            app:layout_constraintEnd_toEndOf="@+id/mealImage"
             app:layout_constraintHorizontal_bias="0.538"
-            app:layout_constraintStart_toStartOf="@+id/fav_meal_img"
-            app:layout_constraintTop_toBottomOf="@+id/fav_meal_img" />
+            app:layout_constraintStart_toStartOf="@+id/mealImage"
+            app:layout_constraintTop_toBottomOf="@+id/mealImage" />
 
         <ImageButton
-            android:id="@+id/remove_from_fav"
+            android:id="@+id/mealFav"
             android:layout_width="30dp"
             android:layout_height="32dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/favorite_bold_icon"
+            android:background="@drawable/add_favorite_outline_icon"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="parent" />
 
