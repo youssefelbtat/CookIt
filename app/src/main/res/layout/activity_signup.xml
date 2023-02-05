@@ -176,7 +176,7 @@
                 android:layout_marginEnd="96dp"
                 android:layout_marginBottom="20dp"
                 android:text="@string/login"
-                android:textColor="@color/maincolor"
+                android:textColor="@color/purple_500"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView4"
                 app:layout_constraintEnd_toEndOf="parent"

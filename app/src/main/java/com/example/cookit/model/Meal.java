@@ -8,12 +8,12 @@ public class Meal {
     private String name;
     private String image ;
     private String country;
-    private List<String> ingredients;
-    private List<String> measures;
+    private String ingredients;
+    private String measures;
     private String steps;
     private String video;
 
-    public Meal(int id, String name, String image, String country, List<String> ingredients, List<String> measures, String steps, String video) {
+    public Meal(int id, String name, String image, String country, String ingredients,String measures, String steps, String video) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -61,19 +61,19 @@ public class Meal {
         this.country = country;
     }
 
-    public List<String> getIngredients() {
+    public String getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
 
-    public List<String> getMeasures() {
+    public String getMeasures() {
         return measures;
     }
 
-    public void setMeasures(List<String> measures) {
+    public void setMeasures(String measures) {
         this.measures = measures;
     }
 

@@ -26,7 +26,7 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
     Context context;
     List<MealModel> model;
     //OnFavClickListner onListener;
-    FavoriteMealsAdapter(Context context, List<MealModel> mealModelList){
+    public FavoriteMealsAdapter(Context context, List<MealModel> mealModelList){
         this.context=context;
         this.model=mealModelList;
         //this.onListener=onFavClickListner;
