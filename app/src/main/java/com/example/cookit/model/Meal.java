@@ -1,0 +1,95 @@
+package com.example.cookit.model;
+
+import java.util.List;
+
+public class Meal {
+
+    private int id;
+    private String name;
+    private String image ;
+    private String country;
+    private List<String> ingredients;
+    private List<String> measures;
+    private String steps;
+    private String video;
+
+    public Meal(int id, String name, String image, String country, List<String> ingredients, List<String> measures, String steps, String video) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.country = country;
+        this.ingredients = ingredients;
+        this.measures = measures;
+        this.steps = steps;
+        this.video = video;
+    }
+
+    public Meal(String name, String image) {
+        this.name = name;
+        this.image = image;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<String> getMeasures() {
+        return measures;
+    }
+
+    public void setMeasures(List<String> measures) {
+        this.measures = measures;
+    }
+
+    public String getSteps() {
+        return steps;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+}

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.example.cookit.R;
+import com.example.cookit.authentication.signup.view.SignupActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent =new Intent(SplashScreen.this,MainActivity.class);
+                Intent intent =new Intent(SplashScreen.this, SignupActivity.class);
                 startActivity(intent);
                 finish();
             }
