@@ -9,7 +9,14 @@
         android:id="@+id/homePageFragment"
         android:name="com.example.cookit.home.view.HomePageFragment"
         android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" />
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homePageFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_countriesFragment"
+            app:destination="@id/countriesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/planMealsFragment"
         android:name="com.example.cookit.planmeals.view.planMealsFragment"
@@ -34,4 +41,14 @@
     <action
         android:id="@+id/action_global_planMealsFragment"
         app:destination="@id/planMealsFragment" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.cookit.categories.view.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/countriesFragment"
+        android:name="com.example.cookit.countries.view.CountriesFragment"
+        android:label="fragment_countries"
+        tools:layout="@layout/fragment_countries" />
 </navigation>
