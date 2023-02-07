@@ -26,6 +26,7 @@
     <string name="skip">SKIP</string>
     <string name="categories">Categories</string>
     <string name="country">Country</string>
+    <string name="add_meal_to_plan_dialog_title">Choose days to add meal to</string>
     <string name="daily_inspiration">Daily Inspiration</string>
     <string name="meals">Meals</string>
     <string name="ingredient">Ingredient:</string>
