@@ -38,4 +38,7 @@
     <string name="profileemail">yelbtat@gmail.com</string>
     <string name="logout">Log out</string>
     <string name="editprofile">Edit Profile</string>
+    <string name="current_password">Current Password</string>
+    <string name="newpassword">New Password</string>
+    <string name="confirmNewPassword">Confirm New Password</string>
 </resources>
