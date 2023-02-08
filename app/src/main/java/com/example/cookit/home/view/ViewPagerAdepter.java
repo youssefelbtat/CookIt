@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
-import com.example.cookit.model.Meal;
+import com.example.cookit.model.MealModel;
 
 import java.util.List;
 
 public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.ViewHolder> {
 
     private final Context context;
-    private List<Meal> list;
+    private List<MealModel> list;
     public static final String TAG = "RECYCLER";
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -48,7 +48,7 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
 
     }
 
-    public ViewPagerAdepter(Context context, List<Meal> list) {
+    public ViewPagerAdepter(Context context, List<MealModel> list) {
         this.context = context;
         this.list = list;
     }

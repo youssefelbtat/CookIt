@@ -7,13 +7,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.cookit.R;
 import com.example.cookit.model.Category;
-import com.example.cookit.model.Meal;
 import com.example.cookit.model.MealModel;
 
 import java.util.Arrays;
@@ -50,9 +49,9 @@ public class HomePageFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         viewPager2.setLayoutManager(linearLayoutManager);
-        List<Meal> meals = Arrays.asList(new Meal(
+        List<MealModel> meals = Arrays.asList(new MealModel(
                         "Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new Meal("Spicy Arrabiata Penne",
+                new MealModel("Spicy Arrabiata Penne",
                         "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"));
         ViewPagerAdepter viewPagerAdepter = new ViewPagerAdepter(view.getContext(),meals);
         viewPager2.setAdapter(viewPagerAdepter);

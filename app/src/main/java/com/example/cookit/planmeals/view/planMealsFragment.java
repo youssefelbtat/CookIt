@@ -13,9 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cookit.R;
-import com.example.cookit.home.view.RecycleCountryAdepter;
-import com.example.cookit.model.Category;
-import com.example.cookit.model.Meal;
+import com.example.cookit.model.MealModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,13 +26,13 @@ public class planMealsFragment extends Fragment {
     LinearLayoutManager linearLayoutManager4 , linearLayoutManager5 , linearLayoutManager6 ,linearLayoutManager7;
     RecyclerView saturday , sunday ,monday , tuesday , wednesday , thursday , friday ;
 
-    List<Meal> saturdayList ;
-    List<Meal> sundayList ;
-    List<Meal> mondayList ;
-    List<Meal> tuesdayList ;
-    List<Meal> wednesdayList ;
-    List<Meal> thursdayList ;
-    List<Meal> fridayList ;
+    List<MealModel> saturdayList ;
+    List<MealModel> sundayList ;
+    List<MealModel> mondayList ;
+    List<MealModel> tuesdayList ;
+    List<MealModel> wednesdayList ;
+    List<MealModel> thursdayList ;
+    List<MealModel> fridayList ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,14 +65,14 @@ public class planMealsFragment extends Fragment {
         saturday.setLayoutManager(linearLayoutManager1);
 
         saturdayList = Arrays.asList(
-                new Meal("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new Meal("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new Meal("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new Meal("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new Meal("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new Meal("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new Meal("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new Meal("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"));
+                new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
+                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
+                new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
+                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
+                new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
+                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
+                new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
+                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"));
         RecyclePlanAdapter recyclePlanAdapter = new RecyclePlanAdapter(view.getContext(),saturdayList);
         saturday.setAdapter(recyclePlanAdapter);
 

@@ -14,8 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cookit.R;
-import com.example.cookit.countries.view.RecyclerCountriesAdapter;
-import com.example.cookit.model.Meal;
+import com.example.cookit.model.MealModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class CategoryFragment extends Fragment {
 
     RecyclerView recyclerView;
     TextView textView ;
-    List<Meal> category;
+    List<MealModel> category;
     RecyclerCategoriesAdapter recyclerCategoriesAdapter;
 
     GridLayoutManager gridLayoutManager;
@@ -51,15 +50,15 @@ public class CategoryFragment extends Fragment {
         category = new ArrayList<>();
 
         textView.setText("Beef");
-        category.add(new Meal("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        category.add(new Meal("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        category.add(new Meal("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-        category.add(new Meal("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        category.add(new Meal("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        category.add(new Meal("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-        category.add(new Meal("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        category.add(new Meal("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        category.add(new Meal("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
+        category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
+        category.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
+        category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
+        category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
+        category.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
+        category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
+        category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
+        category.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
+        category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
 
         recyclerView.setHasFixedSize(true);
         gridLayoutManager=new GridLayoutManager(getContext(),2);
