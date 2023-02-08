@@ -1,4 +1,17 @@
 package com.example.cookit.authentication.signup.presenter;
 
-public class SignupPresenter {
+import com.example.cookit.model.UserModel;
+
+public class SignupPresenter implements SignUpPresenterInterface {
+
+
+    @Override
+    public void onSuccessSignUpWithGoogle() {
+
+    }
+
+    @Override
+    public void onFailureSignUpWithGoogle(String error) {
+
+    }
 }

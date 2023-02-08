@@ -7,8 +7,11 @@ import com.example.cookit.network.NetworkDelegate;
 import java.util.List;
 
 public interface RepositoryInterface {
+
+    public void SignUpWithGoogle();
     public void removeMealFromFav(MealModel mealModel);
     public void insertMeal(MealModel mealModel);
     public LiveData<List<MealModel>> getFavMealslList();
     public void getAllProducts(NetworkDelegate networkDelegate);
+
 }
