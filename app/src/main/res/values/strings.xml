@@ -26,6 +26,7 @@
     <string name="skip">SKIP</string>
     <string name="categories">Categories</string>
     <string name="country">Country</string>
+    <string name="add_meal_to_plan_dialog_title">Choose days to add meal to</string>
     <string name="daily_inspiration">Daily Inspiration</string>
     <string name="meals">Meals</string>
     <string name="ingredient">Ingredient:</string>
@@ -38,6 +39,9 @@
     <string name="profileemail">yelbtat@gmail.com</string>
     <string name="logout">Log out</string>
     <string name="editprofile">Edit Profile</string>
+    <string name="current_password">Current Password</string>
+    <string name="newpassword">New Password</string>
+    <string name="confirmNewPassword">Confirm New Password</string>
     <string name="plan">Plan Meals</string>
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
