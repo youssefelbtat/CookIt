@@ -14,6 +14,9 @@ import android.widget.VideoView;
 
 import com.example.cookit.R;
 import com.example.cookit.model.IngredientModel;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,8 +30,8 @@ public class ItemPageActivity extends AppCompatActivity {
     List<IngredientModel> ingredientList= new ArrayList<IngredientModel>();
     ImageButton addToFav_btn,addToPlane_btn;
 
-    //final String VIDEO_URL="https:\\/\\/www.youtube.com\\/watch?v=4aZr5hZXP_s";
-    final String VIDEO_URL="https://media.geeksforgeeks.org/wp-content/uploads/20201217192146/Screenrecorder-2020-12-17-19-17-36-828.mp4?_=1https:\\/\\/www.youtube.com\\/watch?v=4aZr5hZXP_s";
+//    final String VIDEO_URL="https:\\/\\/www.youtube.com\\/watch?v=4aZr5hZXP_s";
+     final String VIDEO_ID="4aZr5hZXP_s";
     final String []days=new String[]{"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
     final boolean[] checkedDays = new boolean[days.length];
     final List<String> selectedDays = Arrays.asList(days);
@@ -93,14 +96,22 @@ public class ItemPageActivity extends AppCompatActivity {
         recyclerView.setAdapter(ingredientAdapter);
         recyclerView.setLayoutManager(layoutManager);
         // finding videoview by its id
-        VideoView videoView = findViewById(R.id.videoView);
-        Uri uri = Uri.parse(VIDEO_URL);
-        videoView.setVideoURI(uri);
-        MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(videoView);
-        mediaController.setMediaPlayer(videoView);
-        videoView.setMediaController(mediaController);
-        videoView.start();
+      //  YouTubePlayerView videoView = findViewById(R.id.videoView);
+      //  getLifecycle().addObserver(videoView);
+
+//        videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+//            @Override
+//            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+//
+//                try {
+//
+//                    youTubePlayer.loadVideo(VIDEO_ID,0);
+//
+//                } catch (Exception e) {
+//                    //      Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
 
     }
