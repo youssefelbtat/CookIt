@@ -41,8 +41,8 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.meal_name.setText(model.get(position).getMealName());
-        Glide.with(context).load(model.get(position).getMealImage())
+        holder.meal_name.setText(model.get(position).getName());
+        Glide.with(context).load(model.get(position).getImage())
                 .apply(new RequestOptions().override(holder.meal_image.getWidth(),holder.meal_image.getHeight()))
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)
@@ -59,7 +59,7 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, ItemPageActivity.class);
-                intent.putExtra("mealName",model.get(holder.getAdapterPosition()).getMealName());
+                intent.putExtra("mealName",model.get(holder.getAdapterPosition()).getName());
                 context.startActivity(intent);
             }
         });

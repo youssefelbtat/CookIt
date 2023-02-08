@@ -5,13 +5,13 @@ import androidx.lifecycle.Observer;
 
 import com.example.cookit.favoritemeals.view.FavViewInterface;
 import com.example.cookit.model.MealModel;
-import com.example.cookit.model.RepositoryInterface;
+import com.example.cookit.model.modelFirebase.RepositoryFirebaseInterface;
 
 import java.util.List;
 public class FavoriteMealsPresenter implements FavPresenterInterface{
     private FavViewInterface _view;
-    private RepositoryInterface _repo;
-    public FavoriteMealsPresenter(FavViewInterface view, RepositoryInterface repo){
+    private RepositoryFirebaseInterface _repo;
+    public FavoriteMealsPresenter(FavViewInterface view, RepositoryFirebaseInterface repo){
         this._repo=repo;
         this._view=view;
 
