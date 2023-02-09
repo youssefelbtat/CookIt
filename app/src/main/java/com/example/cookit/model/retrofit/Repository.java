@@ -2,6 +2,8 @@ package com.example.cookit.model.retrofit;
 
 import android.content.Context;
 
+import com.example.cookit.network.NetworkDelegate;
+
 public class Repository implements RepositoryInterface{
 
     private Context context ;
@@ -20,4 +22,8 @@ public class Repository implements RepositoryInterface{
         return  repository;
     }
 
+    @Override
+    public void getRandomMeal(NetworkDelegate networkDelegate) {
+
+    }
 }
