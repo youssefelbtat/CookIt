@@ -37,26 +37,7 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
 
     @Override
     public void signUpWithCreateEmail(UserModel userModel) {
-
+        firebaseSource.insertUser(userModel);
     }
 
-    @Override
-    public void removeMealFromFav(MealModel mealModel) {
-
-    }
-
-    @Override
-    public void insertMeal(MealModel mealModel) {
-
-    }
-
-    @Override
-    public LiveData<List<MealModel>> getFavMealslList() {
-        return null;
-    }
-
-    @Override
-    public void getAllProducts(NetworkDelegate networkDelegate) {
-
-    }
 }
