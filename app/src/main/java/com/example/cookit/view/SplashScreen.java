@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
-import android.widget.TextView;
 
 import com.example.cookit.R;
 import com.example.cookit.authentication.signup.view.SignupActivity;
-import com.example.cookit.model.modelFirebase.User;
+import com.example.cookit.utalites.Utalites;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -24,8 +22,8 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                SharedPreferences sharedPreferences = getSharedPreferences(User.SHARDPREFERENCE,getApplicationContext().MODE_PRIVATE);
-                if(sharedPreferences.getString(User.EMAIL,null) == null) {
+                SharedPreferences sharedPreferences = getSharedPreferences(Utalites.SHARDPREFERENCE,getApplicationContext().MODE_PRIVATE);
+                if(sharedPreferences.getString(Utalites.EMAIL,null) == null) {
                     Intent intent = new Intent(SplashScreen.this, SignupActivity.class);
                     startActivity(intent);
                 }else{

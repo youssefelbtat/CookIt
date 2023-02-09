@@ -42,25 +42,4 @@ public class FirebaseSource implements FirebaseSourseInterface {
 
     }
 
-    @Override
-    public UserModel getUser() {
-//        UserModel userModel = null;
-//        databaseReference.child("User").child(String.valueOf(id));
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                userModel = snapshot.getValue(UserModel.class);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//
-//        });
-//        return userModel;
-        return new UserModel();
-    }
 }

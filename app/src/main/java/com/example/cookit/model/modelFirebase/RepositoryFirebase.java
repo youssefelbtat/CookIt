@@ -1,5 +1,6 @@
 package com.example.cookit.model.modelFirebase;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
@@ -31,8 +32,8 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
     }
 
     @Override
-    public void SignUpWithGoogle() {
-
+    public void SignUpWithGoogle(Activity activity, UserModel userModel) {
+        firebaseSource.insertUser(userModel);
     }
 
     @Override

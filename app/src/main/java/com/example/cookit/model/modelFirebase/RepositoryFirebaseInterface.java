@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RepositoryFirebaseInterface {
 
-    public void SignUpWithGoogle();
+    public void SignUpWithGoogle(UserModel userModel);
     public void signUpWithCreateEmail(UserModel userModel);
 
 }

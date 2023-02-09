@@ -1,15 +1,18 @@
 package com.example.cookit.authentication.signup.presenter;
 
+import com.example.cookit.authentication.signup.view.SignUpViewInterface;
 import com.example.cookit.model.modelFirebase.RepositoryFirebaseInterface;
 import com.example.cookit.model.modelFirebase.UserModel;
 
 public class SignupPresenter implements SignUpPresenterInterface {
 
-    private RepositoryFirebaseInterface repositoryFirebaseInterface;
+    private RepositoryFirebaseInterface _repo;
 
-    public SignupPresenter(RepositoryFirebaseInterface repositoryFirebaseInterface){
+    private SignUpViewInterface _view;
 
-        this.repositoryFirebaseInterface = repositoryFirebaseInterface;
+    public SignupPresenter(RepositoryFirebaseInterface _repo){
+
+        this._repo = _repo;
 
     }
 
@@ -25,6 +28,6 @@ public class SignupPresenter implements SignUpPresenterInterface {
 
     @Override
     public void addUserData(UserModel userModel) {
-        repositoryFirebaseInterface.signUpWithCreateEmail(userModel);
+        _repo.signUpWithCreateEmail(userModel);
     }
 }
