@@ -1,4 +1,4 @@
-package com.example.cookit.firebase;
+package com.example.cookit.database.firebase;
 
 import com.example.cookit.model.modelFirebase.UserModel;
 
@@ -6,6 +6,5 @@ public interface FirebaseSourseInterface {
 
     void insertUser(UserModel userModel);
 
-    UserModel getUser();
 
 }

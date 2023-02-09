@@ -8,5 +8,8 @@ public interface SignUpPresenterInterface {
 
     void addUserData(UserModel userModel) ;
 
+    void saveUserData(UserModel userModel);
+
+    UserModel getSavedUserData();
 
 }

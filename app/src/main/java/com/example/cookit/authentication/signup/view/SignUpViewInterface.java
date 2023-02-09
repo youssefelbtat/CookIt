@@ -7,4 +7,8 @@ public interface SignUpViewInterface {
     void onSuccessSignUpWithGoogle();
     void onFailureSignUpWithGoogle(String error);
     void insertUserData(UserModel userModel);
+
+    void saveUserData(UserModel userModel);
+
+    UserModel getSavedUserData();
 }

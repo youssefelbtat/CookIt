@@ -27,4 +27,14 @@ public class SignupPresenter implements SignUpPresenterInterface {
     public void addUserData(UserModel userModel) {
         repositoryFirebaseInterface.signUpWithCreateEmail(userModel);
     }
+
+    @Override
+    public void saveUserData(UserModel userModel) {
+        repositoryFirebaseInterface.saveUserData(userModel);
+    }
+
+    @Override
+    public UserModel getSavedUserData() {
+        return null;
+    }
 }

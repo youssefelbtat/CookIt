@@ -1,20 +1,24 @@
 package com.example.cookit.authentication.signup.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cookit.R;
 import com.example.cookit.authentication.signin.view.SigninActivity;
 import com.example.cookit.authentication.signup.presenter.SignUpPresenterInterface;
 import com.example.cookit.authentication.signup.presenter.SignupPresenter;
-import com.example.cookit.firebase.FirebaseSource;
+import com.example.cookit.database.firebase.FirebaseSource;
+import com.example.cookit.database.sharedpreference.SharedPreferenceSource;
 import com.example.cookit.model.modelFirebase.RepositoryFirebase;
-import com.example.cookit.model.modelFirebase.User;
 import com.example.cookit.model.modelFirebase.UserModel;
 import com.example.cookit.view.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -28,8 +32,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.annotations.Nullable;
 
 public class SignupActivity extends AppCompatActivity implements SignUpViewInterface,SignUpOnclickListener{
 
@@ -43,7 +47,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
     EditText userName , email ,password ,confirmPassword;
     Button signup ;
 
-    public static int id =12 ;
+    public static int id =15 ;
 
     private static final String EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -70,8 +74,8 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
         init();
 
 
-        signUpPresenterInterface = new SignupPresenter(RepositoryFirebase.getInstance(FirebaseSource.getInstance(getApplicationContext())
-                ,getApplicationContext()));
+        signUpPresenterInterface = new SignupPresenter(RepositoryFirebase.getInstance(FirebaseSource.getInstance(this)
+                , SharedPreferenceSource.getInstance(this),this));
 
 
         login.setOnClickListener(event -> loginOnClick());
@@ -107,6 +111,16 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
     }
 
     @Override
+    public void saveUserData(UserModel userModel) {
+        signUpPresenterInterface.saveUserData(userModel);
+    }
+
+    @Override
+    public UserModel getSavedUserData() {
+        return null;
+    }
+
+    @Override
     public void signUpWithGoogleClick() {
 
     }
@@ -123,7 +137,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
         }else if(confirmPassword.getText().toString().equals("")){
             Toast.makeText(this, "You should fill all data", Toast.LENGTH_SHORT).show();
         }else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
-            Toast.makeText(this, "Password and confirmPasssword don’t match", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password and confirmPassword don’t match", Toast.LENGTH_SHORT).show();
         }else if (!email.getText().toString().matches(EMAIL)){
             Toast.makeText(this, "Email is invalid", Toast.LENGTH_SHORT).show();
         }else if (!password.getText().toString().matches(PASSWORD)){
@@ -136,14 +150,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
             userModel.setPassWord(password.getText().toString());
             id++;
             insertUserData(userModel);
-
-            SharedPreferences sharedPreferences = getSharedPreferences(User.SHARDPREFERENCE,getApplicationContext().MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(String.valueOf(User.ID),id);
-            editor.putString(User.USERNAME,userModel.getUserName());
-            editor.putString(User.EMAIL,userModel.getEmail());
-            editor.putString(User.PASSWORD,userModel.getPassWord());
-            editor.commit();
+            saveUserData(userModel);
 
             Intent intent = new Intent(SignupActivity.this, MainActivity.class);
             startActivity(intent);
@@ -219,6 +226,8 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
             }
         });
     }
+
+
 
 
 }
