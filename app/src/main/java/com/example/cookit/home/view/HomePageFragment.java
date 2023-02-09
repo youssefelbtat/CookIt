@@ -15,6 +15,7 @@ import com.example.cookit.R;
 import com.example.cookit.model.Category;
 import com.example.cookit.model.MealModel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,16 +62,17 @@ public class HomePageFragment extends Fragment {
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(view.getContext());
         linearLayoutManager2.setOrientation(RecyclerView.HORIZONTAL);
         category.setLayoutManager(linearLayoutManager2);
-        List<Category> categories = Arrays.asList(new Category(
-                        "Beef")
-                ,new Category("Beef"
-                ),new Category("Beef"
-                ),new Category("Beef"
-                ),new Category("Beef"
-                ),new Category("Beef"
-                ),new Category("Beef"
-                ),new Category("Beef"
-                ));
+        List<Category> categories = new ArrayList<>();
+//        = Arrays.asList(new Category(
+//                        "Beef")
+//                ,new Category("Beef"
+//                ),new Category("Beef"
+//                ),new Category("Beef"
+//                ),new Category("Beef"
+//                ),new Category("Beef"
+//                ),new Category("Beef"
+//                ),new Category("Beef"
+//                ));
         RecycleCategoryAdepter recycleCategoryAdepter = new RecycleCategoryAdepter(view.getContext(),categories);
         category.setAdapter(recycleCategoryAdepter);
 
@@ -81,16 +83,17 @@ public class HomePageFragment extends Fragment {
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(view.getContext());
         linearLayoutManager3.setOrientation(RecyclerView.HORIZONTAL);
         country.setLayoutManager(linearLayoutManager3);
-        List<Category> countries = Arrays.asList(new Category(
-                        "Egypt")
-                ,new Category("Egypt"
-                ),new Category("Egypt"
-                ),new Category("Egypt"
-                ),new Category("Egypt"
-                ),new Category("Egypt"
-                ),new Category("Egypt"
-                ),new Category("Egypt"
-                ));
+        List<Category> countries = new ArrayList<>();
+//                = Arrays.asList(new Category(
+//                        "Egypt")
+//                ,new Category("Egypt"
+//                ),new Category("Egypt"
+//                ),new Category("Egypt"
+//                ),new Category("Egypt"
+//                ),new Category("Egypt"
+//                ),new Category("Egypt"
+//                ),new Category("Egypt"
+//                ));
         RecycleCountryAdepter recycleCountryAdepter = new RecycleCountryAdepter(view.getContext(),countries);
         country.setAdapter(recycleCountryAdepter);
 
