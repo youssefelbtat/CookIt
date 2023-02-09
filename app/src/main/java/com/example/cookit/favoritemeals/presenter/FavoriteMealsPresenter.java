@@ -19,16 +19,16 @@ public class FavoriteMealsPresenter implements FavPresenterInterface{
 
     @Override
     public void getFavMeals(LifecycleOwner lifecycleOwner) {
-        _repo.getFavMealslList().observe( lifecycleOwner, new Observer<List<MealModel>>() {
-            @Override
-            public void onChanged(List<MealModel> products) {
-                _view.showFavMeals(products);
-            }
-        });
+//        _repo.getFavMealslList().observe( lifecycleOwner, new Observer<List<MealModel>>() {
+//            @Override
+//            public void onChanged(List<MealModel> products) {
+//                _view.showFavMeals(products);
+//            }
+//        });
     }
 
     @Override
     public void removeFavMeal(MealModel meal) {
-        _repo.removeMealFromFav(meal);
+//        _repo.removeMealFromFav(meal);
     }
 }

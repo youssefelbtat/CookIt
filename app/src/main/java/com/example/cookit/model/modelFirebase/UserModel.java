@@ -10,6 +10,8 @@ public class UserModel {
     String userName;
     String email;
     String passWord;
+    List<MealModel> Favorites;
+    List<MealModel> Plans;
 
     public UserModel(int id, String image, String userName, String email, String passWord, List<MealModel> favorites, List<MealModel> plans) {
         this.id = id;
@@ -44,10 +46,6 @@ public class UserModel {
     public void setPlans(List<MealModel> plans) {
         Plans = plans;
     }
-
-    List<MealModel> Favorites;
-
-    List<MealModel> Plans;
 
     public UserModel(){
 
