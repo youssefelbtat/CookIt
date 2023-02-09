@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "199536267599",
+    "firebase_url": "https://cookit-16ecb-default-rtdb.firebaseio.com",
     "project_id": "cookit-16ecb",
     "storage_bucket": "cookit-16ecb.appspot.com"
   },
@@ -14,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "199536267599-0tekdpiid4oig2r7m7k3bmqpk7s1jq4f.apps.googleusercontent.com",
+          "client_id": "199536267599-ip4379ku3admraq02eu85dtooq9cv546.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
