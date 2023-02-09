@@ -7,6 +7,7 @@ public class Utalites {
     public static final String USERNAME = null;
     public static final String EMAIL = null;
     public static final String PASSWORD = null;
+
     public static int AUTO_ID =12 ;
 
     public static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
