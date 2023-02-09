@@ -20,6 +20,7 @@ import com.example.cookit.database.firebase.FirebaseSource;
 import com.example.cookit.database.sharedpreference.SharedPreferenceSource;
 import com.example.cookit.model.modelFirebase.RepositoryFirebase;
 import com.example.cookit.model.modelFirebase.UserModel;
+import com.example.cookit.utalites.Utalites;
 import com.example.cookit.view.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -138,9 +139,9 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
             Toast.makeText(this, "You should fill all data", Toast.LENGTH_SHORT).show();
         }else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
             Toast.makeText(this, "Password and confirmPassword don’t match", Toast.LENGTH_SHORT).show();
-        }else if (!email.getText().toString().matches(EMAIL)){
+        }else if (!email.getText().toString().matches(Utalites.EMAIL_PATTERN)){
             Toast.makeText(this, "Email is invalid", Toast.LENGTH_SHORT).show();
-        }else if (!password.getText().toString().matches(PASSWORD)){
+        }else if (!password.getText().toString().matches(Utalites.PASSWORD_PATTERN)){
             Toast.makeText(this, "Password is invalid", Toast.LENGTH_SHORT).show();
         } else {
             UserModel userModel = new UserModel();
