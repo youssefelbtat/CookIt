@@ -27,6 +27,7 @@ public class SplashScreen extends AppCompatActivity {
                     Intent intent = new Intent(SplashScreen.this, SignupActivity.class);
                     startActivity(intent);
                 }else{
+                    System.out.println(sharedPreferences.getString(User.EMAIL,null));
                     Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(intent);
                 }
