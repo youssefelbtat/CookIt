@@ -29,9 +29,11 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
         return  repository;
     }
 
+
+
     @Override
-    public void SignUpWithGoogle(Activity activity, UserModel userModel) {
-        firebaseSource.insertUser(userModel);
+    public void SignUpWithGoogle(UserModel userModel) {
+
     }
 
     @Override

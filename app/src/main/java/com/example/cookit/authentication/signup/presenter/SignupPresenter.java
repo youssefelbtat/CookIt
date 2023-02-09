@@ -11,7 +11,6 @@ public class SignupPresenter implements SignUpPresenterInterface {
     private SignUpViewInterface _view;
 
     public SignupPresenter(RepositoryFirebaseInterface _repo){
-
         this._repo = _repo;
 
     }
@@ -33,7 +32,7 @@ public class SignupPresenter implements SignUpPresenterInterface {
 
     @Override
     public void saveUserData(UserModel userModel) {
-        repositoryFirebaseInterface.saveUserData(userModel);
+        _repo.saveUserData(userModel);
     }
 
     @Override

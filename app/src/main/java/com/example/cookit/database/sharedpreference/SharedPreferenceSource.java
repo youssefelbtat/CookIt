@@ -2,8 +2,8 @@ package com.example.cookit.database.sharedpreference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.example.cookit.model.modelFirebase.User;
 import com.example.cookit.model.modelFirebase.UserModel;
+import com.example.cookit.utalites.Utalites;
 
 public class SharedPreferenceSource implements SharedPreferenceSourceInterfece{
 
@@ -13,7 +13,7 @@ public class SharedPreferenceSource implements SharedPreferenceSourceInterfece{
 
     private SharedPreferenceSource(Context context){
 
-        sharedPreferences = context.getSharedPreferences(User.SHARDPREFERENCE,context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(Utalites.SHARDPREFERENCE,context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
     }
@@ -28,10 +28,10 @@ public class SharedPreferenceSource implements SharedPreferenceSourceInterfece{
 
     @Override
     public void saveUserData(UserModel userModel) {
-        editor.putInt(String.valueOf(User.ID),userModel.getId());
-        editor.putString(User.USERNAME,userModel.getUserName());
-        editor.putString(User.EMAIL,userModel.getEmail());
-        editor.putString(User.PASSWORD,userModel.getPassWord());
+        editor.putInt(String.valueOf(Utalites.ID),userModel.getId());
+        editor.putString(Utalites.USERNAME,userModel.getUserName());
+        editor.putString(Utalites.EMAIL,userModel.getEmail());
+        editor.putString(Utalites.PASSWORD,userModel.getPassWord());
         editor.commit();
     }
 
