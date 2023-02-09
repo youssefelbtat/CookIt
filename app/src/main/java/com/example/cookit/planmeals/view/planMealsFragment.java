@@ -65,6 +65,7 @@ public class planMealsFragment extends Fragment {
         saturday.setLayoutManager(linearLayoutManager1);
 
         saturdayList = Arrays.asList(
+                /*
                 new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
                 new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
                 new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
@@ -72,7 +73,7 @@ public class planMealsFragment extends Fragment {
                 new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
                 new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
                 new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"));
+                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg")*/);
         RecyclePlanAdapter recyclePlanAdapter = new RecyclePlanAdapter(view.getContext(),saturdayList);
         saturday.setAdapter(recyclePlanAdapter);
 

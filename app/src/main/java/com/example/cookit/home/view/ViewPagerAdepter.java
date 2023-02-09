@@ -64,11 +64,11 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Glide.with(context).load(list.get(position).getImage())
+        Glide.with(context).load(list.get(position).getStrMealThumb())
                 .apply(new RequestOptions().override(500,500)
                         .placeholder(R.drawable.ic_launcher_background)
                         .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);
-        holder.name.setText(list.get(position).getName());
+        holder.name.setText(list.get(position).getStrMeal());
 
     }
 

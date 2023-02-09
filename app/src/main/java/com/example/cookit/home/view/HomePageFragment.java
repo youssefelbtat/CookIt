@@ -49,10 +49,8 @@ public class HomePageFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         viewPager2.setLayoutManager(linearLayoutManager);
-        List<MealModel> meals = Arrays.asList(new MealModel(
-                        "Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne",
-                        "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"));
+
+        List<MealModel> meals = Arrays.asList();
         ViewPagerAdepter viewPagerAdepter = new ViewPagerAdepter(view.getContext(),meals);
         viewPager2.setAdapter(viewPagerAdepter);
 

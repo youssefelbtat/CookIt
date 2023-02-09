@@ -57,8 +57,8 @@ public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCate
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerCategoriesAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.name.setText(list.get(position).getName());
-        Glide.with(context).load(list.get(position).getImage())
+        holder.name.setText(list.get(position).getStrMeal());
+        Glide.with(context).load(list.get(position).getStrMealThumb())
                 .apply(new RequestOptions().override(holder.imageView.getWidth(),holder.imageView.getHeight()))
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)

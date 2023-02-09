@@ -50,7 +50,7 @@ public class CategoryFragment extends Fragment {
         category = new ArrayList<>();
 
         textView.setText("Beef");
-        category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
+        /*category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
         category.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
         category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
         category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
@@ -58,7 +58,7 @@ public class CategoryFragment extends Fragment {
         category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
         category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
         category.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
+        category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));*/
 
         recyclerView.setHasFixedSize(true);
         gridLayoutManager=new GridLayoutManager(getContext(),2);

@@ -49,6 +49,7 @@ public class FavoriteMealsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView= view.findViewById(R.id.favItemsRecyclerView);
         group=view.findViewById(R.id.group);
+        /*
         favList.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
         favList.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
         favList.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
@@ -58,7 +59,7 @@ public class FavoriteMealsFragment extends Fragment {
         favList.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
         favList.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
         favList.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-
+        */
         if (favList.size()==0)
         {
             group.setVisibility(View.VISIBLE);

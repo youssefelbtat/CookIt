@@ -49,6 +49,7 @@ public class CountriesFragment extends Fragment {
         country = new ArrayList<>();
 
         textView.setText("Egypt");
+        /*
         country.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
         country.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
         country.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
@@ -58,7 +59,7 @@ public class CountriesFragment extends Fragment {
         country.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
         country.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
         country.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-
+           */
         recyclerView.setHasFixedSize(true);
         gridLayoutManager=new GridLayoutManager(getContext(),2);
         recyclerCountriesAdapter=new RecyclerCountriesAdapter(getContext(),country);
