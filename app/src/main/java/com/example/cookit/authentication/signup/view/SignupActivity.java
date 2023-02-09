@@ -1,5 +1,6 @@
 package com.example.cookit.authentication.signup.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cookit.R;
 import com.example.cookit.authentication.signin.view.SigninActivity;
@@ -17,7 +19,6 @@ import com.example.cookit.authentication.signup.presenter.SignupPresenter;
 import com.example.cookit.database.firebase.FirebaseSource;
 import com.example.cookit.database.sharedpreference.SharedPreferenceSource;
 import com.example.cookit.model.modelFirebase.RepositoryFirebase;
-import com.example.cookit.model.modelFirebase.User;
 import com.example.cookit.model.modelFirebase.UserModel;
 import com.example.cookit.view.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -31,8 +32,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.annotations.Nullable;
 
 public class SignupActivity extends AppCompatActivity implements SignUpViewInterface,SignUpOnclickListener{
 
