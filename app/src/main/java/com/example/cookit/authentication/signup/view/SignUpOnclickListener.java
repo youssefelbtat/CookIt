@@ -6,5 +6,9 @@ public interface SignUpOnclickListener {
 
     void signUpWithGoogleClick();
 
-    void signupWithCreateEmailClick(UserModel userModel);
+    void signupWithCreateEmailClick();
+
+    void loginOnClick();
+
+    void skipOnClick();
 }
