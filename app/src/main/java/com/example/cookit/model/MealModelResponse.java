@@ -1,8 +1,11 @@
 package com.example.cookit.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class MealModelResponse {
+    @SerializedName("meals")
     private List<MealModel> meals;
 
     public MealModelResponse(List<MealModel> mealsModel) {
@@ -13,7 +16,7 @@ public class MealModelResponse {
         return meals;
     }
 
-    public void setMealsModel(List<MealModel> mealsModel) {
-        this.meals = mealsModel;
+    public void setMeals(List<MealModel> meals) {
+        this.meals = meals;
     }
 }

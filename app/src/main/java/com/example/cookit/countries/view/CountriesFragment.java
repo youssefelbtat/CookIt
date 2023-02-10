@@ -14,17 +14,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cookit.R;
+import com.example.cookit.countries.presenter.CountriesPresenter;
+import com.example.cookit.countries.presenter.CountriesPresenterInterface;
+import com.example.cookit.home.presenter.HomePagePresenter;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.retrofit.Repository;
+import com.example.cookit.network.APIResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountriesFragment extends Fragment {
+public class CountriesFragment extends Fragment implements CountriesViewInterface,OnCountriesClickListenterInterface{
 
     RecyclerView recyclerView;
     TextView textView ;
-    List<MealModel> country;
+    String CountryName;
     RecyclerCountriesAdapter recyclerCountriesAdapter;
+
+    CountriesPresenterInterface countriesPresenter;
 
     GridLayoutManager gridLayoutManager;
     @Override
@@ -43,30 +50,36 @@ public class CountriesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        init(view);
+         CountryName =CountriesFragmentArgs.fromBundle(getArguments()).getMealName();
+        if (CountryName != null) {
+            textView.setText(CountryName);
+        }
 
-        recyclerView = view.findViewById(R.id.recyclerCountry);
-        textView = view.findViewById(R.id.countryText);
-        country = new ArrayList<>();
-
-        textView.setText("Egypt");
-        /*
-        country.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        country.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        country.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-        country.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        country.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        country.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-        country.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        country.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        country.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-           */
-        recyclerView.setHasFixedSize(true);
         gridLayoutManager=new GridLayoutManager(getContext(),2);
-        recyclerCountriesAdapter=new RecyclerCountriesAdapter(getContext(),country);
-        recyclerCountriesAdapter.notifyDataSetChanged();
+        countriesPresenter=new CountriesPresenter(this, Repository.getInstance(APIResponse.getInstance(),view.getContext()));
+        recyclerCountriesAdapter=new RecyclerCountriesAdapter(getContext(),new ArrayList<>());
         recyclerView.setAdapter(recyclerCountriesAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setHasFixedSize(true);
 
+        countriesPresenter.getMeals(CountryName);
+
+
+    }
+    void init(View view){
+        recyclerView = view.findViewById(R.id.recyclerCountry);
+        textView = view.findViewById(R.id.countryText);
+    }
+
+    @Override
+    public void ViewCounteryMeal(List<MealModel> models) {
+        recyclerCountriesAdapter.setCountryMealModelList(models);
+        recyclerCountriesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addMealToFav(MealModel Meal) {
 
     }
 }

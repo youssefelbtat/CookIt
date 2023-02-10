@@ -45,6 +45,9 @@ public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCount
             this.context = context;
             this.list = list;
         }
+        public void setCountryMealModelList(List<MealModel> countryMealModelList) {
+            this.list = countryMealModelList;
+        }
 
         @NonNull
         @Override

@@ -1,12 +1,17 @@
 package com.example.cookit.network;
 
+import com.example.cookit.model.MealModel;
+import com.example.cookit.model.MealModelResponse;
 import com.example.cookit.model.retrofit.CategoryResponse;
 import com.example.cookit.model.retrofit.CountryResponse;
 import com.example.cookit.model.retrofit.IngredientResponse;
-import com.example.cookit.model.MealModelResponse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -42,9 +47,13 @@ public class APIResponse implements RemoteSource{
     @Override
     public void getRandomMeals(NetworkDelegate networkDelegate) {
 
-        Single<MealModelResponse> mealModelResponseSingle= mealService.getRandomMeals();
+        List<MealModel> list=new ArrayList<>();
+        Flowable<MealModelResponse> mealModelResponseSingle= mealService.getRandomMeals();
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
+                .repeat(10)
+                .doOnNext(e-> list.addAll(e.getMealsModel()))
+                .doOnComplete(()->networkDelegate.onSuccessMeals(list))
+                .subscribe();
     }
 
     @Override
@@ -58,9 +67,10 @@ public class APIResponse implements RemoteSource{
     @Override
     public void getAllCountries(NetworkDelegate networkDelegate) {
 
-        Single<CountryResponse> countryResponseSingle= mealService.getAllCountries();
-        countryResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(item -> networkDelegate.onSuccessCountries(item.getCountries()));
+                Single<CountryResponse> countryResponseSingle= mealService.getAllCountries();
+                countryResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(item -> networkDelegate.onSuccessCountries(item.getCountries()));
+
     }
 
     @Override

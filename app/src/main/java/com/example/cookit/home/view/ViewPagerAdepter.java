@@ -32,10 +32,6 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
         public CardView cardItem;
         public View view;
 
-
-
-
-
         public ViewHolder(View v){
             super(v);
             view = v;
@@ -51,6 +47,9 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
     public ViewPagerAdepter(Context context, List<MealModel> list) {
         this.context = context;
         this.list = list;
+    }
+    public void setViewPagerAdepterList(List<MealModel> mealModels) {
+        this.list = mealModels;
     }
 
     @NonNull

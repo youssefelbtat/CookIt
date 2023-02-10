@@ -4,7 +4,7 @@ import com.example.cookit.network.NetworkDelegate;
 
 
 public interface RepositoryInterface {
-
+    void getRandomMeal(NetworkDelegate networkDelegate);
     void getAllCategories(NetworkDelegate networkDelegate);
 
     void getAllCountries(NetworkDelegate networkDelegate);
