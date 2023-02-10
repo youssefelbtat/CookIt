@@ -1,7 +1,6 @@
 package com.example.cookit.search.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
-import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.model.MealModel;
 
 import java.util.List;
@@ -70,7 +68,7 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             meal_name =itemView.findViewById(R.id.ingredient_meal_name);
-            meal_image =itemView.findViewById(R.id.profileImage);
+            meal_image =itemView.findViewById(R.id.mealItemImage);
             remove_from_fav =itemView.findViewById(R.id.remove_from_fav);
             item=itemView.findViewById(R.id.favoriteItemCard);
         }

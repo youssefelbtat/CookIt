@@ -23,12 +23,12 @@
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/profileImage"
-            app:layout_constraintStart_toStartOf="@+id/profileImage"
-            app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+            app:layout_constraintEnd_toEndOf="@+id/mealItemImage"
+            app:layout_constraintStart_toStartOf="@+id/mealItemImage"
+            app:layout_constraintTop_toBottomOf="@+id/mealItemImage" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
+            android:id="@+id/mealItemImage"
             android:layout_width="290dp"
             android:layout_height="292dp"
             android:layout_margin="25dp"
@@ -58,21 +58,18 @@
             android:layout_width="30dp"
             android:layout_height="32dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="56dp"
+            android:layout_marginEnd="28dp"
             android:background="@drawable/add_to_calender_solid"
             app:layout_constraintEnd_toStartOf="@+id/add_to_favorite"
-            app:layout_constraintHorizontal_bias="0.87"
-            app:layout_constraintStart_toStartOf="@+id/itemPageMealName"
             app:layout_constraintTop_toBottomOf="@+id/itemPageMealCountry" />
 
         <ImageButton
             android:id="@+id/add_to_favorite"
             android:layout_width="30dp"
             android:layout_height="32dp"
-            android:layout_marginEnd="36dp"
             android:background="@drawable/add_favorite_solid_icon"
             app:layout_constraintBottom_toBottomOf="@+id/add_to_calender"
-            app:layout_constraintEnd_toEndOf="@+id/itemPageMealName"
+            app:layout_constraintEnd_toEndOf="@+id/itemPageMealCountry"
             app:layout_constraintTop_toTopOf="@+id/add_to_calender"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -81,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="itemPageMealName,profileImage,itemPageMealCountry,add_to_calender,add_to_favorite,line"
+            app:constraint_referenced_ids="itemPageMealName,mealItemImage,itemPageMealCountry,add_to_calender,add_to_favorite,line"
             tools:layout_editor_absoluteY="791dp" />
 
         <View
@@ -109,7 +106,7 @@
             app:layout_constraintTop_toBottomOf="@+id/barrier1" />
 
         <ImageButton
-            android:id="@+id/Profilebackbutton"
+            android:id="@+id/itembackbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -204,8 +201,8 @@
 
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:id="@+id/videoView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,7 +1,11 @@
 package com.example.cookit.model;
 
-import com.google.gson.annotations.SerializedName;
-public class MealModel {
+import android.os.Parcelable;
+
+
+import java.io.Serializable;
+
+public class MealModel implements Serializable {
 
     private String idMeal;
     private String strMeal;
