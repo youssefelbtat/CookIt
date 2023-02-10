@@ -1,13 +1,9 @@
 package com.example.cookit.network;
 
-import com.example.cookit.model.Category;
-import com.example.cookit.model.CategoryResponse;
-import com.example.cookit.model.Country;
-import com.example.cookit.model.CountryResponse;
-import com.example.cookit.model.Ingredient;
-import com.example.cookit.model.IngredientResponse;
+import com.example.cookit.model.retrofit.Category;
+import com.example.cookit.model.retrofit.Country;
+import com.example.cookit.model.retrofit.Ingredient;
 import com.example.cookit.model.MealModel;
-import com.example.cookit.model.MealModelResponse;
 
 import java.util.List;
 

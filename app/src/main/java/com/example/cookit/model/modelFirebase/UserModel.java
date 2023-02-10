@@ -5,7 +5,6 @@ import com.example.cookit.model.MealModel;
 import java.util.List;
 
 public class UserModel {
-    int id ;
     String image;
     String userName;
     String email;
@@ -13,8 +12,7 @@ public class UserModel {
     List<MealModel> Favorites;
     List<MealModel> Plans;
 
-    public UserModel(int id, String image, String userName, String email, String passWord, List<MealModel> favorites, List<MealModel> plans) {
-        this.id = id;
+    public UserModel(String image, String userName, String email, String passWord, List<MealModel> favorites, List<MealModel> plans) {
         this.image = image;
         this.userName = userName;
         this.email = email;
@@ -23,13 +21,6 @@ public class UserModel {
         Plans = plans;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public List<MealModel> getFavorites() {
         return Favorites;

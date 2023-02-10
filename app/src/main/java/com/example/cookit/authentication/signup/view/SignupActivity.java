@@ -48,8 +48,6 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
     EditText userName , email ,password ,confirmPassword;
     Button signup ;
 
-    public static int id =15 ;
-
     private static final String EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     private static final String PASSWORD = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})";
@@ -112,6 +110,11 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
     }
 
     @Override
+    public boolean isUserExists(UserModel userModel) {
+        return signUpPresenterInterface.isUserExists(userModel);
+    }
+
+    @Override
     public void saveUserData(UserModel userModel) {
         signUpPresenterInterface.saveUserData(userModel);
     }
@@ -145,18 +148,24 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
             Toast.makeText(this, "Password is invalid", Toast.LENGTH_SHORT).show();
         } else {
             UserModel userModel = new UserModel();
-            userModel.setId(id);
             userModel.setUserName(userName.getText().toString());
             userModel.setEmail(email.getText().toString());
             userModel.setPassWord(password.getText().toString());
-            id++;
-            insertUserData(userModel);
-            saveUserData(userModel);
+            userModel.setFavorites(null);
+            userModel.setPlans(null);
 
-            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-            Toast.makeText(this, "You registered successfully", Toast.LENGTH_SHORT).show();
+            if (isUserExists(userModel)){
+                insertUserData(userModel);
+                saveUserData(userModel);
+
+                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                Toast.makeText(this, "You registered successfully", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "This email already exists", Toast.LENGTH_SHORT).show();
+            }
+
 
         }
 

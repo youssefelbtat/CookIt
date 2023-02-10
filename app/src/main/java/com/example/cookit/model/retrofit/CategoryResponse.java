@@ -1,4 +1,6 @@
-package com.example.cookit.model;
+package com.example.cookit.model.retrofit;
+
+import com.example.cookit.model.retrofit.Category;
 
 import java.util.List;
 
