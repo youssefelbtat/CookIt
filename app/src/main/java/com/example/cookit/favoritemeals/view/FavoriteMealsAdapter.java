@@ -79,7 +79,7 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             meal_name =itemView.findViewById(R.id.ingredient_meal_name);
-            meal_image =itemView.findViewById(R.id.profileImage);
+            meal_image =itemView.findViewById(R.id.mealItemImage);
             remove_from_fav =itemView.findViewById(R.id.remove_from_fav);
             item=itemView.findViewById(R.id.favoriteItemCard);
         }
