@@ -7,6 +7,8 @@ public interface RepositoryFirebaseInterface {
 
     void saveUserData(UserModel userModel);
 
+    boolean isUserExists(UserModel userModel);
+
     UserModel getSavedUserData();
 
 }

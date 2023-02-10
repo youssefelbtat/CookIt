@@ -8,6 +8,8 @@ public interface SignUpViewInterface {
     void onFailureSignUpWithGoogle(String error);
     void insertUserData(UserModel userModel);
 
+    boolean isUserExists(UserModel userModel);
+
     void saveUserData(UserModel userModel);
 
     UserModel getSavedUserData();

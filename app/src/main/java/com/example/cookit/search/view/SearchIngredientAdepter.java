@@ -1,4 +1,4 @@
-package com.example.cookit.home.view;
+package com.example.cookit.search.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,19 +10,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookit.R;
-import com.example.cookit.model.retrofit.Category;
+import com.example.cookit.model.retrofit.Ingredient;
 
 import java.util.List;
 
-public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAdepter.ViewHolder> {
+public class SearchIngredientAdepter extends RecyclerView.Adapter<SearchIngredientAdepter.ViewHolder> {
 
     private final Context context;
-    private List<Category> list;
+    private List<Ingredient> list;
     public static final String TAG = "RECYCLER";
+    SearchClickListener searchClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView imageView;
@@ -40,9 +40,10 @@ public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAd
         }
     }
 
-    public RecycleCountryAdepter(Context context, List<Category> list) {
+    public SearchIngredientAdepter(Context context, List<Ingredient> list,SearchClickListener searchClickListener) {
         this.context = context;
         this.list = list;
+        this.searchClickListener = searchClickListener;
     }
 
     @NonNull
@@ -50,25 +51,28 @@ public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAd
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.categoryitem,parent,false);
-        ViewHolder viewHolder = new RecycleCountryAdepter.ViewHolder(view);
+        ViewHolder viewHolder = new SearchIngredientAdepter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.imageView.setImageResource(R.drawable.egypt);
-        holder.name.setText(list.get(position).getStrCategory());
-        holder.cardItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homePageFragment_to_countriesFragment);
-            }
-        });
+        holder.name.setText(list.get(position).getStrIngredient());
+        holder.cardItem.setOnClickListener(event ->
+                searchClickListener.ingredientItemOnclick(list.get(position).getStrIngredient()));
+
+
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void setList(List<Ingredient> list){
+
+        this.list = list;
     }
 }
 

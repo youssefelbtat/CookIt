@@ -41,9 +41,17 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
         firebaseSource.insertUser(userModel);
     }
 
+
+
     @Override
     public void saveUserData(UserModel userModel) {
         sharedPreferenceSource.saveUserData(userModel);
+    }
+
+    @Override
+    public boolean isUserExists(UserModel userModel) {
+
+        return  firebaseSource.isUserExists(userModel);
     }
 
     @Override

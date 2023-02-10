@@ -1,8 +1,8 @@
 package com.example.cookit.network;
 
-import com.example.cookit.model.CategoryResponse;
-import com.example.cookit.model.CountryResponse;
-import com.example.cookit.model.IngredientResponse;
+import com.example.cookit.model.retrofit.CategoryResponse;
+import com.example.cookit.model.retrofit.CountryResponse;
+import com.example.cookit.model.retrofit.IngredientResponse;
 import com.example.cookit.model.MealModelResponse;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIResponse implements RemoteSource{
 
-    public static final String url="www.themealdb.com/api/json/v1/1/";
+    public static final String url="https://www.themealdb.com/api/json/v1/1/";
    MealService mealService;
     private static APIResponse apiResponse = null;
 
@@ -77,13 +77,14 @@ public class APIResponse implements RemoteSource{
 
         Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByName(name);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
     }
 
     @Override
     public void getMealsByCategories(NetworkDelegate networkDelegate, String category) {
 
-        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByName(category);
+        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByCategories(category);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
 
@@ -92,7 +93,7 @@ public class APIResponse implements RemoteSource{
     @Override
     public void getMealsByCountries(NetworkDelegate networkDelegate, String country) {
 
-        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByName(country);
+        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByCountries(country);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
     }
@@ -100,7 +101,7 @@ public class APIResponse implements RemoteSource{
     @Override
     public void getMealsByIngredients(NetworkDelegate networkDelegate, String ingredient) {
 
-        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByName(ingredient);
+        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByIngredients(ingredient);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
 

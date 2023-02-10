@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.cookit.R;
-import com.example.cookit.model.Category;
+import com.example.cookit.model.retrofit.Category;
 import com.example.cookit.model.MealModel;
 
 import java.util.ArrayList;

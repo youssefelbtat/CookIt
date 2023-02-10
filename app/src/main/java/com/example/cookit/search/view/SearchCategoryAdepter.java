@@ -1,4 +1,4 @@
-package com.example.cookit.home.view;
+package com.example.cookit.search.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,25 +10,29 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.model.retrofit.Category;
 
 import java.util.List;
 
-public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAdepter.ViewHolder> {
+public class SearchCategoryAdepter extends RecyclerView.Adapter<SearchCategoryAdepter.ViewHolder> {
 
     private final Context context;
     private List<Category> list;
     public static final String TAG = "RECYCLER";
+
+    SearchClickListener searchClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView imageView;
         public TextView name;
         public CardView cardItem;
         public View view;
+
 
         public ViewHolder(View v){
             super(v);
@@ -38,11 +42,13 @@ public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAd
             cardItem = v.findViewById(R.id.cardCategory);
 
         }
+
     }
 
-    public RecycleCountryAdepter(Context context, List<Category> list) {
+    public SearchCategoryAdepter(Context context, List<Category> list ,SearchClickListener searchClickListener) {
         this.context = context;
         this.list = list;
+        this.searchClickListener = searchClickListener ;
     }
 
     @NonNull
@@ -50,25 +56,32 @@ public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAd
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.categoryitem,parent,false);
-        ViewHolder viewHolder = new RecycleCountryAdepter.ViewHolder(view);
+        ViewHolder viewHolder = new SearchCategoryAdepter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.imageView.setImageResource(R.drawable.egypt);
+        Glide.with(context).load(list.get(position).getStrCategoryThumb())
+                .apply(new RequestOptions().override(500,500)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);
         holder.name.setText(list.get(position).getStrCategory());
-        holder.cardItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homePageFragment_to_countriesFragment);
-            }
+
+        holder.cardItem.setOnClickListener(event ->{
+            searchClickListener.categoryItemOnClick(list.get(position).getStrCategory());
         });
+
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void setList(List<Category> list){
+
+        this.list = list;
     }
 }
 

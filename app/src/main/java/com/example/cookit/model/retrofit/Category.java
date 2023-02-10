@@ -1,4 +1,4 @@
-package com.example.cookit.model;
+package com.example.cookit.model.retrofit;
 
 public class Category {
 
