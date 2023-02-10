@@ -40,6 +40,9 @@ public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCate
 
         }
     }
+    public void setCategoriesMealModelList(List<MealModel> categoriesMealModelList) {
+        this.list = categoriesMealModelList;
+    }
 
     public RecyclerCategoriesAdapter(Context context, List<MealModel> list) {
         this.context = context;

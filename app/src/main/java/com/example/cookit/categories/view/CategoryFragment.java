@@ -14,19 +14,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.cookit.R;
+import com.example.cookit.categories.presenter.CategoriesPresenter;
+import com.example.cookit.categories.presenter.CategoriesPresenterInterface;
+import com.example.cookit.countries.presenter.CountriesPresenter;
+import com.example.cookit.countries.view.CountriesFragmentArgs;
+import com.example.cookit.countries.view.RecyclerCountriesAdapter;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.retrofit.Repository;
+import com.example.cookit.network.APIResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements CategoriesViewInterface,OnCategoriesClickListenterInterface{
 
     RecyclerView recyclerView;
     TextView textView ;
-    List<MealModel> category;
     RecyclerCategoriesAdapter recyclerCategoriesAdapter;
+    CategoriesPresenterInterface categoriesPresenter;
 
     GridLayoutManager gridLayoutManager;
+    String categoryMealName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,26 +53,36 @@ public class CategoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.recyclerCategory);
-        textView = view.findViewById(R.id.categoryText);
-        category = new ArrayList<>();
+        init(view);
+        categoryMealName = CategoryFragmentArgs.fromBundle(getArguments()).getCMealName();
+        if (categoryMealName != null) {
+            textView.setText(categoryMealName);
+        }
 
-        textView.setText("Beef");
-        /*category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        category.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-        category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        category.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));
-        category.add(new MealModel("Fettuccine Alfredo","https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"));
-        category.add(new MealModel("Chivito uruguayo","https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"));
-        category.add(new MealModel("Croatian Bean Stew","https://www.themealdb.com/images/media/meals/tnwy8m1628770384.jpg"));*/
 
-        recyclerView.setHasFixedSize(true);
         gridLayoutManager=new GridLayoutManager(getContext(),2);
-        recyclerCategoriesAdapter=new RecyclerCategoriesAdapter(getContext(),category);
-        recyclerCategoriesAdapter.notifyDataSetChanged();
+        categoriesPresenter=new CategoriesPresenter(this, Repository.getInstance(APIResponse.getInstance(),view.getContext()));
+        recyclerCategoriesAdapter=new RecyclerCategoriesAdapter(getContext(),new ArrayList<>());
         recyclerView.setAdapter(recyclerCategoriesAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        categoriesPresenter.getMeals(categoryMealName);
+    }
+
+    void init(View view){
+        recyclerView = view.findViewById(R.id.recyclerCategory);
+        textView = view.findViewById(R.id.categoryText);
+    }
+
+    @Override
+    public void ViewCategoriesMeal(List<MealModel> models) {
+        recyclerCategoriesAdapter.setCategoriesMealModelList(models);
+        recyclerCategoriesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addMealToFav(MealModel Meal) {
+
     }
 }

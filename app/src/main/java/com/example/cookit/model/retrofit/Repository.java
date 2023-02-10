@@ -27,6 +27,11 @@ public class Repository implements RepositoryInterface{
 
 
     @Override
+    public void getRandomMeal(NetworkDelegate networkDelegate) {
+        remoteSource.getRandomMeals(networkDelegate);
+    }
+
+    @Override
     public void getAllCategories(NetworkDelegate networkDelegate) {
         remoteSource.getAllCategories(networkDelegate);
     }

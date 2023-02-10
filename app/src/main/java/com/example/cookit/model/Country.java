@@ -1,5 +1,7 @@
 package com.example.cookit.model;
 
+import java.io.Serializable;
+
 public class Country {
 
     public String  strArea;

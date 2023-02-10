@@ -4,13 +4,13 @@ import java.util.List;
 
 public class CountryResponse {
 
-    private List<Country> countries;
+    private List<Country> meals;
 
-    public List<Country> getCountries() {
-        return countries;
+    public List<Country> getMeals() {
+        return meals;
     }
 
-    public void setCountries(List<Country> countries) {
-        this.countries = countries;
+    public void setMeals(List<Country> meals) {
+        this.meals = meals;
     }
 }

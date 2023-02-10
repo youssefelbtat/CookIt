@@ -12,24 +12,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.cookit.R;
+import com.example.cookit.home.presenter.HomePagePresenter;
+import com.example.cookit.home.presenter.HomePresenter;
 import com.example.cookit.model.Category;
+import com.example.cookit.model.Country;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.retrofit.Repository;
+import com.example.cookit.network.APIResponse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomePageFragment extends Fragment {
+public class HomePageFragment extends Fragment implements HomeViewInterface,OnHomeClickLisenterInterface {
 
-    RecyclerView viewPager2;
+    RecyclerView mealRecyclerView;
     RecyclerView category;
     RecyclerView country;
 
-    RecyclerView meal;
+    HomePresenter homePagePresenter;
+    LinearLayoutManager mealLayoutManager, CategorieLayoutManager,countryLayoutManager;
+    RecycleCountryAdepter recycleCountryAdepter;
+    RecycleCategoryAdepter recycleCategoryAdepter;
+    ViewPagerAdepter viewPagerAdepter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -44,58 +53,78 @@ public class HomePageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initUI(view);
+        mealLayoutManager = new LinearLayoutManager(view.getContext());
+        CategorieLayoutManager = new LinearLayoutManager(view.getContext());
+        countryLayoutManager = new LinearLayoutManager(view.getContext());
 
-        viewPager2 = view.findViewById(R.id.viewPager);
-        viewPager2.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
-        linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        viewPager2.setLayoutManager(linearLayoutManager);
+        recycleCountryAdepter = new RecycleCountryAdepter(view.getContext(),new ArrayList<>());
+        recycleCategoryAdepter = new RecycleCategoryAdepter(view.getContext(),new ArrayList<>());
+         viewPagerAdepter = new ViewPagerAdepter(view.getContext(),new ArrayList<>());
 
-        List<MealModel> meals = Arrays.asList();
-        ViewPagerAdepter viewPagerAdepter = new ViewPagerAdepter(view.getContext(),meals);
-        viewPager2.setAdapter(viewPagerAdepter);
+        homePagePresenter=new HomePagePresenter(this, Repository.getInstance(APIResponse.getInstance(),view.getContext()));
 
+        mealRecyclerView.setLayoutManager(mealLayoutManager);
+        mealRecyclerView.setAdapter(viewPagerAdepter);
 
-
-        category = view.findViewById(R.id.categoryRecycler);
-        category.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(view.getContext());
-        linearLayoutManager2.setOrientation(RecyclerView.HORIZONTAL);
-        category.setLayoutManager(linearLayoutManager2);
-        List<Category> categories = new ArrayList<>();
-//        = Arrays.asList(new Category(
-//                        "Beef")
-//                ,new Category("Beef"
-//                ),new Category("Beef"
-//                ),new Category("Beef"
-//                ),new Category("Beef"
-//                ),new Category("Beef"
-//                ),new Category("Beef"
-//                ),new Category("Beef"
-//                ));
-        RecycleCategoryAdepter recycleCategoryAdepter = new RecycleCategoryAdepter(view.getContext(),categories);
+        category.setLayoutManager(CategorieLayoutManager);
         category.setAdapter(recycleCategoryAdepter);
 
-
-
-        country = view.findViewById(R.id.countryRecycler);
-        country.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(view.getContext());
-        linearLayoutManager3.setOrientation(RecyclerView.HORIZONTAL);
-        country.setLayoutManager(linearLayoutManager3);
-        List<Category> countries = new ArrayList<>();
-//                = Arrays.asList(new Category(
-//                        "Egypt")
-//                ,new Category("Egypt"
-//                ),new Category("Egypt"
-//                ),new Category("Egypt"
-//                ),new Category("Egypt"
-//                ),new Category("Egypt"
-//                ),new Category("Egypt"
-//                ),new Category("Egypt"
-//                ));
-        RecycleCountryAdepter recycleCountryAdepter = new RecycleCountryAdepter(view.getContext(),countries);
+        country.setLayoutManager(countryLayoutManager);
         country.setAdapter(recycleCountryAdepter);
+
+        mealRecyclerView.setHasFixedSize(true);
+        category.setHasFixedSize(true);
+        country.setHasFixedSize(true);
+
+        mealLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        CategorieLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        countryLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+
+        homePagePresenter.getRandomMeal();
+        homePagePresenter.getCategoriesList();
+        homePagePresenter.getCountriesList();
+
+    }
+     private void initUI(View view){
+         mealRecyclerView = view.findViewById(R.id.viewPager);
+         category = view.findViewById(R.id.categoryRecycler);
+         country = view.findViewById(R.id.countryRecycler);
+
+    }
+    @Override
+    public void ViewRandomMeal(List<MealModel> models) {
+        viewPagerAdepter.setViewPagerAdepterList(models);
+        viewPagerAdepter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void ViewCountriesList(List<Country> models) {
+        System.out.println("All Categories :"+models.get(0).getStrArea());
+        recycleCountryAdepter.setRecycleCountryAdepterList(models);
+        recycleCountryAdepter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void ViewCategoriesList(List<Category> models) {
+
+        recycleCategoryAdepter.setCategoryModelList(models);
+        recycleCategoryAdepter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addMealToFav(MealModel Meal) {
+
+    }
+
+
+    @Override
+    public void addMealToFavClick(MealModel model) {
+
+    }
+
+    @Override
+    public void nevToItemPage(MealModel model) {
 
     }
 }

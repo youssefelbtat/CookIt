@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.model.Country;
 import com.example.cookit.model.MealModel;
 
 import java.util.List;
@@ -32,10 +33,6 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
         public CardView cardItem;
         public View view;
 
-
-
-
-
         public ViewHolder(View v){
             super(v);
             view = v;
@@ -51,6 +48,9 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
     public ViewPagerAdepter(Context context, List<MealModel> list) {
         this.context = context;
         this.list = list;
+    }
+    public void setViewPagerAdepterList(List<MealModel> mealModels) {
+        this.list = mealModels;
     }
 
     @NonNull

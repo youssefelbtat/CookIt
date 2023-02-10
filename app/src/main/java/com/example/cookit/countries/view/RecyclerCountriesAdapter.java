@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.model.Category;
 import com.example.cookit.model.MealModel;
 
 import java.util.List;
@@ -44,6 +45,9 @@ public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCount
         public RecyclerCountriesAdapter(Context context, List<MealModel> list) {
             this.context = context;
             this.list = list;
+        }
+        public void setCountryMealModelList(List<MealModel> countryMealModelList) {
+            this.list = countryMealModelList;
         }
 
         @NonNull

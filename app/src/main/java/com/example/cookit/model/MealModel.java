@@ -1,5 +1,6 @@
 package com.example.cookit.model;
 
+import com.google.gson.annotations.SerializedName;
 public class MealModel {
 
     private String idMeal;

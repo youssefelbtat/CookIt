@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.example.cookit.home.view.HomePageFragmentDirections.ActionHomePageFragmentToCategoryFragment;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -26,15 +27,51 @@ import java.util.List;
         private List<Category> list;
         public static final String TAG = "RECYCLER";
 
+        public RecycleCategoryAdepter(Context context, List<Category> list) {
+            this.context = context;
+            this.list = list;
+        }
+        public void setCategoryModelList(List<Category> CategoryList) {
+            this.list = CategoryList;
+        }
+        @NonNull
+        @Override
+        public RecycleCategoryAdepter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater.inflate(R.layout.categoryitem,parent,false);
+            ViewHolder viewHolder = new RecycleCategoryAdepter.ViewHolder(view);
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+            Glide.with(context).load(list.get(position).getStrCategoryThumb())
+                    .apply(new RequestOptions().override(500,500)
+                            .placeholder(R.drawable.ic_launcher_background)
+                            .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);
+            holder.name.setText(list.get(position).getStrCategory());
+
+            holder.cardItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   ActionHomePageFragmentToCategoryFragment action= HomePageFragmentDirections
+                           .actionHomePageFragmentToCategoryFragment(list.get(position).getStrCategory());
+                    Navigation.findNavController(v).navigate(action);
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+
         public static class ViewHolder extends RecyclerView.ViewHolder{
             public ImageView imageView;
             public TextView name;
             public CardView cardItem;
             public View view;
-
-
-
-
 
             public ViewHolder(View v){
                 super(v);
@@ -45,42 +82,6 @@ import java.util.List;
 
             }
 
-        }
-
-        public RecycleCategoryAdepter(Context context, List<Category> list) {
-            this.context = context;
-            this.list = list;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View view = layoutInflater.inflate(R.layout.categoryitem,parent,false);
-            ViewHolder viewHolder = new RecycleCategoryAdepter.ViewHolder(view);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-            Glide.with(context).load("https://www.themealdb.com/images/ingredients/Lime.png")
-                    .apply(new RequestOptions().override(500,500)
-                            .placeholder(R.drawable.ic_launcher_background)
-                            .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);
-            holder.name.setText(list.get(position).getStrCategory());
-
-            holder.cardItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Navigation.findNavController(v).navigate(R.id.action_homePageFragment_to_categoryFragment);
-                }
-            });
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
         }
     }
 

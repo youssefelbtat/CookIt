@@ -1,7 +1,9 @@
 package com.example.cookit.home.view;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +14,25 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.cookit.home.view.HomePageFragmentDirections.ActionHomePageFragmentToCountriesFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.countries.view.CountriesFragment;
+import com.example.cookit.home.view.HomePageFragmentDirections;
 import com.example.cookit.model.Category;
+import com.example.cookit.model.Country;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAdepter.ViewHolder> {
 
     private final Context context;
-    private List<Category> list;
+    private List<Country> list;
     public static final String TAG = "RECYCLER";
+    String [] countriesFlags;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView imageView;
@@ -41,10 +49,14 @@ public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAd
 
         }
     }
+    public void setRecycleCountryAdepterList(List<Country> CountryList) {
+        this.list = CountryList;
+    }
 
-    public RecycleCountryAdepter(Context context, List<Category> list) {
+    public RecycleCountryAdepter(Context context, List<Country> list) {
         this.context = context;
         this.list = list;
+       countriesFlags=context.getResources().getStringArray(R.array.flags);
     }
 
     @NonNull
@@ -58,12 +70,18 @@ public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.imageView.setImageResource(R.drawable.egypt);
-        holder.name.setText(list.get(position).getStrCategory());
+        Glide.with(context).load(countriesFlags[position])
+                .apply(new RequestOptions().override(60,60)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);
+        holder.name.setText(list.get(position).getStrArea());
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homePageFragment_to_countriesFragment);
+
+                ActionHomePageFragmentToCountriesFragment action= HomePageFragmentDirections
+                        .actionHomePageFragmentToCountriesFragment(list.get(position).getStrArea());
+                Navigation.findNavController(v).navigate(action);
             }
         });
     }

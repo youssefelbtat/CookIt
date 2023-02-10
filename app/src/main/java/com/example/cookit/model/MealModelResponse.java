@@ -12,7 +12,7 @@ public class MealModelResponse {
         this.meals = mealsModel;
     }
 
-    public List<MealModel> getMeals() {
+    public List<MealModel> getMealsModel() {
         return meals;
     }
 
