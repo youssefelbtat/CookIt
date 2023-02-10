@@ -28,7 +28,6 @@ public class SharedPreferenceSource implements SharedPreferenceSourceInterfece{
 
     @Override
     public void saveUserData(UserModel userModel) {
-        editor.putInt(String.valueOf(Utalites.ID),userModel.getId());
         editor.putString(Utalites.USERNAME,userModel.getUserName());
         editor.putString(Utalites.EMAIL,userModel.getEmail());
         editor.putString(Utalites.PASSWORD,userModel.getPassWord());

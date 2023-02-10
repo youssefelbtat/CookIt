@@ -1,14 +1,11 @@
-package com.example.cookit.model;
+package com.example.cookit.model.retrofit;
 
 import java.io.Serializable;
 
 public class Country {
 
-    public String  strArea;
+    public String strArea;
 
-    public Country(String strArea) {
-        this.strArea = strArea;
-    }
 
     public String getStrArea() {
         return strArea;

@@ -6,5 +6,7 @@ public interface FirebaseSourseInterface {
 
     void insertUser(UserModel userModel);
 
+    boolean isUserExists(UserModel userModel);
+
 
 }

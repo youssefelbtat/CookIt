@@ -71,7 +71,6 @@ public class APIResponse implements RemoteSource{
 
     @Override
     public void getAllCountries(NetworkDelegate networkDelegate) {
-        System.out.println("GetAllCountries Method..........");
 
                 Single<CountryResponse> countryResponseSingle= mealService.getAllCountries();
                 countryResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -93,6 +92,7 @@ public class APIResponse implements RemoteSource{
 
         Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByName(name);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
     }
 
@@ -116,7 +116,7 @@ public class APIResponse implements RemoteSource{
     @Override
     public void getMealsByIngredients(NetworkDelegate networkDelegate, String ingredient) {
 
-        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByName(ingredient);
+        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByIngredients(ingredient);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
 

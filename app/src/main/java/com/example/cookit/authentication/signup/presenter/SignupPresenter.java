@@ -30,6 +30,8 @@ public class SignupPresenter implements SignUpPresenterInterface {
         _repo.signUpWithCreateEmail(userModel);
     }
 
+
+
     @Override
     public void saveUserData(UserModel userModel) {
         _repo.saveUserData(userModel);
@@ -38,5 +40,10 @@ public class SignupPresenter implements SignUpPresenterInterface {
     @Override
     public UserModel getSavedUserData() {
         return null;
+    }
+
+    @Override
+    public boolean isUserExists(UserModel userModel) {
+        return _repo.isUserExists(userModel);
     }
 }
