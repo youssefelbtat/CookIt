@@ -1,8 +1,9 @@
 package com.example.cookit.home.view;
 
-import com.example.cookit.model.Category;
-import com.example.cookit.model.Country;
+
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.retrofit.Category;
+import com.example.cookit.model.retrofit.Country;
 
 import java.util.List;
 

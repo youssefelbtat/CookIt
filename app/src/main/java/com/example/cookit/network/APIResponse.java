@@ -1,21 +1,16 @@
 package com.example.cookit.network;
 
-
-import com.example.cookit.model.CategoryResponse;
-import com.example.cookit.model.CountryResponse;
-import com.example.cookit.model.IngredientResponse;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.model.MealModelResponse;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import com.example.cookit.model.retrofit.CategoryResponse;
+import com.example.cookit.model.retrofit.CountryResponse;
+import com.example.cookit.model.retrofit.IngredientResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -74,7 +69,7 @@ public class APIResponse implements RemoteSource{
 
                 Single<CountryResponse> countryResponseSingle= mealService.getAllCountries();
                 countryResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(item -> networkDelegate.onSuccessCountries(item.getMeals()));
+                        .subscribe(item -> networkDelegate.onSuccessCountries(item.getCountries()));
 
     }
 

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
-import com.example.cookit.model.Country;
 import com.example.cookit.model.MealModel;
 
 import java.util.List;

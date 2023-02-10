@@ -21,8 +21,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.countries.view.CountriesFragment;
 import com.example.cookit.home.view.HomePageFragmentDirections;
-import com.example.cookit.model.Category;
-import com.example.cookit.model.Country;
+import com.example.cookit.model.retrofit.Country;
 
 import java.io.Serializable;
 import java.util.List;

@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import com.example.cookit.R;
 import com.example.cookit.home.presenter.HomePagePresenter;
 import com.example.cookit.home.presenter.HomePresenter;
-import com.example.cookit.model.Category;
-import com.example.cookit.model.Country;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.retrofit.Category;
+import com.example.cookit.model.retrofit.Country;
 import com.example.cookit.model.retrofit.Repository;
 import com.example.cookit.network.APIResponse;
 

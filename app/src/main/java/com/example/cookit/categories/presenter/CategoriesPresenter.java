@@ -3,10 +3,11 @@ package com.example.cookit.categories.presenter;
 import com.example.cookit.categories.view.CategoriesViewInterface;
 import com.example.cookit.countries.presenter.CountriesPresenterInterface;
 import com.example.cookit.countries.view.CountriesViewInterface;
-import com.example.cookit.model.Category;
-import com.example.cookit.model.Country;
-import com.example.cookit.model.Ingredient;
+
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.retrofit.Category;
+import com.example.cookit.model.retrofit.Country;
+import com.example.cookit.model.retrofit.Ingredient;
 import com.example.cookit.model.retrofit.RepositoryInterface;
 import com.example.cookit.network.NetworkDelegate;
 
