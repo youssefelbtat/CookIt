@@ -73,6 +73,22 @@ public class MealModel implements Serializable {
         return strMeal;
     }
 
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
+    public String getNameDay() {
+        return nameDay;
+    }
+
+    public void setNameDay(String nameDay) {
+        this.nameDay = nameDay;
+    }
+
     public void setStrMeal(String strMeal) {
         this.strMeal = strMeal;
     }

@@ -22,7 +22,7 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/mealItemImage"
+            android:id="@+id/profileUserImage"
             android:layout_width="140dp"
             android:layout_height="150dp"
             android:layout_margin="25dp"
@@ -58,10 +58,10 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/mealItemImage"
+            app:layout_constraintEnd_toEndOf="@+id/profileUserImage"
             app:layout_constraintHorizontal_bias="0.538"
-            app:layout_constraintStart_toStartOf="@+id/mealItemImage"
-            app:layout_constraintTop_toBottomOf="@+id/mealItemImage" />
+            app:layout_constraintStart_toStartOf="@+id/profileUserImage"
+            app:layout_constraintTop_toBottomOf="@+id/profileUserImage" />
 
         <ImageButton
             android:id="@+id/remove_from_fav"

@@ -59,7 +59,7 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface{
     }
 
     public void init(View view){
-        profileImage = view.findViewById(R.id.profileImage);
+        profileImage = view.findViewById(R.id.profileUserImage);
         editImage = view.findViewById(R.id.editProfileImage);
         userName = view.findViewById(R.id.profileName);
         email = view.findViewById(R.id.profileEmail);
