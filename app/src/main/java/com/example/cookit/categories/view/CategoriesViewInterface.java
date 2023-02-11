@@ -7,5 +7,5 @@ import java.util.List;
 public interface CategoriesViewInterface {
 
     void ViewCategoriesMeal(List<MealModel> models);
-    void addMealToFav(MealModel Meal);
+    public void addToFavorite (MealModel mealModel);
 }

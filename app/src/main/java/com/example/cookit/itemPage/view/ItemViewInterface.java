@@ -8,7 +8,7 @@ public interface ItemViewInterface {
 
     void ViewMealItem(MealModel meal);
 
-    void addMealToFav(MealModel Meal);
-
     void addMealToPlan(MealModel Meal);
+
+    public void addToFavorite (MealModel mealModel);
 }
