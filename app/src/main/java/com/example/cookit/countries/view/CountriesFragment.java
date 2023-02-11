@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.cookit.R;
 import com.example.cookit.countries.presenter.CountriesPresenter;
 import com.example.cookit.countries.presenter.CountriesPresenterInterface;
+import com.example.cookit.database.room.ConceretLocalSource;
 import com.example.cookit.home.presenter.HomePagePresenter;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.model.retrofit.Repository;
@@ -57,7 +58,7 @@ public class CountriesFragment extends Fragment implements CountriesViewInterfac
         }
 
         gridLayoutManager=new GridLayoutManager(getContext(),2);
-        countriesPresenter=new CountriesPresenter(this, Repository.getInstance(APIResponse.getInstance(),view.getContext()));
+        countriesPresenter=new CountriesPresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
         recyclerCountriesAdapter=new RecyclerCountriesAdapter(getContext(),new ArrayList<>());
         recyclerView.setAdapter(recyclerCountriesAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);

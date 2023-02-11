@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.cookit.R;
+import com.example.cookit.database.room.ConceretLocalSource;
 import com.example.cookit.home.presenter.HomePagePresenter;
 import com.example.cookit.home.presenter.HomePresenter;
 import com.example.cookit.model.MealModel;
@@ -62,7 +63,7 @@ public class HomePageFragment extends Fragment implements HomeViewInterface,OnHo
         recycleCategoryAdepter = new RecycleCategoryAdepter(view.getContext(),new ArrayList<>());
          viewPagerAdepter = new ViewPagerAdepter(view.getContext(),new ArrayList<>());
 
-        homePagePresenter=new HomePagePresenter(this, Repository.getInstance(APIResponse.getInstance(),view.getContext()));
+        homePagePresenter=new HomePagePresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
 
         mealRecyclerView.setLayoutManager(mealLayoutManager);
         mealRecyclerView.setAdapter(viewPagerAdepter);

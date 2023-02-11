@@ -12,5 +12,4 @@ public interface SignUpViewInterface {
 
     void saveUserData(UserModel userModel);
 
-    UserModel getSavedUserData();
 }

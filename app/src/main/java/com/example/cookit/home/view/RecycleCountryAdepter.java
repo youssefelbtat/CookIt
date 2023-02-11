@@ -3,27 +3,22 @@ package com.example.cookit.home.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import com.example.cookit.home.view.HomePageFragmentDirections.ActionHomePageFragmentToCountriesFragment;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.cookit.home.view.HomePageFragmentDirections.ActionHomePageFragmentToCountriesFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
-import com.example.cookit.countries.view.CountriesFragment;
-import com.example.cookit.home.view.HomePageFragmentDirections;
 import com.example.cookit.model.retrofit.Country;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAdepter.ViewHolder> {
@@ -77,9 +72,7 @@ public class RecycleCountryAdepter extends RecyclerView.Adapter<RecycleCountryAd
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ActionHomePageFragmentToCountriesFragment action= HomePageFragmentDirections
-                        .actionHomePageFragmentToCountriesFragment(list.get(position).getStrArea());
+                ActionHomePageFragmentToCountriesFragment action= HomePageFragmentDirections.actionHomePageFragmentToCountriesFragment(list.get(position).getStrArea());
                 Navigation.findNavController(v).navigate(action);
             }
         });

@@ -1,9 +1,17 @@
 package com.example.cookit.model;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "Meals")
 public class MealModel {
 
+    @PrimaryKey
+    @NonNull
     private String idMeal;
+    private boolean isFavorite;
+    private String nameDay;
     private String strMeal;
     private String strDrinkAlternate;
     private String strCategory;
@@ -52,6 +60,22 @@ public class MealModel {
     private String strMeasure18;
     private String strMeasure19;
     private String strMeasure20;
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
+    public String getNameDay() {
+        return nameDay;
+    }
+
+    public void setNameDay(String nameDay) {
+        this.nameDay = nameDay;
+    }
 
     public String getIdMeal() {
         return idMeal;

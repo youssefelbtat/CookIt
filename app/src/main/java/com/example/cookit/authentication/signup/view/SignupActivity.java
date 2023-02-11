@@ -120,11 +120,6 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
     }
 
     @Override
-    public UserModel getSavedUserData() {
-        return null;
-    }
-
-    @Override
     public void signUpWithGoogleClick() {
 
     }
@@ -155,8 +150,15 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
             userModel.setPlans(null);
 
             if (isUserExists(userModel)){
+                System.out.println("signup before "+userModel.getUserName());
+                System.out.println("signup before "+userModel.getEmail());
+                System.out.println("signup before "+userModel.getPassWord());
                 insertUserData(userModel);
+                System.out.println("signup After "+userModel.getUserName());
+                System.out.println("signup After "+userModel.getEmail());
+                System.out.println("signup After "+userModel.getPassWord());
                 saveUserData(userModel);
+
 
                 Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                 startActivity(intent);

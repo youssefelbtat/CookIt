@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.cookit.home.view.HomePageFragmentDirections.ActionHomePageFragmentToCategoryFragment;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
@@ -54,7 +53,7 @@ import java.util.List;
             holder.cardItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   ActionHomePageFragmentToCategoryFragment action= HomePageFragmentDirections
+                    ActionHomePageFragmentToCategoryFragment action= HomePageFragmentDirections
                            .actionHomePageFragmentToCategoryFragment(list.get(position).getStrCategory());
                     Navigation.findNavController(v).navigate(action);
                 }

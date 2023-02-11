@@ -19,6 +19,7 @@ import com.example.cookit.categories.presenter.CategoriesPresenterInterface;
 import com.example.cookit.countries.presenter.CountriesPresenter;
 import com.example.cookit.countries.view.CountriesFragmentArgs;
 import com.example.cookit.countries.view.RecyclerCountriesAdapter;
+import com.example.cookit.database.room.ConceretLocalSource;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.model.retrofit.Repository;
 import com.example.cookit.network.APIResponse;
@@ -61,7 +62,7 @@ public class CategoryFragment extends Fragment implements CategoriesViewInterfac
 
 
         gridLayoutManager=new GridLayoutManager(getContext(),2);
-        categoriesPresenter=new CategoriesPresenter(this, Repository.getInstance(APIResponse.getInstance(),view.getContext()));
+        categoriesPresenter=new CategoriesPresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
         recyclerCategoriesAdapter=new RecyclerCategoriesAdapter(getContext(),new ArrayList<>());
         recyclerView.setAdapter(recyclerCategoriesAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);

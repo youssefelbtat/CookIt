@@ -31,16 +31,11 @@ public class SignupPresenter implements SignUpPresenterInterface {
     }
 
 
-
     @Override
     public void saveUserData(UserModel userModel) {
         _repo.saveUserData(userModel);
     }
 
-    @Override
-    public UserModel getSavedUserData() {
-        return null;
-    }
 
     @Override
     public boolean isUserExists(UserModel userModel) {
