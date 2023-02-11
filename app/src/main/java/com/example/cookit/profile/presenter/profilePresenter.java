@@ -12,10 +12,20 @@ public class profilePresenter implements profilePresenterInterface{
 
     public profilePresenter(RepositoryFirebaseInterface repositoryFirebaseInterface){
         this.repositoryFirebaseInterface = repositoryFirebaseInterface;
-
     }
     @Override
     public UserModel getSavedUserData() {
         return repositoryFirebaseInterface.getSavedUserData();
+    }
+
+
+    @Override
+    public void updateUserData(UserModel userModel) {
+        repositoryFirebaseInterface.updateUserData(userModel);
+    }
+
+    @Override
+    public void updateUserFirebaseData(UserModel userModel) {
+        repositoryFirebaseInterface.updateUserFirebaseData(userModel);
     }
 }

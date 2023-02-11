@@ -59,4 +59,19 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
         return sharedPreferenceSource.getSavedUserData();
     }
 
+    @Override
+    public void updateUserData(UserModel userModel) {
+        sharedPreferenceSource.updateUserData(userModel);
+    }
+
+    @Override
+    public void updateUserFirebaseData(UserModel userModel) {
+        firebaseSource.insertUser(userModel);
+    }
+
+    @Override
+    public void updateFavoriteInFirebase(UserModel userModel) {
+        firebaseSource.insertUser(userModel);
+    }
+
 }

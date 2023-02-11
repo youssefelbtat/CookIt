@@ -34,8 +34,8 @@ public class SharedPreferenceSource implements SharedPreferenceSourceInterfece{
         editor.putString(Utalites.USERNAME,userModel.getUserName());
         editor.putString(Utalites.PASSWORD,userModel.getPassWord());
         editor.putString(Utalites.EMAIL,userModel.getEmail());
-
         editor.commit();
+
 
     }
 
@@ -44,6 +44,19 @@ public class SharedPreferenceSource implements SharedPreferenceSourceInterfece{
         userModel.setUserName(sharedPreferences.getString(Utalites.USERNAME,"Null"));
         userModel.setEmail(sharedPreferences.getString(Utalites.EMAIL,"Null"));
         userModel.setPassWord(sharedPreferences.getString(Utalites.PASSWORD,"Null"));
+        userModel.setImage(sharedPreferences.getString(Utalites.IMAGE,"null"));
         return userModel;
+
+
+    }
+
+    @Override
+    public void updateUserData(UserModel userModel) {
+        editor.putString(Utalites.USERNAME,userModel.getUserName());
+        editor.putString(Utalites.PASSWORD,userModel.getPassWord());
+        editor.putString(Utalites.EMAIL,userModel.getEmail());
+        editor.putString(Utalites.IMAGE,userModel.getImage());
+        editor.commit();
+
     }
 }

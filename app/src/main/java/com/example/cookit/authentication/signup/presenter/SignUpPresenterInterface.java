@@ -10,5 +10,6 @@ public interface SignUpPresenterInterface {
 
     void saveUserData(UserModel userModel);
 
+
     boolean isUserExists(UserModel userModel);
 }
