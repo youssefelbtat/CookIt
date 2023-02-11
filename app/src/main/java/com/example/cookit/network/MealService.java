@@ -5,8 +5,6 @@ import com.example.cookit.model.retrofit.CountryResponse;
 import com.example.cookit.model.retrofit.IngredientResponse;
 import com.example.cookit.model.MealModelResponse;
 
-import java.util.List;
-
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
@@ -26,7 +24,9 @@ public interface MealService {
     Single<IngredientResponse> getAllIngredient();
 
     @GET("search.php")
-    Single<MealModelResponse> getMealsByName(@Query("f") String name);
+    Single<MealModelResponse> getMealsByFirstChar(@Query("f") String name);
+    @GET("search.php")
+    Single<MealModelResponse> getMealsByName(@Query("s") String name);
 
     @GET("filter.php")
     Single<MealModelResponse> getMealsByCategories(@Query("c") String category);

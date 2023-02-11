@@ -38,6 +38,7 @@ public class CountriesFragment extends Fragment implements CountriesViewInterfac
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("onCreateMeal............&");
 
     }
 
@@ -75,6 +76,7 @@ public class CountriesFragment extends Fragment implements CountriesViewInterfac
 
     @Override
     public void ViewCounteryMeal(List<MealModel> models) {
+        System.out.println("ViewCounteryMeal............&");
         recyclerCountriesAdapter.setCountryMealModelList(models);
         recyclerCountriesAdapter.notifyDataSetChanged();
     }

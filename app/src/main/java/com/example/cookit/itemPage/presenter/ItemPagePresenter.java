@@ -26,7 +26,8 @@ public class ItemPagePresenter implements ItemPagePresenterInterface, NetworkDel
     }
     @Override
     public void onSuccessMeals(List<MealModel> mealModels) {
-
+        System.out.println("<<<<<<<<<<<<<<<<onSuccessMeals>>>>>>>>>>>>");
+        _view.ViewMealItem(mealModels);
 
     }
 
@@ -52,6 +53,8 @@ public class ItemPagePresenter implements ItemPagePresenterInterface, NetworkDel
 
     @Override
     public void getMealItem(String ItemName) {
+        System.out.println("getMealItem meal Models : "+ ItemName);
+        _repo.getMealsByName(this,ItemName);
     }
 
 

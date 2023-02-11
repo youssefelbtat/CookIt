@@ -17,6 +17,7 @@ public interface RepositoryInterface {
     void getAllIngredient(NetworkDelegate networkDelegate);
 
     void getMealsByName(NetworkDelegate networkDelegate,String name);
+    void getMealsByFirstChar(NetworkDelegate networkDelegate,String name);
 
     void getMealsByCategories(NetworkDelegate networkDelegate,String category);
 

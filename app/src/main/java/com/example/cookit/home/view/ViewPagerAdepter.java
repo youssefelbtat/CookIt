@@ -76,7 +76,7 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
         holder.name.setText(list.get(position).getStrMeal());
         holder.cardItem.setOnClickListener(v -> {
             Intent myIntent =new Intent(context, ItemPageActivity.class);
-            myIntent.putExtra("MEAL_ITEM", (Serializable) list.get(position));
+            myIntent.putExtra("MEAL_NAME",list.get(position).getStrMeal());
             context.startActivity(myIntent);
         });
 
