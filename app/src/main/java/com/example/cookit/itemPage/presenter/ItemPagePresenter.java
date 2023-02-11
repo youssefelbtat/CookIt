@@ -21,6 +21,10 @@ public class ItemPagePresenter implements ItemPagePresenterInterface, NetworkDel
     }
 
     @Override
+    public void addToFavorite(MealModel mealModel) {
+        _repo.insertFavorite(mealModel);
+    }
+    @Override
     public void onSuccessMeals(List<MealModel> mealModels) {
         System.out.println("<<<<<<<<<<<<<<<<onSuccessMeals>>>>>>>>>>>>");
         _view.ViewMealItem(mealModels);
@@ -52,4 +56,6 @@ public class ItemPagePresenter implements ItemPagePresenterInterface, NetworkDel
         System.out.println("getMealItem meal Models : "+ ItemName);
         _repo.getMealsByName(this,ItemName);
     }
+
+
 }

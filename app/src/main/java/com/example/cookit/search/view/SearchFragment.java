@@ -82,6 +82,7 @@ public class SearchFragment extends Fragment implements SearchClickListener,Sear
 
         searchPresenterInterface = new SearchPresenter(this ,Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),getContext()));
 
+
         layoutManager=new GridLayoutManager(getContext(),2);
 
         searchMealAdapter=new SearchMealAdapter(getContext(),mealModels,this);
@@ -249,6 +250,11 @@ public class SearchFragment extends Fragment implements SearchClickListener,Sear
     }
 
     @Override
+    public void addToFavorite(MealModel mealModel) {
+        searchPresenterInterface.addToFavorite(mealModel);
+    }
+
+    @Override
     public void categoryItemOnClick(String category) {
         searchPresenterInterface.getMealsByCategories(category);
     }
@@ -276,5 +282,10 @@ public class SearchFragment extends Fragment implements SearchClickListener,Sear
     @Override
     public void ingredientOnclick() {
         searchPresenterInterface.getAllIngredient();
+    }
+
+    @Override
+    public void addToFavoriteOnClick(MealModel mealModel) {
+        addToFavorite(mealModel);
     }
 }

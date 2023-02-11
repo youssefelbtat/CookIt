@@ -47,6 +47,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     String[] videoID;
     String []days;
 
+    ItemPagePresenterInterface itemPagePresenterInterface;
     boolean[] checkedDays;
     List<String> selectedDays;
     String mealNameItem;
@@ -72,6 +73,14 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         pagepresenter.getMealItem(mealNameItem);
         /*
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
+
+       itemPagePresenterInterface = new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance()
+               , ConceretLocalSource.getInstance(getApplicationContext()),this));
+
+       model.setFavorite(true);
+       model.setNameDay("Not");
+       addToFav_btn.setOnClickListener(event -> addToFavoriteOnClick(model));
+
         videoID=model.getStrYoutube().split("=");
         System.out.println("The Meal Video:"+videoID[1]);
         mealName.setText(model.getStrMeal());
@@ -220,11 +229,17 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         recyclerView.setLayoutManager(layoutManager);
 
     }
+    @Override
+    public void addToFavorite(MealModel mealModel) {
+        itemPagePresenterInterface.addToFavorite(mealModel);
+    }
 
     @Override
-    public void addMealToFav(MealModel Meal) {
-
+    public void addToFavoriteOnClick(MealModel mealModel) {
+        addToFavorite(mealModel);
     }
+
+
 
     @Override
     public void addMealToPlan(MealModel Meal) {

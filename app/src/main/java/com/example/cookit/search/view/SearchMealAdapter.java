@@ -58,6 +58,13 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
             }
         });
 
+
+        holder.btnFav.setOnClickListener( event -> {
+            list.get(position).setFavorite(true);
+            list.get(position).setNameDay("Not");
+            searchClickListener.addToFavoriteOnClick(list.get(position));
+        });
+
     }
 
     @Override
@@ -73,13 +80,13 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView meal_name;
         CircleImageView meal_image;
-        ImageButton remove_from_fav;
+        ImageButton btnFav;
         CardView item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             meal_name =itemView.findViewById(R.id.ingredient_meal_name);
             meal_image =itemView.findViewById(R.id.profileUserImage);
-            remove_from_fav =itemView.findViewById(R.id.remove_from_fav);
+            btnFav =itemView.findViewById(R.id.remove_from_fav);
             item=itemView.findViewById(R.id.favoriteItemCard);
         }
     }

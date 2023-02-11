@@ -63,4 +63,10 @@ public class HomePagePresenter implements NetworkDelegate ,HomePresenter {
     public void getCategoriesList() {
         _repo.getAllCategories(this);
     }
+
+    @Override
+    public void addToFavorite(MealModel mealModel) {
+        _repo.insertFavorite(mealModel);
+
+    }
 }

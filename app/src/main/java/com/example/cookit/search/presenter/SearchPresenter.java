@@ -81,4 +81,10 @@ public class SearchPresenter implements SearchPresenterInterface , NetworkDelega
     public void getMealsByIngredients(String ingredient) {
         repositoryInterface.getMealsByIngredients(this,ingredient);
     }
+
+    @Override
+    public void addToFavorite(MealModel mealModel) {
+        repositoryInterface.insertFavorite(mealModel);
+
+    }
 }

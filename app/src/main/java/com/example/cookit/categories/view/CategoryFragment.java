@@ -63,7 +63,7 @@ public class CategoryFragment extends Fragment implements CategoriesViewInterfac
 
         gridLayoutManager=new GridLayoutManager(getContext(),2);
         categoriesPresenter=new CategoriesPresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
-        recyclerCategoriesAdapter=new RecyclerCategoriesAdapter(getContext(),new ArrayList<>());
+        recyclerCategoriesAdapter=new RecyclerCategoriesAdapter(getContext(),new ArrayList<>(),this);
         recyclerView.setAdapter(recyclerCategoriesAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -83,7 +83,13 @@ public class CategoryFragment extends Fragment implements CategoriesViewInterfac
     }
 
     @Override
-    public void addMealToFav(MealModel Meal) {
+    public void addToFavorite(MealModel mealModel) {
+        categoriesPresenter.addToFavorite(mealModel);
+    }
 
+
+    @Override
+    public void addToFavoriteOnClick(MealModel mealModel) {
+        addToFavorite(mealModel);
     }
 }

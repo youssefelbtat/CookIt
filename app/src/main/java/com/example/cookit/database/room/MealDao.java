@@ -14,13 +14,13 @@ import io.reactivex.rxjava3.core.Single;
 
 @Dao
 public interface MealDao {
-    @Query("SELECT * From Meals where isFavorite ='true'")
+    @Query("SELECT * From Meals where isFavorite = '1'")
     Single<List<MealModel>> getFavorites() ;
     @Insert
     void insertFavorite (MealModel mealModel);
     @Delete
     void deleteFavorite (MealModel mealModel);
-    @Query("SELECT * From Meals where nameDay !='null'")
+    @Query("SELECT * From Meals where nameDay !='Not'")
     Single<List<MealModel>> getPlans() ;
     @Insert
     void insertPlan (MealModel mealModel);

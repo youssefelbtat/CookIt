@@ -51,6 +51,7 @@
     <string name="wednesday">Wednesday</string>
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
+    <string name="favorite">Favorite</string>
 
     <string-array name="weekdays">
         <item>Saturday</item>

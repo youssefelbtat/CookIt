@@ -28,6 +28,8 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
     private List<MealModel> list;
     public static final String TAG = "RECYCLER";
 
+    private OnHomeClickLisenterInterface onHomeClickLisenterInterface ;
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView imageView;
         public TextView name;
@@ -47,9 +49,10 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
 
     }
 
-    public ViewPagerAdepter(Context context, List<MealModel> list) {
+    public ViewPagerAdepter(Context context, List<MealModel> list,OnHomeClickLisenterInterface onHomeClickLisenterInterface) {
         this.context = context;
         this.list = list;
+        this.onHomeClickLisenterInterface = onHomeClickLisenterInterface;
     }
     public void setViewPagerAdepterList(List<MealModel> mealModels) {
         this.list = mealModels;
@@ -75,6 +78,15 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
             Intent myIntent =new Intent(context, ItemPageActivity.class);
             myIntent.putExtra("MEAL_NAME",list.get(position).getStrMeal());
             context.startActivity(myIntent);
+        });
+
+        holder.cardFavorate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.get(position).setFavorite(true);
+                list.get(position).setNameDay("Not");
+                onHomeClickLisenterInterface.addToFavoriteOnClick(list.get(position));
+            }
         });
 
     }

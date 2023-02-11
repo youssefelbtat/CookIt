@@ -19,4 +19,6 @@ public interface SearchViewInterface {
 
     public void getMeals(List<MealModel> mealModels);
 
+    public void addToFavorite (MealModel mealModel);
+
 }

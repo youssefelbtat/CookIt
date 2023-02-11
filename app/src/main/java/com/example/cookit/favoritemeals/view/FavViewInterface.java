@@ -5,6 +5,8 @@ import com.example.cookit.model.MealModel;
 import java.util.List;
 
 public interface FavViewInterface {
-    void showFavMeals(List<MealModel> meals);
-    void RemoveFromFav(MealModel meal);
+    void removeFromFav(MealModel meal);
+
+    public void showData(List<MealModel> products);
+
 }

@@ -6,29 +6,27 @@ import androidx.lifecycle.Observer;
 import com.example.cookit.favoritemeals.view.FavViewInterface;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.model.modelFirebase.RepositoryFirebaseInterface;
+import com.example.cookit.model.retrofit.RepositoryInterface;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Single;
+
 public class FavoriteMealsPresenter implements FavPresenterInterface{
-    private FavViewInterface _view;
-    private RepositoryFirebaseInterface _repo;
-    public FavoriteMealsPresenter(FavViewInterface view, RepositoryFirebaseInterface repo){
-        this._repo=repo;
-        this._view=view;
+    private RepositoryInterface repositoryInterface;
 
+    public FavoriteMealsPresenter(RepositoryInterface repositoryInterface){
+        this.repositoryInterface = repositoryInterface ;
+    }
+
+
+    @Override
+    public Single<List<MealModel>> getAllStoredFavorites() {
+        return repositoryInterface.getAllStoredFavorites();
     }
 
     @Override
-    public void getFavMeals(LifecycleOwner lifecycleOwner) {
-//        _repo.getFavMealslList().observe( lifecycleOwner, new Observer<List<MealModel>>() {
-//            @Override
-//            public void onChanged(List<MealModel> products) {
-//                _view.showFavMeals(products);
-//            }
-//        });
-    }
-
-    @Override
-    public void removeFavMeal(MealModel meal) {
-//        _repo.removeMealFromFav(meal);
+    public void removeFromFavorite(MealModel mealModel) {
+        repositoryInterface.removeFavorite(mealModel);
     }
 }

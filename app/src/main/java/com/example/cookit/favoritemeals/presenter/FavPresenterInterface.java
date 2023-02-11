@@ -7,7 +7,9 @@ import com.example.cookit.model.MealModel;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Single;
+
 public interface FavPresenterInterface {
-    void getFavMeals(LifecycleOwner lifecycleOwner);
-    void removeFavMeal(MealModel meal);
+    Single<List<MealModel>> getAllStoredFavorites();
+    void removeFromFavorite(MealModel mealModel);
 }
