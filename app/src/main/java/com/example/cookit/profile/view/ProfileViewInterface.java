@@ -8,5 +8,9 @@ public interface ProfileViewInterface {
 
     UserModel getSavedUserData();
 
+    void updateUserData(UserModel userModel);
+
+    void updateUserFirebaseData(UserModel userModel);
+
     public void showData(UserModel userModel);
 }
