@@ -19,6 +19,13 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
 
+//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Utalites.SHARDPREFERENCE,getApplicationContext().MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(Utalites.USERNAME,null);
+//        editor.putString(Utalites.EMAIL,null);
+//        editor.putString(Utalites.PASSWORD,null);
+//        editor.commit();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

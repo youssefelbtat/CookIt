@@ -56,7 +56,7 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
 
     @Override
     public UserModel getSavedUserData() {
-        return null;
+        return sharedPreferenceSource.getSavedUserData();
     }
 
 }

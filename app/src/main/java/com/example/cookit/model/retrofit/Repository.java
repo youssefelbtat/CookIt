@@ -1,8 +1,15 @@
 package com.example.cookit.model.retrofit;
 
 import android.content.Context;
+
+import com.example.cookit.database.room.LocalSource;
+import com.example.cookit.model.MealModel;
 import com.example.cookit.network.NetworkDelegate;
 import com.example.cookit.network.RemoteSource;
+
+import java.util.List;
+
+import io.reactivex.rxjava3.core.Single;
 
 public class Repository implements RepositoryInterface{
 
@@ -11,15 +18,18 @@ public class Repository implements RepositoryInterface{
     RemoteSource remoteSource;
     private static Repository repository =null ;
 
-    public Repository(RemoteSource remoteSource,Context context) {
+    LocalSource localSource ;
+
+    public Repository(RemoteSource remoteSource,LocalSource localSource,Context context) {
         this.context = context;
         this.remoteSource = remoteSource;
+        this.localSource = localSource;
 
     }
 
-    public static Repository getInstance(RemoteSource remoteSource,Context context){
+    public static Repository getInstance(RemoteSource remoteSource, LocalSource localSource, Context context){
         if (repository == null){
-            repository = new Repository(remoteSource,context);
+            repository = new Repository(remoteSource,localSource,context);
         }
 
         return  repository;
@@ -64,5 +74,35 @@ public class Repository implements RepositoryInterface{
     @Override
     public void getMealsByIngredients(NetworkDelegate networkDelegate, String ingredient) {
         remoteSource.getMealsByIngredients(networkDelegate,ingredient);
+    }
+
+    @Override
+    public void insertFavorite(MealModel mealModel) {
+
+    }
+
+    @Override
+    public void removeFavorite(MealModel mealModel) {
+
+    }
+
+    @Override
+    public Single<List<MealModel>> getAllStoredFavorites() {
+        return null;
+    }
+
+    @Override
+    public void insertPlan(MealModel mealModel) {
+
+    }
+
+    @Override
+    public void removePlan(MealModel mealModel) {
+
+    }
+
+    @Override
+    public Single<List<MealModel>> getAllStoredPlans() {
+        return null;
     }
 }

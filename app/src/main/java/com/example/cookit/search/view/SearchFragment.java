@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.SearchView;
 
 import com.example.cookit.R;
+import com.example.cookit.database.room.ConceretLocalSource;
 import com.example.cookit.model.retrofit.Category;
 import com.example.cookit.model.retrofit.Country;
 import com.example.cookit.model.retrofit.Ingredient;
@@ -79,7 +80,7 @@ public class SearchFragment extends Fragment implements SearchClickListener,Sear
 
 
 
-        searchPresenterInterface = new SearchPresenter(this, Repository.getInstance(APIResponse.getInstance(),getContext()));
+        searchPresenterInterface = new SearchPresenter(this ,Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),getContext()));
 
         layoutManager=new GridLayoutManager(getContext(),2);
 

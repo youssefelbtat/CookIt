@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.model.retrofit.Country;
 
@@ -22,6 +24,7 @@ public class SearchCountryAdepter extends RecyclerView.Adapter<SearchCountryAdep
     private final Context context;
     private List<Country> list;
     public static final String TAG = "RECYCLER";
+    String [] countriesFlags;
 
     SearchClickListener searchClickListener;
 
@@ -45,6 +48,7 @@ public class SearchCountryAdepter extends RecyclerView.Adapter<SearchCountryAdep
         this.context = context;
         this.list = list;
         this.searchClickListener = searchClickListener;
+        countriesFlags=context.getResources().getStringArray(R.array.flags);
 
     }
 
@@ -59,11 +63,12 @@ public class SearchCountryAdepter extends RecyclerView.Adapter<SearchCountryAdep
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.imageView.setImageResource(R.drawable.egypt);
-        holder.name.setText(list.get(position).getStrArea());
+        Glide.with(context).load(countriesFlags[position])
+                .apply(new RequestOptions().override(60,60)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);        holder.name.setText(list.get(position).getStrArea());
         holder.cardItem.setOnClickListener(event ->
                 searchClickListener.countryItemOnClick(list.get(position).strArea));
-
     }
 
     @Override

@@ -11,10 +11,13 @@ public class SharedPreferenceSource implements SharedPreferenceSourceInterfece{
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
+    private UserModel userModel ;
+
     private SharedPreferenceSource(Context context){
 
         sharedPreferences = context.getSharedPreferences(Utalites.SHARDPREFERENCE,context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        userModel = new UserModel();
 
     }
 
@@ -29,13 +32,18 @@ public class SharedPreferenceSource implements SharedPreferenceSourceInterfece{
     @Override
     public void saveUserData(UserModel userModel) {
         editor.putString(Utalites.USERNAME,userModel.getUserName());
-        editor.putString(Utalites.EMAIL,userModel.getEmail());
         editor.putString(Utalites.PASSWORD,userModel.getPassWord());
+        editor.putString(Utalites.EMAIL,userModel.getEmail());
+
         editor.commit();
+
     }
 
     @Override
     public UserModel getSavedUserData() {
-        return null;
+        userModel.setUserName(sharedPreferences.getString(Utalites.USERNAME,"Null"));
+        userModel.setEmail(sharedPreferences.getString(Utalites.EMAIL,"Null"));
+        userModel.setPassWord(sharedPreferences.getString(Utalites.PASSWORD,"Null"));
+        return userModel;
     }
 }

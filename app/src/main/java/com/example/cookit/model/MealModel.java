@@ -1,13 +1,17 @@
 package com.example.cookit.model;
 
-import android.os.Parcelable;
-
-
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import java.io.Serializable;
-
+@Entity(tableName = "Meals")
 public class MealModel implements Serializable {
 
+    @PrimaryKey
+    @NonNull
     private String idMeal;
+    private boolean isFavorite;
+    private String nameDay;
     private String strMeal;
     private String strDrinkAlternate;
     private String strCategory;
