@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/mealItemImage"
+            android:id="@+id/profileUserImage"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_margin="25dp"
@@ -53,10 +53,10 @@
             app:circularflow_radiusInDP="5dp"
             app:civ_border_color="#E1C49A"
             app:civ_border_width="2dp"
-            app:layout_constraintEnd_toEndOf="@+id/mealItemImage"
+            app:layout_constraintEnd_toEndOf="@+id/profileUserImage"
             app:layout_constraintHorizontal_bias="0.939"
-            app:layout_constraintStart_toStartOf="@+id/mealItemImage"
-            app:layout_constraintTop_toTopOf="@+id/mealItemImage" />
+            app:layout_constraintStart_toStartOf="@+id/profileUserImage"
+            app:layout_constraintTop_toTopOf="@+id/profileUserImage" />
 
         <TextView
             android:id="@+id/profileName"
@@ -66,10 +66,10 @@
             android:text="@string/profileName"
             android:textColor="#000000"
             android:textSize="34sp"
-            app:layout_constraintEnd_toEndOf="@+id/mealItemImage"
+            app:layout_constraintEnd_toEndOf="@+id/profileUserImage"
             app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="@+id/mealItemImage"
-            app:layout_constraintTop_toBottomOf="@+id/mealItemImage" />
+            app:layout_constraintStart_toStartOf="@+id/profileUserImage"
+            app:layout_constraintTop_toBottomOf="@+id/profileUserImage" />
 
         <TextView
             android:id="@+id/profileEmail"

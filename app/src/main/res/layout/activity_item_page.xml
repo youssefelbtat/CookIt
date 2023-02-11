@@ -23,12 +23,12 @@
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/mealItemImage"
-            app:layout_constraintStart_toStartOf="@+id/mealItemImage"
-            app:layout_constraintTop_toBottomOf="@+id/mealItemImage" />
+            app:layout_constraintEnd_toEndOf="@+id/profileUserImage"
+            app:layout_constraintStart_toStartOf="@+id/profileUserImage"
+            app:layout_constraintTop_toBottomOf="@+id/profileUserImage" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/mealItemImage"
+            android:id="@+id/profileUserImage"
             android:layout_width="290dp"
             android:layout_height="292dp"
             android:layout_margin="25dp"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="itemPageMealName,mealItemImage,itemPageMealCountry,add_to_calender,add_to_favorite,line"
+            app:constraint_referenced_ids="itemPageMealName,profileUserImage,itemPageMealCountry,add_to_calender,add_to_favorite,line"
             tools:layout_editor_absoluteY="791dp" />
 
         <View

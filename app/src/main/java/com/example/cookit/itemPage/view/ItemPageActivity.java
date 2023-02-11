@@ -7,13 +7,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -130,6 +127,6 @@ public class ItemPageActivity extends AppCompatActivity {
         addToFav_btn=findViewById(R.id.add_to_favorite);
         addToPlane_btn=findViewById(R.id.add_to_calender);
         backArrow=findViewById(R.id.itembackbutton);
-        imageView=findViewById(R.id.mealItemImage);
+        imageView=findViewById(R.id.profileUserImage);
     }
 }

@@ -20,7 +20,7 @@
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/mealItemImage"
+            android:id="@+id/profileUserImage"
             android:layout_width="68dp"
             android:layout_height="68dp"
             android:layout_margin="5dp"
@@ -56,9 +56,9 @@
             android:text="@string/_1_2_cup_heavy_cream"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/mealItemImage"
+            app:layout_constraintEnd_toEndOf="@+id/profileUserImage"
             app:layout_constraintHorizontal_bias="0.538"
-            app:layout_constraintStart_toStartOf="@+id/mealItemImage"
-            app:layout_constraintTop_toBottomOf="@+id/mealItemImage" />
+            app:layout_constraintStart_toStartOf="@+id/profileUserImage"
+            app:layout_constraintTop_toBottomOf="@+id/profileUserImage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

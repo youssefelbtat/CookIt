@@ -68,7 +68,7 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             meal_name =itemView.findViewById(R.id.ingredient_meal_name);
-            meal_image =itemView.findViewById(R.id.mealItemImage);
+            meal_image =itemView.findViewById(R.id.profileUserImage);
             remove_from_fav =itemView.findViewById(R.id.remove_from_fav);
             item=itemView.findViewById(R.id.favoriteItemCard);
         }
