@@ -5,6 +5,7 @@ import com.example.cookit.network.NetworkDelegate;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
 
@@ -30,7 +31,7 @@ public interface RepositoryInterface {
     Single<List<MealModel>> getAllStoredFavorites();
     void insertPlan(MealModel mealModel);
     void removePlan(MealModel mealModel);
-    Single<List<MealModel>> getAllStoredPlans();
+    Single<List<MealModel>> getAllStoredPlans(String day);
 
 
 }

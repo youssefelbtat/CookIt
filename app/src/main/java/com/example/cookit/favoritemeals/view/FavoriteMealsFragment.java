@@ -94,7 +94,7 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
     }
 
     @Override
-    public void showData(List<MealModel> products) {
+    public void showData(List<MealModel> meals) {
 
     }
 

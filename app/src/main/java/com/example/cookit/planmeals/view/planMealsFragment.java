@@ -13,26 +13,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cookit.R;
+import com.example.cookit.database.room.ConceretLocalSource;
+import com.example.cookit.favoritemeals.presenter.FavoriteMealsPresenter;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.retrofit.Repository;
+import com.example.cookit.network.APIResponse;
+import com.example.cookit.planmeals.presenter.PlanMealsPresenter;
+import com.example.cookit.planmeals.presenter.PlanPresenterInterface;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class planMealsFragment extends Fragment {
 
-    LinearLayoutManager linearLayoutManager1 , linearLayoutManager2 , linearLayoutManager3 ;
+public class planMealsFragment extends Fragment implements OnPlanClickListner,OnPlanViewListner{
 
-    LinearLayoutManager linearLayoutManager4 , linearLayoutManager5 , linearLayoutManager6 ,linearLayoutManager7;
-    RecyclerView saturday , sunday ,monday , tuesday , wednesday , thursday , friday ;
+    LinearLayoutManager[] linearLayoutManager=new LinearLayoutManager[7];
+    RecyclerView []recyclerView=new RecyclerView[7];
 
-    List<MealModel> saturdayList ;
-    List<MealModel> sundayList ;
-    List<MealModel> mondayList ;
-    List<MealModel> tuesdayList ;
-    List<MealModel> wednesdayList ;
-    List<MealModel> thursdayList ;
-    List<MealModel> fridayList ;
+    RecyclePlanAdapter[] recyclePlanAdapter=new RecyclePlanAdapter[7];
+
+    PlanPresenterInterface planPresenterInterface;
+    String [] daysWeak;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,84 +45,136 @@ public class planMealsFragment extends Fragment {
 
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_plan_meals, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        saturday = view.findViewById(R.id.recyclerSaturday);
-        sunday = view.findViewById(R.id.recyclerSunday);
-        monday = view.findViewById(R.id.recyclerMonday);
-        tuesday = view.findViewById(R.id.recyclerTuesday);
-        wednesday = view.findViewById(R.id.recyclerWednesday);
-        thursday = view.findViewById(R.id.recyclerThursday);
-        friday = view.findViewById(R.id.recyclerFriday);
+         daysWeak=getResources().getStringArray(R.array.weekdays);
+
+        Init(view);
+
+        planPresenterInterface = new PlanMealsPresenter((Repository.getInstance(APIResponse.getInstance(),
+                ConceretLocalSource.getInstance(getContext()),getContext())));
 
 
-        saturday.setHasFixedSize(true);
-        linearLayoutManager1= new LinearLayoutManager(view.getContext());
-        linearLayoutManager1.setOrientation(RecyclerView.HORIZONTAL);
-        saturday.setLayoutManager(linearLayoutManager1);
+      /*
+        saturdayRV.setAdapter(recyclePlanAdapter);
 
-        saturdayList = Arrays.asList(
-                /*
-                new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne","https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"),
-                new MealModel("Spicy Arrabiata Penne", "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg")*/);
-        RecyclePlanAdapter recyclePlanAdapter = new RecyclePlanAdapter(view.getContext(),saturdayList);
-        saturday.setAdapter(recyclePlanAdapter);
+        sundayRV.setHasFixedSize(true);
+        linearLayoutManagerSat = new LinearLayoutManager(view.getContext());
+        linearLayoutManagerSat.setOrientation(RecyclerView.HORIZONTAL);
+        sundayRV.setLayoutManager(linearLayoutManagerSat);
+        sundayRV.setAdapter(recyclePlanAdapter2);
 
-        sunday.setHasFixedSize(true);
-        linearLayoutManager2= new LinearLayoutManager(view.getContext());
-        linearLayoutManager2.setOrientation(RecyclerView.HORIZONTAL);
-        sunday.setLayoutManager(linearLayoutManager2);
-        RecyclePlanAdapter recyclePlanAdapter2 = new RecyclePlanAdapter(view.getContext(),saturdayList);
-        sunday.setAdapter(recyclePlanAdapter2);
+        mondayRV.setHasFixedSize(true);
+        linearLayoutManagerMon = new LinearLayoutManager(view.getContext());
+        linearLayoutManagerMon.setOrientation(RecyclerView.HORIZONTAL);
+        mondayRV.setLayoutManager(linearLayoutManagerMon);
+        mondayRV.setAdapter(recyclePlanAdapter3);
 
-        monday.setHasFixedSize(true);
-        linearLayoutManager3= new LinearLayoutManager(view.getContext());
-        linearLayoutManager3.setOrientation(RecyclerView.HORIZONTAL);
-        monday.setLayoutManager(linearLayoutManager3);
-        RecyclePlanAdapter recyclePlanAdapter3 = new RecyclePlanAdapter(view.getContext(),saturdayList);
-        monday.setAdapter(recyclePlanAdapter3);
+        tuesdayRv.setHasFixedSize(true);
+        linearLayoutManagerTus = new LinearLayoutManager(view.getContext());
+        linearLayoutManagerTus.setOrientation(RecyclerView.HORIZONTAL);
+        tuesdayRv.setLayoutManager(linearLayoutManagerTus);
+        tuesdayRv.setAdapter(recyclePlanAdapter4);
 
-        tuesday.setHasFixedSize(true);
-        linearLayoutManager4= new LinearLayoutManager(view.getContext());
-        linearLayoutManager4.setOrientation(RecyclerView.HORIZONTAL);
-        tuesday.setLayoutManager(linearLayoutManager4);
-        RecyclePlanAdapter recyclePlanAdapter4 = new RecyclePlanAdapter(view.getContext(),saturdayList);
-        tuesday.setAdapter(recyclePlanAdapter4);
+        wednesdayRV.setHasFixedSize(true);
+        linearLayoutManagerWed = new LinearLayoutManager(view.getContext());
+        linearLayoutManagerWed.setOrientation(RecyclerView.HORIZONTAL);
+        wednesdayRV.setLayoutManager(linearLayoutManagerWed);
+        wednesdayRV.setAdapter(recyclePlanAdapter5);
 
-        wednesday.setHasFixedSize(true);
-        linearLayoutManager5= new LinearLayoutManager(view.getContext());
-        linearLayoutManager5.setOrientation(RecyclerView.HORIZONTAL);
-        wednesday.setLayoutManager(linearLayoutManager5);
-        RecyclePlanAdapter recyclePlanAdapter5 = new RecyclePlanAdapter(view.getContext(),saturdayList);
-        wednesday.setAdapter(recyclePlanAdapter5);
+        thursdayRV.setHasFixedSize(true);
+        linearLayoutManagerThu = new LinearLayoutManager(view.getContext());
+        linearLayoutManagerThu.setOrientation(RecyclerView.HORIZONTAL);
+        thursdayRV.setLayoutManager(linearLayoutManagerThu);
+        thursdayRV.setAdapter(recyclePlanAdapter6);
 
-        thursday.setHasFixedSize(true);
-        linearLayoutManager6= new LinearLayoutManager(view.getContext());
-        linearLayoutManager6.setOrientation(RecyclerView.HORIZONTAL);
-        thursday.setLayoutManager(linearLayoutManager6);
-        RecyclePlanAdapter recyclePlanAdapter6 = new RecyclePlanAdapter(view.getContext(),saturdayList);
-        thursday.setAdapter(recyclePlanAdapter6);
+        fridayRV.setHasFixedSize(true);
+        linearLayoutManagerFri.setOrientation(RecyclerView.HORIZONTAL);
+        fridayRV.setLayoutManager(linearLayoutManagerFri);
+        fridayRV.setAdapter(recyclePlanAdapter7);
+        List<MealModel> allPlanedMeal=new ArrayList<>();*/
 
-        friday.setHasFixedSize(true);
-        linearLayoutManager7= new LinearLayoutManager(view.getContext());
-        linearLayoutManager7.setOrientation(RecyclerView.HORIZONTAL);
-        friday.setLayoutManager(linearLayoutManager7);
-        RecyclePlanAdapter recyclePlanAdapter7 = new RecyclePlanAdapter(view.getContext(),saturdayList);
-        friday.setAdapter(recyclePlanAdapter7);
 
+          getPlan(0);
+          getPlan(1);
+          getPlan(2);
+          getPlan(3);
+          getPlan(4);
+          getPlan(5);
+          getPlan(6);
+
+    }
+    void Init(View view){
+        recyclerView[0]= view.findViewById(R.id.recyclerSaturday);
+        recyclerView[1] = view.findViewById(R.id.recyclerSunday);
+        recyclerView[2] = view.findViewById(R.id.recyclerMonday);
+        recyclerView[3] = view.findViewById(R.id.recyclerTuesday);
+        recyclerView[4] = view.findViewById(R.id.recyclerWednesday);
+        recyclerView[5] = view.findViewById(R.id.recyclerThursday);
+        recyclerView[6] = view.findViewById(R.id.recyclerFriday);
+        linearLayoutManager[0]=new LinearLayoutManager(view.getContext());
+        linearLayoutManager[1]=new LinearLayoutManager(view.getContext());
+        linearLayoutManager[2]=new LinearLayoutManager(view.getContext());
+        linearLayoutManager[3]=new LinearLayoutManager(view.getContext());
+        linearLayoutManager[4]=new LinearLayoutManager(view.getContext());
+        linearLayoutManager[5]=new LinearLayoutManager(view.getContext());
+        linearLayoutManager[6]=new LinearLayoutManager(view.getContext());
+        recyclePlanAdapter[0] = new RecyclePlanAdapter(view.getContext(),new ArrayList<>(),this);
+        recyclePlanAdapter[1] = new RecyclePlanAdapter(view.getContext(),new ArrayList<>(),this);
+        recyclePlanAdapter[2] = new RecyclePlanAdapter(view.getContext(),new ArrayList<>(),this);
+        recyclePlanAdapter[3] = new RecyclePlanAdapter(view.getContext(),new ArrayList<>(),this);
+        recyclePlanAdapter[4]= new RecyclePlanAdapter(view.getContext(),new ArrayList<>(),this);
+        recyclePlanAdapter[5] = new RecyclePlanAdapter(view.getContext(),new ArrayList<>(),this);
+        recyclePlanAdapter[6] = new RecyclePlanAdapter(view.getContext(),new ArrayList<>(),this);
+
+    }
+
+    @Override
+    public void onRemovePlanClicked(MealModel mealModel) {
+        removeMealFromPlaned(mealModel);
+    }
+
+    @Override
+    public void removeMealFromPlaned(MealModel meal) {
+        planPresenterInterface.removeFromPlan(meal);
+        updateData(0,meal);
+        updateData(1,meal);
+        updateData(2,meal);
+        updateData(3,meal);
+        updateData(4,meal);
+        updateData(5,meal);
+        updateData(6,meal);
+    }
+
+    @Override
+    public void ViewData(List<MealModel> Meals) {
+
+    }
+    public void updateData(int i,MealModel meal){
+        recyclePlanAdapter[i].removePlan(meal);
+        recyclePlanAdapter[i].notifyDataSetChanged();
+    }
+
+    public void getPlan(int i){
+        planPresenterInterface.getAllPlanedMeals(daysWeak[i]).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
+                .subscribe(e->{
+                    recyclerView[i].setHasFixedSize(true);
+                    recyclerView[i].setAdapter(recyclePlanAdapter[i]);
+                    linearLayoutManager[i].setOrientation(RecyclerView.HORIZONTAL);
+                    recyclerView[i].setLayoutManager(linearLayoutManager[i]);
+                    System.out.println("The size of :"+e.size());
+                    recyclePlanAdapter[i].setRecyclePlanAdapterList(e);
+                    recyclePlanAdapter[i].notifyDataSetChanged();
+                });
     }
 }

@@ -11,6 +11,7 @@ import com.example.cookit.network.RemoteSource;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
 public class Repository implements RepositoryInterface{
@@ -100,16 +101,18 @@ public class Repository implements RepositoryInterface{
 
     @Override
     public void insertPlan(MealModel mealModel) {
+        localSource.insertPlan(mealModel);
 
     }
 
     @Override
     public void removePlan(MealModel mealModel) {
+        localSource.removePlan(mealModel);
 
     }
 
     @Override
-    public Single<List<MealModel>> getAllStoredPlans() {
-        return null;
+    public Single<List<MealModel>> getAllStoredPlans(String day) {
+        return localSource.getAllStoredPlans(day);
     }
 }

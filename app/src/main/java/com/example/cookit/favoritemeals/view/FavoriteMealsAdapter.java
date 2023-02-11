@@ -49,6 +49,14 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(holder.meal_image);
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent =new Intent(context, ItemPageActivity.class);
+                myIntent.putExtra("MEAL_NAME",model.get(position).getStrMeal());
+                context.startActivity(myIntent);
+            }
+        });
         holder.remove_from_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

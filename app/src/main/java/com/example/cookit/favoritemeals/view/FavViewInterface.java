@@ -7,6 +7,6 @@ import java.util.List;
 public interface FavViewInterface {
     void removeFromFav(MealModel meal);
 
-    public void showData(List<MealModel> products);
+    public void showData(List<MealModel> meals);
 
 }

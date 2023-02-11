@@ -7,6 +7,7 @@ import com.example.cookit.model.MealModel;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
 public class ConceretLocalSource implements LocalSource{
@@ -16,11 +17,13 @@ public class ConceretLocalSource implements LocalSource{
 
     Single<List<MealModel>> mealFavorites;
 
+
     private ConceretLocalSource(Context context){
 
         AppDataBase appDataBase = AppDataBase.getInstance(context.getApplicationContext());
         mealDao = appDataBase.mealDao();
         mealFavorites = mealDao.getFavorites();
+
 
     }
 
@@ -65,16 +68,35 @@ public class ConceretLocalSource implements LocalSource{
 
     @Override
     public void insertPlan(MealModel mealModel) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    mealDao.insertPlan(mealModel);
+                }catch (SQLiteConstraintException e){
+
+                }
+
+            }
+        }).start();
 
     }
 
     @Override
     public void removePlan(MealModel mealModel) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mealDao.deletePlan(mealModel);
+            }
+        }).start();
 
     }
 
     @Override
-    public Single<List<MealModel>> getAllStoredPlans() {
-        return null;
+    public Single<List<MealModel>> getAllStoredPlans(String day) {
+        Single<List<MealModel>> planMeals =mealDao.getPlans(day);
+        return planMeals;
     }
 }

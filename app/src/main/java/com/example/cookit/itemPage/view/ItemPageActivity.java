@@ -60,9 +60,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         days=getResources().getStringArray(R.array.weekdays);
         checkedDays= new boolean[days.length];
         selectedDays = Arrays.asList(days);
-//        Intent intent = getIntent();
-//        model = (MealModel) intent.getSerializableExtra("MEAL_ITEM");
-//
+
         Bundle extra=getIntent().getExtras();
         if(extra!=null){
             mealNameItem = extra.getString("MEAL_NAME");
@@ -71,15 +69,12 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         init();
         pagepresenter=new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(ItemPageActivity.this),ItemPageActivity.this));
         pagepresenter.getMealItem(mealNameItem);
+
         /*
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
 
        itemPagePresenterInterface = new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance()
                , ConceretLocalSource.getInstance(getApplicationContext()),this));
-
-       model.setFavorite(true);
-       model.setNameDay("Not");
-       addToFav_btn.setOnClickListener(event -> addToFavoriteOnClick(model));
 
         videoID=model.getStrYoutube().split("=");
         System.out.println("The Meal Video:"+videoID[1]);
@@ -158,11 +153,13 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
 
                     builder.setCancelable(false);
                     builder.setPositiveButton("add", (dialog, which) -> {
-                        for (int i = 0; i < checkedDays.length; i++) {
-                            if (checkedDays[i]) {
-                                System.out.println("Selected days : "+ selectedDays.get(i));
-                            }
-                        }
+                        addTop(0);
+                        addTop(1);
+                        addTop(2);
+                        addTop(3);
+                        addTop(4);
+                        addTop(5);
+                        addTop(6);
                     });
                     builder.setNegativeButton("CANCEL", (dialog, which) -> {});
                     builder.create();
@@ -186,8 +183,14 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
 
     @Override
     public void ViewMealItem(List<MealModel> meal) {
+
         System.out.println("The View Mealllll: "+meal.get(0).getStrMeal());
         model=meal.get(0);
+
+        addToFav_btn.setOnClickListener(event -> {
+            model.setFavorite(true);
+            model.setNameDay("Not");
+            addToFavoriteOnClick(model);});
 
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
         videoID=model.getStrYoutube().split("=");
@@ -219,8 +222,6 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         ingredientList.add(new IngredientModel("1/2 cup Butter","https://www.themealdb.com/images/ingredients/Butter.png"));
 
 
-//        if(getIntent().hasExtra("mealName"))
-//            mealName.setText(getIntent().getStringExtra("mealName"));
 
         layoutManager=new GridLayoutManager(this,3);
         ingredientAdapter=new IngredientAdapter(this,ingredientList);
@@ -231,7 +232,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     }
     @Override
     public void addToFavorite(MealModel mealModel) {
-        itemPagePresenterInterface.addToFavorite(mealModel);
+        pagepresenter.addToFavorite(mealModel);
     }
 
     @Override
@@ -239,10 +240,22 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         addToFavorite(mealModel);
     }
 
+    @Override
+    public void addToWeakPlanOnclick(MealModel mealModel) {
+        addMealToPlan(mealModel);
+    }
 
 
     @Override
     public void addMealToPlan(MealModel Meal) {
+        pagepresenter.addToPlan(Meal);
 
+    }
+    void addTop(int i){
+        if (checkedDays[i]) {
+            model.setNameDay(selectedDays.get(i));
+            addToWeakPlanOnclick(model);
+            System.out.println("Selected days : "+ selectedDays.get(i));
+        }
     }
 }

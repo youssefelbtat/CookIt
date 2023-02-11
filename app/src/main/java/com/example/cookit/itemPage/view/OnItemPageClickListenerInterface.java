@@ -6,4 +6,6 @@ public interface OnItemPageClickListenerInterface {
 
     void addToFavoriteOnClick(MealModel mealModel);
 
+    void addToWeakPlanOnclick(MealModel mealModel);
+
 }
