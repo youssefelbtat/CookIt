@@ -11,4 +11,10 @@ public interface RepositoryFirebaseInterface {
 
     UserModel getSavedUserData();
 
+    void updateUserData(UserModel userModel);
+
+    void updateUserFirebaseData(UserModel userModel);
+
+    void updateFavoriteInFirebase(UserModel userModel);
+
 }

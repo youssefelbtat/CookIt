@@ -87,6 +87,12 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
         this.model.remove(mealModel);
     }
 
+    public  List<MealModel> remove(MealModel mealModel){
+        this.model.remove(mealModel);
+        return  model;
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView meal_name;
         CircleImageView meal_image;

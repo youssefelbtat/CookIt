@@ -37,7 +37,7 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
     @Override
     public SearchMealAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(context);
-        View view=inflater.inflate(R.layout.favorite_meal_item,parent,false);
+        View view=inflater.inflate(R.layout.mealitem,parent,false);
         return new ViewHolder(view);
     }
 
@@ -84,10 +84,11 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
         CardView item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            meal_name =itemView.findViewById(R.id.ingredient_meal_name);
-            meal_image =itemView.findViewById(R.id.profileUserImage);
-            btnFav =itemView.findViewById(R.id.remove_from_fav);
-            item=itemView.findViewById(R.id.favoriteItemCard);
+            meal_name =itemView.findViewById(R.id.mealName);
+            meal_image =itemView.findViewById(R.id.mealImage);
+            btnFav =itemView.findViewById(R.id.mealFav);
+            item=itemView.findViewById(R.id.mealItemCard);
+
         }
     }
 }
