@@ -64,7 +64,7 @@ public class SearchPresenter implements SearchPresenterInterface , NetworkDelega
 
     @Override
     public void getMealsByName(String name) {
-        repositoryInterface.getMealsByName(this,name);
+        repositoryInterface.getMealsByFirstChar(this,name);
     }
 
     @Override

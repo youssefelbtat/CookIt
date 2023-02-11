@@ -10,12 +10,14 @@ public interface RemoteSource {
 
     void getAllIngredient(NetworkDelegate networkDelegate);
 
-    void getMealsByName(NetworkDelegate networkDelegate, String name);
+    void getMealsByFirstChar(NetworkDelegate networkDelegate, String name);
 
     void getMealsByCategories(NetworkDelegate networkDelegate, String category);
 
     void getMealsByCountries(NetworkDelegate networkDelegate, String country);
 
     void getMealsByIngredients(NetworkDelegate networkDelegate, String ingredient);
+
+    void  getMealsByName(NetworkDelegate networkDelegate,String name);
 
 }

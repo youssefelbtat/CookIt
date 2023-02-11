@@ -15,8 +15,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.database.room.ConceretLocalSource;
+import com.example.cookit.itemPage.presenter.ItemPagePresenter;
+import com.example.cookit.itemPage.presenter.ItemPagePresenterInterface;
 import com.example.cookit.model.IngredientModel;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.retrofit.Repository;
+import com.example.cookit.network.APIResponse;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -25,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ItemPageActivity extends AppCompatActivity {
+public class ItemPageActivity extends AppCompatActivity implements ItemViewInterface,OnItemPageClickListenerInterface {
     TextView mealName,mealCountry,mealSteps;
     RecyclerView recyclerView;
     IngredientAdapter ingredientAdapter;
@@ -33,6 +38,8 @@ public class ItemPageActivity extends AppCompatActivity {
     List<IngredientModel> ingredientList= new ArrayList<IngredientModel>();
     ImageButton addToFav_btn,addToPlane_btn,backArrow;
     ImageView imageView;
+
+    ItemPagePresenterInterface pagepresenter;
 
     MealModel model;
     YouTubePlayerView videoView ;
@@ -42,6 +49,7 @@ public class ItemPageActivity extends AppCompatActivity {
 
     boolean[] checkedDays;
     List<String> selectedDays;
+    String mealNameItem;
 
 
     @Override
@@ -51,10 +59,19 @@ public class ItemPageActivity extends AppCompatActivity {
         days=getResources().getStringArray(R.array.weekdays);
         checkedDays= new boolean[days.length];
         selectedDays = Arrays.asList(days);
-        Intent intent = getIntent();
-        model = (MealModel) intent.getSerializableExtra("MEAL_ITEM");
-        init();
+//        Intent intent = getIntent();
+//        model = (MealModel) intent.getSerializableExtra("MEAL_ITEM");
+//
+        Bundle extra=getIntent().getExtras();
+        if(extra!=null){
+            mealNameItem = extra.getString("MEAL_NAME");
 
+        }
+        init();
+        pagepresenter=new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(ItemPageActivity.this),ItemPageActivity.this));
+        pagepresenter.getMealItem(mealNameItem);
+        /*
+        System.out.println("The Meal Name is ......."+model.getStrYoutube());
         videoID=model.getStrYoutube().split("=");
         System.out.println("The Meal Video:"+videoID[1]);
         mealName.setText(model.getStrMeal());
@@ -110,13 +127,41 @@ public class ItemPageActivity extends AppCompatActivity {
         ingredientList.add(new IngredientModel("1/2 cup Butter","https://www.themealdb.com/images/ingredients/Butter.png"));
 
 
-        if(getIntent().hasExtra("mealName"))
-            mealName.setText(getIntent().getStringExtra("mealName"));
+//        if(getIntent().hasExtra("mealName"))
+//            mealName.setText(getIntent().getStringExtra("mealName"));
+
         layoutManager=new GridLayoutManager(this,3);
         ingredientAdapter=new IngredientAdapter(this,ingredientList);
         ingredientAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(ingredientAdapter);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);*/
+        backArrow.setOnClickListener(v->{this.finish();});
+
+        addToPlane_btn.setOnClickListener(
+                v->{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ItemPageActivity.this);
+                    builder.setTitle(R.string.add_meal_to_plan_dialog_title);
+                    builder.setIcon(imageView.getDrawable());
+                    builder.setMultiChoiceItems(days, checkedDays, (dialog, which, isChecked) -> {
+                        checkedDays[which] = isChecked;
+                        String currentItem = selectedDays.get(which);
+                    });
+
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("add", (dialog, which) -> {
+                        for (int i = 0; i < checkedDays.length; i++) {
+                            if (checkedDays[i]) {
+                                System.out.println("Selected days : "+ selectedDays.get(i));
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("CANCEL", (dialog, which) -> {});
+                    builder.create();
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+
+                }
+        );
     }
     void init(){
         videoView = findViewById(R.id.videoView);
@@ -128,5 +173,61 @@ public class ItemPageActivity extends AppCompatActivity {
         addToPlane_btn=findViewById(R.id.add_to_calender);
         backArrow=findViewById(R.id.itembackbutton);
         imageView=findViewById(R.id.profileUserImage);
+    }
+
+    @Override
+    public void ViewMealItem(List<MealModel> meal) {
+        System.out.println("The View Mealllll: "+meal.get(0).getStrMeal());
+        model=meal.get(0);
+
+        System.out.println("The Meal Name is ......."+model.getStrYoutube());
+        videoID=model.getStrYoutube().split("=");
+        System.out.println("The Meal Video:"+videoID[1]);
+        mealName.setText(model.getStrMeal());
+        mealCountry.setText(model.getStrArea());
+        mealSteps.setText(model.getStrInstructions());
+        Glide.with(this).load(model.getStrMealThumb())
+                .apply(new RequestOptions().override(imageView.getWidth(),imageView.getHeight()))
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(imageView);
+
+        getLifecycle().addObserver(videoView);
+
+        videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+
+                youTubePlayer.loadVideo(videoID[1], 0);
+            }
+        });
+
+
+
+        ingredientList.add(new IngredientModel("2 tbsp Parsley","https://www.themealdb.com/images/ingredients/Parsley.png"));
+        ingredientList.add(new IngredientModel("1 Ib Fettuccine","https://www.themealdb.com/images/ingredients/Fettuccine.png"));
+        ingredientList.add(new IngredientModel("Black Pepper","https://www.themealdb.com/images/ingredients/Black%20Pepper.png"));
+        ingredientList.add(new IngredientModel("1/2 cup Butter","https://www.themealdb.com/images/ingredients/Butter.png"));
+
+
+//        if(getIntent().hasExtra("mealName"))
+//            mealName.setText(getIntent().getStringExtra("mealName"));
+
+        layoutManager=new GridLayoutManager(this,3);
+        ingredientAdapter=new IngredientAdapter(this,ingredientList);
+        ingredientAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(ingredientAdapter);
+        recyclerView.setLayoutManager(layoutManager);
+
+    }
+
+    @Override
+    public void addMealToFav(MealModel Meal) {
+
+    }
+
+    @Override
+    public void addMealToPlan(MealModel Meal) {
+
     }
 }
