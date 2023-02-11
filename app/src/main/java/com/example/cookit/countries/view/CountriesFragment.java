@@ -59,7 +59,7 @@ public class CountriesFragment extends Fragment implements CountriesViewInterfac
 
         gridLayoutManager=new GridLayoutManager(getContext(),2);
         countriesPresenter=new CountriesPresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
-        recyclerCountriesAdapter=new RecyclerCountriesAdapter(getContext(),new ArrayList<>());
+        recyclerCountriesAdapter=new RecyclerCountriesAdapter(getContext(),new ArrayList<>(),this);
         recyclerView.setAdapter(recyclerCountriesAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -80,7 +80,13 @@ public class CountriesFragment extends Fragment implements CountriesViewInterfac
     }
 
     @Override
-    public void addMealToFav(MealModel Meal) {
+    public void addToFavorite(MealModel mealModel) {
+        countriesPresenter.addToFavorite(mealModel);
+    }
 
+
+    @Override
+    public void addToFavoriteOnClick(MealModel mealModel) {
+        addToFavorite(mealModel);
     }
 }

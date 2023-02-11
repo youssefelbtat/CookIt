@@ -61,7 +61,7 @@ public class HomePageFragment extends Fragment implements HomeViewInterface,OnHo
 
         recycleCountryAdepter = new RecycleCountryAdepter(view.getContext(),new ArrayList<>());
         recycleCategoryAdepter = new RecycleCategoryAdepter(view.getContext(),new ArrayList<>());
-         viewPagerAdepter = new ViewPagerAdepter(view.getContext(),new ArrayList<>());
+         viewPagerAdepter = new ViewPagerAdepter(view.getContext(),new ArrayList<>(),this);
 
         homePagePresenter=new HomePagePresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
 
@@ -114,14 +114,14 @@ public class HomePageFragment extends Fragment implements HomeViewInterface,OnHo
     }
 
     @Override
-    public void addMealToFav(MealModel Meal) {
-
+    public void addToFavorite(MealModel mealModel) {
+        homePagePresenter.addToFavorite(mealModel);
     }
 
 
     @Override
-    public void addMealToFavClick(MealModel model) {
-
+    public void addToFavoriteOnClick(MealModel mealModel) {
+        addToFavorite(mealModel);
     }
 
     @Override

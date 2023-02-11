@@ -2,7 +2,9 @@ package com.example.cookit.model.retrofit;
 
 import android.content.Context;
 
+import com.example.cookit.database.room.AppDataBase;
 import com.example.cookit.database.room.LocalSource;
+import com.example.cookit.database.room.MealDao;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.network.NetworkDelegate;
 import com.example.cookit.network.RemoteSource;
@@ -78,17 +80,17 @@ public class Repository implements RepositoryInterface{
 
     @Override
     public void insertFavorite(MealModel mealModel) {
-
+        localSource.insertFavorite(mealModel);
     }
 
     @Override
     public void removeFavorite(MealModel mealModel) {
-
+        localSource.removeFavorite(mealModel);
     }
 
     @Override
     public Single<List<MealModel>> getAllStoredFavorites() {
-        return null;
+        return localSource.getAllStoredFavorites();
     }
 
     @Override

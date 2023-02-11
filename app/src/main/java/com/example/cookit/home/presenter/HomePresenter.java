@@ -10,4 +10,6 @@ public interface HomePresenter {
     void getCountriesList();
     void getCategoriesList();
 
+    public void addToFavorite(MealModel mealModel);
+
 }

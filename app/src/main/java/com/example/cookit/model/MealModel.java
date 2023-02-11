@@ -1,16 +1,15 @@
 package com.example.cookit.model;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import java.io.Serializable;
-@Entity(tableName = "Meals")
+@Entity(tableName = "Meals",primaryKeys = {"idMeal","nameDay"})
 public class MealModel implements Serializable {
 
-    @PrimaryKey
     @NonNull
     private String idMeal;
     private boolean isFavorite;
+
+    @NonNull
     private String nameDay;
     private String strMeal;
     private String strDrinkAlternate;

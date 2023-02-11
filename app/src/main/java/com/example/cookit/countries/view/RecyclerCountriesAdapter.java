@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,25 +26,28 @@ public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCount
         private List<MealModel> list;
         public static final String TAG = "RECYCLER";
 
+    private OnCountriesClickListenterInterface  onCountriesClickListenterInterface ;
+
         public static class ViewHolder extends RecyclerView.ViewHolder{
             public ImageView imageView;
             public TextView name;
             public CardView cardItem;
             public View view;
-
+            public ImageButton fav;
             public ViewHolder(View v){
                 super(v);
                 view = v;
                 imageView = v.findViewById(R.id.mealImage);
                 name = v.findViewById(R.id.mealName);
                 cardItem = v.findViewById(R.id.mealItemCard);
-
+                fav = v.findViewById(R.id.mealFav);
             }
         }
 
-        public RecyclerCountriesAdapter(Context context, List<MealModel> list) {
+        public RecyclerCountriesAdapter(Context context, List<MealModel> list,OnCountriesClickListenterInterface onCountriesClickListenterInterface) {
             this.context = context;
             this.list = list;
+            this.onCountriesClickListenterInterface = onCountriesClickListenterInterface;
         }
         public void setCountryMealModelList(List<MealModel> countryMealModelList) {
             this.list = countryMealModelList;
@@ -66,6 +70,12 @@ public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCount
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(holder.imageView);
+
+            holder.fav.setOnClickListener(event -> {
+                        list.get(position).setFavorite(true);
+                        list.get(position).setNameDay("Not");
+
+                    onCountriesClickListenterInterface.addToFavoriteOnClick(list.get(position));});
         }
 
         @Override

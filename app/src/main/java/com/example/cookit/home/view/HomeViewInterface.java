@@ -11,5 +11,5 @@ public interface HomeViewInterface {
     void ViewRandomMeal(List<MealModel> models);
     void ViewCountriesList(List<Country> models);
     void ViewCategoriesList(List<Category> models);
-    void addMealToFav(MealModel Meal);
+    public void addToFavorite (MealModel mealModel);
 }

@@ -1,5 +1,6 @@
 package com.example.cookit.favoritemeals.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -25,11 +27,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdapter.ViewHolder> {
     Context context;
     List<MealModel> model;
-    //OnFavClickListner onListener;
-    public FavoriteMealsAdapter(Context context, List<MealModel> mealModelList){
+    OnFavClickListner onFavClickListner;
+    public FavoriteMealsAdapter(Context context, List<MealModel> mealModelList,OnFavClickListner onFavClickListner){
         this.context=context;
         this.model=mealModelList;
-        //this.onListener=onFavClickListner;
+        this.onFavClickListner = onFavClickListner;
     }
     @NonNull
     @Override
@@ -40,7 +42,7 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.meal_name.setText(model.get(position).getStrMeal());
         Glide.with(context).load(model.get(position).getStrMealThumb())
                 .apply(new RequestOptions().override(holder.meal_image.getWidth(),holder.meal_image.getHeight()))
@@ -50,25 +52,31 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
         holder.remove_from_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                model.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-//                onListener.onRemoveFavClick(model.get(holder.getAdapterPosition()));
+                onFavClickListner.onRemoveFavClick(model.get(position));
             }
         });
-        holder.item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context, ItemPageActivity.class);
-                intent.putExtra("mealName",model.get(holder.getAdapterPosition()).getStrMeal());
-                context.startActivity(intent);
-            }
-        });
+//        holder.item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(context, ItemPageActivity.class);
+//                intent.putExtra("mealName",model.get(holder.getAdapterPosition()).getStrMeal());
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 
     @Override
     public int getItemCount() {
         return model.size();
+    }
+
+    public void setList(List<MealModel> model){
+        this.model = model ;
+    }
+
+    public void removeFavorite(MealModel mealModel){
+        this.model.remove(mealModel);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

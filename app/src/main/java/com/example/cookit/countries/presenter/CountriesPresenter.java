@@ -24,6 +24,12 @@ public class CountriesPresenter implements CountriesPresenterInterface,NetworkDe
     }
 
     @Override
+    public void addToFavorite(MealModel mealModel) {
+        _repo.insertFavorite(mealModel);
+
+    }
+
+    @Override
     public void onSuccessMeals(List<MealModel> mealModels) {
         _view.ViewCounteryMeal(mealModels);
     }
