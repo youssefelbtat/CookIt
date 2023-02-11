@@ -3,9 +3,9 @@ package com.example.cookit.model;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+import java.io.Serializable;
 @Entity(tableName = "Meals")
-public class MealModel {
+public class MealModel implements Serializable {
 
     @PrimaryKey
     @NonNull
@@ -60,22 +60,6 @@ public class MealModel {
     private String strMeasure18;
     private String strMeasure19;
     private String strMeasure20;
-
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
-    }
-
-    public String getNameDay() {
-        return nameDay;
-    }
-
-    public void setNameDay(String nameDay) {
-        this.nameDay = nameDay;
-    }
 
     public String getIdMeal() {
         return idMeal;

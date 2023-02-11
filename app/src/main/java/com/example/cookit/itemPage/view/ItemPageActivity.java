@@ -1,19 +1,25 @@
 package com.example.cookit.itemPage.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.model.IngredientModel;
+import com.example.cookit.model.MealModel;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -23,48 +29,69 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ItemPageActivity extends AppCompatActivity {
-    TextView mealName;
+    TextView mealName,mealCountry,mealSteps;
     RecyclerView recyclerView;
     IngredientAdapter ingredientAdapter;
     GridLayoutManager layoutManager;
     List<IngredientModel> ingredientList= new ArrayList<IngredientModel>();
-    ImageButton addToFav_btn,addToPlane_btn;
+    ImageButton addToFav_btn,addToPlane_btn,backArrow;
+    ImageView imageView;
 
-//    final String VIDEO_URL="https:\\/\\/www.youtube.com\\/watch?v=4aZr5hZXP_s";
-     final String VIDEO_ID="4aZr5hZXP_s";
-    final String []days=new String[]{"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
-    final boolean[] checkedDays = new boolean[days.length];
-    final List<String> selectedDays = Arrays.asList(days);
+    MealModel model;
+    YouTubePlayerView videoView ;
+
+    String[] videoID;
+    String []days;
+
+    boolean[] checkedDays;
+    List<String> selectedDays;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_page);
-        addToFav_btn=findViewById(R.id.add_to_favorite);
-        addToPlane_btn=findViewById(R.id.add_to_calender);
+        days=getResources().getStringArray(R.array.weekdays);
+        checkedDays= new boolean[days.length];
+        selectedDays = Arrays.asList(days);
+        Intent intent = getIntent();
+        model = (MealModel) intent.getSerializableExtra("MEAL_ITEM");
+        init();
+
+        videoID=model.getStrYoutube().split("=");
+        System.out.println("The Meal Video:"+videoID[1]);
+        mealName.setText(model.getStrMeal());
+        mealCountry.setText(model.getStrArea());
+        mealSteps.setText(model.getStrInstructions());
+        Glide.with(this).load(model.getStrMealThumb())
+                .apply(new RequestOptions().override(imageView.getWidth(),imageView.getHeight()))
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(imageView);
+
+        getLifecycle().addObserver(videoView);
+
+        videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+
+                youTubePlayer.loadVideo(videoID[1], 0);
+            }
+        });
+
+        backArrow.setOnClickListener(v->{this.finish();});
 
         addToPlane_btn.setOnClickListener(
                 v->{
-
-                    // initialise the alert dialog builder
                     AlertDialog.Builder builder = new AlertDialog.Builder(ItemPageActivity.this);
-
-                    // set the title for the alert dialog
                     builder.setTitle(R.string.add_meal_to_plan_dialog_title);
-
-                    // set the icon for the alert dialog
-                    builder.setIcon(R.drawable.fettuccinealfredo);
-
-                    // now this is the function which sets the alert dialog for multiple item selection ready
+                    builder.setIcon(imageView.getDrawable());
                     builder.setMultiChoiceItems(days, checkedDays, (dialog, which, isChecked) -> {
                         checkedDays[which] = isChecked;
                         String currentItem = selectedDays.get(which);
                     });
 
-                    // alert dialog shouldn't be cancellable
                     builder.setCancelable(false);
-
-                    // handle the positive button of the dialog
                     builder.setPositiveButton("add", (dialog, which) -> {
                         for (int i = 0; i < checkedDays.length; i++) {
                             if (checkedDays[i]) {
@@ -72,8 +99,6 @@ public class ItemPageActivity extends AppCompatActivity {
                             }
                         }
                     });
-
-                    // handle the negative button of the alert dialog
                     builder.setNegativeButton("CANCEL", (dialog, which) -> {});
                     builder.create();
                     AlertDialog alertDialog = builder.create();
@@ -86,8 +111,8 @@ public class ItemPageActivity extends AppCompatActivity {
         ingredientList.add(new IngredientModel("1 Ib Fettuccine","https://www.themealdb.com/images/ingredients/Fettuccine.png"));
         ingredientList.add(new IngredientModel("Black Pepper","https://www.themealdb.com/images/ingredients/Black%20Pepper.png"));
         ingredientList.add(new IngredientModel("1/2 cup Butter","https://www.themealdb.com/images/ingredients/Butter.png"));
-        mealName=findViewById(R.id.itemPageMealName);
-        recyclerView=findViewById(R.id.ingredientRecyclerView);
+
+
         if(getIntent().hasExtra("mealName"))
             mealName.setText(getIntent().getStringExtra("mealName"));
         layoutManager=new GridLayoutManager(this,3);
@@ -95,24 +120,16 @@ public class ItemPageActivity extends AppCompatActivity {
         ingredientAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(ingredientAdapter);
         recyclerView.setLayoutManager(layoutManager);
-        // finding videoview by its id
-      //  YouTubePlayerView videoView = findViewById(R.id.videoView);
-      //  getLifecycle().addObserver(videoView);
-
-//        videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-//            @Override
-//            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-//
-//                try {
-//
-//                    youTubePlayer.loadVideo(VIDEO_ID,0);
-//
-//                } catch (Exception e) {
-//                    //      Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
-
+    }
+    void init(){
+        videoView = findViewById(R.id.videoView);
+        mealName=findViewById(R.id.itemPageMealName);
+        recyclerView=findViewById(R.id.ingredientRecyclerView);
+        mealCountry=findViewById(R.id.itemPageMealCountry);
+        mealSteps=findViewById(R.id.itemPageMealSteps);
+        addToFav_btn=findViewById(R.id.add_to_favorite);
+        addToPlane_btn=findViewById(R.id.add_to_calender);
+        backArrow=findViewById(R.id.itembackbutton);
+        imageView=findViewById(R.id.mealItemImage);
     }
 }

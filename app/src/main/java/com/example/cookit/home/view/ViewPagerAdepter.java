@@ -2,6 +2,7 @@ package com.example.cookit.home.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.model.MealModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.ViewHolder> {
@@ -68,6 +71,11 @@ public class ViewPagerAdepter extends RecyclerView.Adapter<ViewPagerAdepter.View
                         .placeholder(R.drawable.ic_launcher_background)
                         .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);
         holder.name.setText(list.get(position).getStrMeal());
+        holder.cardItem.setOnClickListener(v -> {
+            Intent myIntent =new Intent(context, ItemPageActivity.class);
+            myIntent.putExtra("MEAL_ITEM", (Serializable) list.get(position));
+            context.startActivity(myIntent);
+        });
 
     }
 
