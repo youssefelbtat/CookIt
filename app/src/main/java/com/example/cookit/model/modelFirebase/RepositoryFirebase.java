@@ -56,6 +56,11 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
     }
 
     @Override
+    public boolean isLoginSuccessed(Context context,String email, String pass) {
+        return firebaseSource.isLoginSuccessed(context,email,pass);
+    }
+
+    @Override
     public UserModel getSavedUserData() {
         return sharedPreferenceSource.getSavedUserData();
     }
@@ -79,5 +84,7 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
     public void uploadPlanInFirebase(UserModel userModel) {
         firebaseSource.insertUser(userModel);
     }
+
+
 
 }

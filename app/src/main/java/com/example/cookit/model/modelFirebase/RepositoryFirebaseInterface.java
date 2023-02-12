@@ -1,5 +1,8 @@
 package com.example.cookit.model.modelFirebase;
 
+import android.app.Activity;
+import android.content.Context;
+
 public interface RepositoryFirebaseInterface {
 
     public void SignUpWithGoogle(UserModel userModel);
@@ -8,6 +11,8 @@ public interface RepositoryFirebaseInterface {
     void saveUserData(UserModel userModel);
 
     boolean isUserExists(UserModel userModel);
+
+    boolean isLoginSuccessed(Context context, String email, String pass);
 
     UserModel getSavedUserData();
 
@@ -18,5 +23,6 @@ public interface RepositoryFirebaseInterface {
     void updateFavoriteInFirebase(UserModel userModel);
 
     void uploadPlanInFirebase(UserModel userModel);
+
 
 }

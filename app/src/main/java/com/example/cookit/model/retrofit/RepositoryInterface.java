@@ -1,5 +1,7 @@
 package com.example.cookit.model.retrofit;
 
+import android.app.Activity;
+
 import com.example.cookit.model.MealModel;
 import com.example.cookit.network.NetworkDelegate;
 

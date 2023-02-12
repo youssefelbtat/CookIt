@@ -3,6 +3,8 @@ package com.example.cookit.authentication.signin.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +14,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cookit.R;
+import com.example.cookit.authentication.signin.presenter.SigninPresenter;
+import com.example.cookit.authentication.signin.presenter.SigninPresenterInterface;
+import com.example.cookit.database.firebase.FirebaseSource;
+import com.example.cookit.database.sharedpreference.SharedPreferenceSource;
+import com.example.cookit.model.modelFirebase.RepositoryFirebase;
 import com.example.cookit.model.modelFirebase.UserModel;
 import com.example.cookit.utalites.Utalites;
 import com.example.cookit.view.MainActivity;
@@ -24,94 +31,67 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SigninActivity extends AppCompatActivity {
+public class SigninActivity extends AppCompatActivity implements SigninOnclickListener,SignInViewInterface {
 
     EditText email_edt,passWord_edt;
     Button login_btn;
-    FirebaseDatabase firebaseDatabase;
+    SigninPresenterInterface signinPresenterInterface;
 
-    DatabaseReference databaseReference;
-    List<String> usersEmailsList =new ArrayList<>();
-    List<String> usersPasswordList =new ArrayList<>();
+
     String userEmail;
-    String []splitEmail;
-    String root;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
         init();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("User");
-
+        signinPresenterInterface=new SigninPresenter(this, RepositoryFirebase.getInstance(FirebaseSource.getInstance(this)
+                , SharedPreferenceSource.getInstance(this),this));
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                splitEmail=email_edt.getText().toString().split("\\.");
-                root=splitEmail[0];
                 userEmail=email_edt.getText().toString();
                 if(email_edt.getText().toString().equals("")||email_edt.getText().toString().equals(null)){
                     Toast.makeText(SigninActivity.this, "You should fill all data", Toast.LENGTH_SHORT).show();
                 }else if(passWord_edt.getText().toString().equals("")||passWord_edt.getText().toString().equals(null)){
                     Toast.makeText(SigninActivity.this, "You should fill all data", Toast.LENGTH_SHORT).show();
                 }else {
-                    onSuccessLogin();
+                    onLoginClicked();
                 }
             }
         });
 
     }
 
-    private void onSuccessLogin() {
-
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserModel userModel1=snapshot.child(root).getValue(UserModel.class);
-                if(userModel1!=null){
-                    if(userModel1.getPassWord().equals(passWord_edt.getText().toString())
-                            &&userModel1.getEmail().equals(userEmail)){
-                        System.out.println("Successed");
-                      addToShered(userModel1);
-
-                        Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }else {
-                        System.out.println("Data is invalid");
-                        Toast.makeText(SigninActivity.this, "Data invalid.", Toast.LENGTH_SHORT).show();
-                    }
-                }else {
-                    System.out.println("Data is invalid");
-                    Toast.makeText(SigninActivity.this, "Data invalid.", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("Data is invalid");
-                Toast.makeText(SigninActivity.this, "Data invalid.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     private void init(){
         email_edt=findViewById(R.id.editTextEmailLogin);
         passWord_edt=findViewById(R.id.editTextPasswordLogin);
         login_btn=findViewById(R.id.btnLogin);
     }
-    void addToShered(UserModel userModel1){
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Utalites.SHARDPREFERENCE,getApplicationContext().MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Utalites.FavUserMealsList=userModel1.getFavorites();
-        editor.putString(Utalites.USERNAME,userModel1.getUserName());
-        editor.putString(Utalites.PASSWORD,userModel1.getPassWord());
-        editor.putString(Utalites.EMAIL,userModel1.getEmail());
-        editor.putString(Utalites.IMAGE,userModel1.getImage());
-        editor.commit();
+
+
+    @Override
+    public void onLoginSuccess(UserModel userModel) {
+        signinPresenterInterface.addUserDataToShered(userModel);
+    }
+
+    @Override
+    public boolean isSuccessed(Context context, String email, String pass) {
+        return signinPresenterInterface.checkUserData(context,email,pass);
+    }
+
+    @Override
+    public void onLoginClicked() {
+        if(isSuccessed(getApplicationContext(),email_edt.getText().toString(),passWord_edt.getText().toString())){
+            Toast.makeText(SigninActivity.this, "Login Succeed.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        }else{
+            Toast.makeText(SigninActivity.this, "Data invalid.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

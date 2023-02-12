@@ -1,5 +1,6 @@
 package com.example.cookit.model.retrofit;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.example.cookit.database.room.AppDataBase;
@@ -120,4 +121,7 @@ public class Repository implements RepositoryInterface{
     public void deleteAllMeals() {
         localSource.deleteAllMeals();
     }
+
+
+
 }
