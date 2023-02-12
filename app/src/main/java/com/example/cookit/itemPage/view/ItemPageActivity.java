@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,8 +33,10 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class ItemPageActivity extends AppCompatActivity implements ItemViewInterface,OnItemPageClickListenerInterface {
@@ -101,9 +104,13 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
                         AlertDialog.Builder builder = new AlertDialog.Builder(ItemPageActivity.this);
                         builder.setTitle(R.string.add_meal_to_plan_dialog_title);
                         builder.setIcon(imageView.getDrawable());
-                        builder.setMultiChoiceItems(days, checkedDays, (dialog, which, isChecked) -> {
-                            checkedDays[which] = isChecked;
-                            String currentItem = selectedDays.get(which);
+                        builder.setSingleChoiceItems(days, -1, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                checkedDays[which] = true;
+                            }
+
+
                         });
 
                     builder.setCancelable(false);
@@ -115,6 +122,29 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
                         addTop(4);
                         addTop(5);
                         addTop(6);
+
+                        which++;
+                        System.out.println("wwwwwwwwwwwwwwwwwwwwwwww"+which);
+                        Calendar calendar = Calendar.getInstance();
+                        if(which==0){
+                            which = 6;
+                            calendar.set(Calendar.DAY_OF_WEEK, which+1 );
+                        }else {
+                            calendar.set(Calendar.DAY_OF_WEEK, which );
+                        }
+                        Intent intent = new Intent(Intent.ACTION_INSERT);
+                        intent.setData(CalendarContract.Events.CONTENT_URI);
+                        intent.putExtra(CalendarContract.Events.TITLE,"Day Plan");
+                        intent.putExtra(CalendarContract.Events.DESCRIPTION,"You set "+mealName.getText()+" In your Plan In "+checkedDays[which]);
+//                        intent.putExtra(CalendarContract.Events.ALL_DAY,"true");
+                        intent.putExtra(CalendarContract.Events.DTSTART,calendar);
+                        intent.putExtra(CalendarContract.Events.DTEND,calendar);
+
+                        if(intent.resolveActivity(getPackageManager())!=null){
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(ItemPageActivity.this, "Application is not support this action", Toast.LENGTH_SHORT).show();
+                        }
                     });
                     builder.setNegativeButton("CANCEL", (dialog, which) -> {});
                     builder.create();
