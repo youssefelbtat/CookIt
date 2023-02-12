@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -83,25 +84,8 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         addToFav_btn.setOnClickListener(event -> {
 
             if(Utalites.SKIP == "skip"){
-                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getApplicationContext());
-                builder.setMessage("Do you want to signup in application?");
-                builder.setTitle("Alert !");
-                builder.setCancelable(false);
-                builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                        getApplicationContext().startActivity(intent);
-                        ((Activity)getApplicationContext()).finish();
-                    }
-                });
+                Toast.makeText(this, "Please, Signup", Toast.LENGTH_SHORT).show();
 
-                builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
-                    dialog.cancel();
-                });
-
-                android.app.AlertDialog alertDialog = builder.create();
-//                alertDialog.show();
             }else {
                 model.setFavorite(true);
                 model.setNameDay("Not");
@@ -184,25 +168,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         addToPlane_btn.setOnClickListener(
                 v-> {
                     if (Utalites.SKIP == "skip") {
-                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getApplicationContext());
-                        builder.setMessage("Do you want to signup in application?");
-                        builder.setTitle("Alert !");
-                        builder.setCancelable(false);
-                        builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                                getApplicationContext().startActivity(intent);
-                                ((Activity) getApplicationContext()).finish();
-                            }
-                        });
-
-                        builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
-                            dialog.cancel();
-                        });
-
-                        android.app.AlertDialog alertDialog = builder.create();
-//                alertDialog.show();
+                        Toast.makeText(this, "Please, Signup", Toast.LENGTH_SHORT).show();
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ItemPageActivity.this);
                         builder.setTitle(R.string.add_meal_to_plan_dialog_title);

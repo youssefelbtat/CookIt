@@ -55,7 +55,7 @@ public class SearchCategoryAdepter extends RecyclerView.Adapter<SearchCategoryAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.categoryitem,parent,false);
+        View view = layoutInflater.inflate(R.layout.searchitem,parent,false);
         ViewHolder viewHolder = new SearchCategoryAdepter.ViewHolder(view);
         return viewHolder;
     }
