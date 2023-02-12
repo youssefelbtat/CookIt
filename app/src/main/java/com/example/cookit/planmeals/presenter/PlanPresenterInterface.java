@@ -14,4 +14,6 @@ public interface PlanPresenterInterface {
     void uploadPlanInFirebase(UserModel userModel);
 
     UserModel getSavedData();
+
+    public void addToFavorite(MealModel mealModel);
 }

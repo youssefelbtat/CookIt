@@ -74,46 +74,6 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
                 , SharedPreferenceSource.getInstance(getContext()),getContext()));
 
 
-      /*
-        saturdayRV.setAdapter(recyclePlanAdapter);
-
-        sundayRV.setHasFixedSize(true);
-        linearLayoutManagerSat = new LinearLayoutManager(view.getContext());
-        linearLayoutManagerSat.setOrientation(RecyclerView.HORIZONTAL);
-        sundayRV.setLayoutManager(linearLayoutManagerSat);
-        sundayRV.setAdapter(recyclePlanAdapter2);
-
-        mondayRV.setHasFixedSize(true);
-        linearLayoutManagerMon = new LinearLayoutManager(view.getContext());
-        linearLayoutManagerMon.setOrientation(RecyclerView.HORIZONTAL);
-        mondayRV.setLayoutManager(linearLayoutManagerMon);
-        mondayRV.setAdapter(recyclePlanAdapter3);
-
-        tuesdayRv.setHasFixedSize(true);
-        linearLayoutManagerTus = new LinearLayoutManager(view.getContext());
-        linearLayoutManagerTus.setOrientation(RecyclerView.HORIZONTAL);
-        tuesdayRv.setLayoutManager(linearLayoutManagerTus);
-        tuesdayRv.setAdapter(recyclePlanAdapter4);
-
-        wednesdayRV.setHasFixedSize(true);
-        linearLayoutManagerWed = new LinearLayoutManager(view.getContext());
-        linearLayoutManagerWed.setOrientation(RecyclerView.HORIZONTAL);
-        wednesdayRV.setLayoutManager(linearLayoutManagerWed);
-        wednesdayRV.setAdapter(recyclePlanAdapter5);
-
-        thursdayRV.setHasFixedSize(true);
-        linearLayoutManagerThu = new LinearLayoutManager(view.getContext());
-        linearLayoutManagerThu.setOrientation(RecyclerView.HORIZONTAL);
-        thursdayRV.setLayoutManager(linearLayoutManagerThu);
-        thursdayRV.setAdapter(recyclePlanAdapter6);
-
-        fridayRV.setHasFixedSize(true);
-        linearLayoutManagerFri.setOrientation(RecyclerView.HORIZONTAL);
-        fridayRV.setLayoutManager(linearLayoutManagerFri);
-        fridayRV.setAdapter(recyclePlanAdapter7);
-        List<MealModel> allPlanedMeal=new ArrayList<>();*/
-
-
           getPlan(0);
           getPlan(1);
           getPlan(2);
@@ -154,6 +114,11 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
     }
 
     @Override
+    public void addToFavoriteOnClick(MealModel mealModel) {
+        addToFavorite(mealModel);
+    }
+
+    @Override
     public void removeMealFromPlaned(MealModel meal) {
         planPresenterInterface.removeFromPlan(meal);
         updateData(0,meal);
@@ -173,6 +138,11 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
     @Override
     public void uploadPlanInFirebase(UserModel userModel) {
         planPresenterInterface.uploadPlanInFirebase(userModel);
+    }
+
+    @Override
+    public void addToFavorite(MealModel mealModel) {
+        planPresenterInterface.addToFavorite(mealModel);
     }
 
     public void updateData(int i,MealModel meal){

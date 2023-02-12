@@ -11,4 +11,6 @@ public interface OnPlanViewListner {
     public void ViewData(List<MealModel> Meals);
 
     public void uploadPlanInFirebase(UserModel userModel);
+
+    public void addToFavorite (MealModel mealModel);
 }
