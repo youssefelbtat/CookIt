@@ -72,20 +72,22 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
 
         }
         init();
-        pagepresenter=new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(ItemPageActivity.this),ItemPageActivity.this));
+        pagepresenter=new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(getApplicationContext()), ConceretLocalSource.getInstance(ItemPageActivity.this),ItemPageActivity.this));
         pagepresenter.getMealItem(mealNameItem);
+
+
+        addToFav_btn.setOnClickListener(event -> {
+            model.setFavorite(true);
+            model.setNameDay("Not");
+            addToFavoriteOnClick(model);
+        });
         /*
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
 
        itemPagePresenterInterface = new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(getApplicationContext())
                , ConceretLocalSource.getInstance(getApplicationContext()),this));
 
-        model.setFavorite(true);
-        model.setNameDay("Not");
-       addToFav_btn.setOnClickListener(event -> {
 
-               addToFavoriteOnClick(model);
-       });
 
         videoID=model.getStrYoutube().split("=");
         System.out.println("The Meal Video:"+videoID[1]);
@@ -237,7 +239,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     }
     @Override
     public void addToFavorite(MealModel mealModel) {
-        itemPagePresenterInterface.addToFavorite(mealModel);
+        pagepresenter.addToFavorite(mealModel);
     }
 
     @Override
