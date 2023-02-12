@@ -12,4 +12,6 @@ public interface HomeViewInterface {
     void ViewCountriesList(List<Country> models);
     void ViewCategoriesList(List<Category> models);
     public void addToFavorite (MealModel mealModel);
+
+    void insertDataInRoom(MealModel mealModel);
 }

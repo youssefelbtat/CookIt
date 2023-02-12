@@ -67,6 +67,10 @@ public class HomePagePresenter implements NetworkDelegate ,HomePresenter {
     @Override
     public void addToFavorite(MealModel mealModel) {
         _repo.insertFavorite(mealModel);
+    }
 
+    @Override
+    public void insertDataInRoom(MealModel mealModel) {
+        _repo.insertDataInRoom(mealModel);
     }
 }

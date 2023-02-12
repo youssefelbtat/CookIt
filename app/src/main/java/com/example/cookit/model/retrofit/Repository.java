@@ -122,6 +122,10 @@ public class Repository implements RepositoryInterface{
         localSource.deleteAllMeals();
     }
 
+    @Override
+    public void insertDataInRoom(MealModel mealModel) {
+        localSource.insertFavorite(mealModel);
+    }
 
 
 }

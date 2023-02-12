@@ -37,7 +37,6 @@ public class SigninActivity extends AppCompatActivity implements SigninOnclickLi
     Button login_btn;
     SigninPresenterInterface signinPresenterInterface;
 
-
     String userEmail;
 
     @Override

@@ -9,7 +9,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.cookit.authentication.signin.view.SigninActivity;
+import com.example.cookit.database.room.MealDao;
 import com.example.cookit.database.sharedpreference.SharedPreferenceSource;
+import com.example.cookit.home.view.HomePageFragment;
 import com.example.cookit.model.modelFirebase.UserModel;
 import com.example.cookit.view.MainActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -90,6 +93,8 @@ public class FirebaseSource implements FirebaseSourseInterface  {
                     if(userModel1.getPassWord().equals(pass)
                             &&userModel1.getEmail().equals(email)){
                         isSucced = true;
+
+                        showdataFromFirebase(userModel1);
                         SharedPreferenceSource.getInstance(context).saveUserData(userModel1);
                         System.out.println("Successed");
 
@@ -112,5 +117,33 @@ public class FirebaseSource implements FirebaseSourseInterface  {
         return isSucced;
     }
 
+    public void showdataFromFirebase(UserModel userModel1){
+        if(userModel1.getFavorites()!=null) {
+            HomePageFragment.favorite = userModel1.getFavorites();
+        }
+        int i=0;
+        HomePageFragment.plans = new ArrayList<>();
+        if(userModel1.getFriday()!= null) {
+            HomePageFragment.plans.add(userModel1.getFriday());
+        }
+        if (userModel1.getSaturday() !=null) {
+            HomePageFragment.plans.add(userModel1.getSaturday());
+        }
+        if (userModel1.getSunday() !=null) {
+            HomePageFragment.plans.add(userModel1.getSunday());
+        }
+        if (userModel1.getMonday() !=null) {
+            HomePageFragment.plans.add(userModel1.getMonday());
+        }
+        if (userModel1.getThursday() !=null ) {
+            HomePageFragment.plans.add(userModel1.getThursday());
+        }
+        if (userModel1.getWednesday() !=null ) {
+            HomePageFragment.plans.add(userModel1.getWednesday());
+        }
+        if (userModel1.getThursday() !=null) {
+            HomePageFragment.plans.add(userModel1.getThursday());
+        }
+    }
 
 }
