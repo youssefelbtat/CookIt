@@ -12,4 +12,6 @@ public interface HomePresenter {
 
     public void addToFavorite(MealModel mealModel);
 
+    void insertDataInRoom(MealModel mealModel);
+
 }

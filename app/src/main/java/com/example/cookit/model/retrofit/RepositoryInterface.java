@@ -37,5 +37,7 @@ public interface RepositoryInterface {
 
     public void deleteAllMeals() ;
 
+    void insertDataInRoom(MealModel mealModel);
+
 
 }

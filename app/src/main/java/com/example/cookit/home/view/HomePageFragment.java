@@ -31,6 +31,8 @@ public class HomePageFragment extends Fragment implements HomeViewInterface,OnHo
     RecyclerView category;
     RecyclerView country;
 
+    public static List<MealModel> favorite;
+    public static List<List<MealModel>> plans;
     HomePresenter homePagePresenter;
     LinearLayoutManager mealLayoutManager, CategorieLayoutManager,countryLayoutManager;
     RecycleCountryAdepter recycleCountryAdepter;
@@ -87,6 +89,24 @@ public class HomePageFragment extends Fragment implements HomeViewInterface,OnHo
         homePagePresenter.getCategoriesList();
         homePagePresenter.getCountriesList();
 
+        if (favorite != null && favorite.size() != 0 ){
+            for (int i=0 ;i<favorite.size() ;i++){
+                insertDataInRoom(favorite.get(i));
+            }
+            favorite.clear();
+        }
+
+        if(plans != null && plans.size() > 0) {
+            for (int i = 0; i < plans.size(); i++) {
+                for (int j = 0; j < plans.get(i).size(); j++) {
+                    insertDataInRoom(plans.get(i).get(j));
+                }
+            }
+            plans.clear();
+        }
+
+
+
     }
      private void initUI(View view){
          mealRecyclerView = view.findViewById(R.id.viewPager);
@@ -117,6 +137,12 @@ public class HomePageFragment extends Fragment implements HomeViewInterface,OnHo
     @Override
     public void addToFavorite(MealModel mealModel) {
         homePagePresenter.addToFavorite(mealModel);
+
+    }
+
+    @Override
+    public void insertDataInRoom(MealModel mealModel) {
+        homePagePresenter.insertDataInRoom(mealModel);
     }
 
 
