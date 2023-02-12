@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cookit.R;
-import com.example.cookit.authentication.signup.view.SignupActivity;
 import com.example.cookit.model.modelFirebase.UserModel;
+import com.example.cookit.utalites.Utalites;
 import com.example.cookit.view.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,15 +56,14 @@ public class SigninActivity extends AppCompatActivity {
                 }else if(passWord_edt.getText().toString().equals("")||passWord_edt.getText().toString().equals(null)){
                     Toast.makeText(SigninActivity.this, "You should fill all data", Toast.LENGTH_SHORT).show();
                 }else {
-                    getAllUsers();
-
+                    onSuccessLogin();
                 }
             }
         });
 
     }
 
-    private void getAllUsers() {
+    private void onSuccessLogin() {
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -74,6 +74,7 @@ public class SigninActivity extends AppCompatActivity {
                     if(userModel1.getPassWord().equals(passWord_edt.getText().toString())
                             &&userModel1.getEmail().equals(userEmail)){
                         System.out.println("Successed");
+                      addToShered(userModel1);
 
                         Intent intent = new Intent(SigninActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -102,5 +103,15 @@ public class SigninActivity extends AppCompatActivity {
         email_edt=findViewById(R.id.editTextEmailLogin);
         passWord_edt=findViewById(R.id.editTextPasswordLogin);
         login_btn=findViewById(R.id.btnLogin);
+    }
+    void addToShered(UserModel userModel1){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Utalites.SHARDPREFERENCE,getApplicationContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Utalites.FavUserMealsList=userModel1.getFavorites();
+        editor.putString(Utalites.USERNAME,userModel1.getUserName());
+        editor.putString(Utalites.PASSWORD,userModel1.getPassWord());
+        editor.putString(Utalites.EMAIL,userModel1.getEmail());
+        editor.putString(Utalites.IMAGE,userModel1.getImage());
+        editor.commit();
     }
 }

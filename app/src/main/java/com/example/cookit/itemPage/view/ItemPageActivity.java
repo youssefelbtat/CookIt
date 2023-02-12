@@ -6,8 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,7 +44,8 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     MealModel model;
     YouTubePlayerView videoView ;
 
-    String[] videoID;
+    String[] videoSplit;
+    String videoId;
     String []days;
 
     ItemPagePresenterInterface itemPagePresenterInterface;
@@ -58,19 +58,18 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_page);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         days=getResources().getStringArray(R.array.weekdays);
         checkedDays= new boolean[days.length];
         selectedDays = Arrays.asList(days);
-//        Intent intent = getIntent();
-//        model = (MealModel) intent.getSerializableExtra("MEAL_ITEM");
-//
+
         Bundle extra=getIntent().getExtras();
         if(extra!=null){
             mealNameItem = extra.getString("MEAL_NAME");
 
         }
         init();
-        pagepresenter=new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(ItemPageActivity.this),ItemPageActivity.this));
+        pagepresenter=new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(this), ConceretLocalSource.getInstance(ItemPageActivity.this),ItemPageActivity.this));
         pagepresenter.getMealItem(mealNameItem);
         /*
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
@@ -198,8 +197,14 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
             addToFavoriteOnClick(model);});
 
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
-        videoID=model.getStrYoutube().split("=");
-        System.out.println("The Meal Video:"+videoID[1]);
+        if(!model.getStrYoutube().equals(""))
+        {
+            videoSplit =model.getStrYoutube().split("=");
+            videoId =videoSplit[1];
+        }else{
+            videoId =" ";
+        }
+
         mealName.setText(model.getStrMeal());
         mealCountry.setText(model.getStrArea());
         mealSteps.setText(model.getStrInstructions());
@@ -215,18 +220,34 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
 
-                youTubePlayer.loadVideo(videoID[1], 0);
+                youTubePlayer.loadVideo(videoId, 0);
             }
         });
 
-
-
-        ingredientList.add(new IngredientModel("2 tbsp Parsley","https://www.themealdb.com/images/ingredients/Parsley.png"));
-        ingredientList.add(new IngredientModel("1 Ib Fettuccine","https://www.themealdb.com/images/ingredients/Fettuccine.png"));
-        ingredientList.add(new IngredientModel("Black Pepper","https://www.themealdb.com/images/ingredients/Black%20Pepper.png"));
-        ingredientList.add(new IngredientModel("1/2 cup Butter","https://www.themealdb.com/images/ingredients/Butter.png"));
-
-
+        if(model.getStrIngredient1()!="")
+            ingredientList.add(new IngredientModel(model.getStrIngredient1(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient1()+".png"));
+        if(!model.getStrIngredient2().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient2(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient2()+".png"));
+        if(!model.getStrIngredient3().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient3(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient3()+".png"));
+        if(!model.getStrIngredient4().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient4(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient4()+".png"));
+        if(!model.getStrIngredient5().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient5(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient5()+".png"));
+        if(!model.getStrIngredient6().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient6(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient6()+".png"));
+        if(!model.getStrIngredient7().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient7(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient7()+".png"));
+        if(!model.getStrIngredient8().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient8(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient8()+".png"));
+        if(!model.getStrIngredient9().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient9(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient9()+".png"));
+        if(!model.getStrIngredient10().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient10(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient10()+".png"));
+        if(!model.getStrIngredient11().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient11(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient11()+".png"));
+        if(!model.getStrIngredient12().equals(""))
+            ingredientList.add(new IngredientModel(model.getStrIngredient12(),"https://www.themealdb.com/images/ingredients/"+model.getStrIngredient12()+".png"));
 
         layoutManager=new GridLayoutManager(this,3);
         ingredientAdapter=new IngredientAdapter(this,ingredientList);

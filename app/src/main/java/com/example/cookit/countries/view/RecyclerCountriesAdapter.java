@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.utalites.Utalites;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCountriesAdapter.ViewHolder> {
@@ -47,7 +45,7 @@ public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCount
                 view = v;
                 imageView = v.findViewById(R.id.mealImage);
                 name = v.findViewById(R.id.mealName);
-                cardItem = v.findViewById(R.id.mealItemCard);
+                cardItem = v.findViewById(R.id.planmealitem);
                 fav = v.findViewById(R.id.mealFav);
             }
         }

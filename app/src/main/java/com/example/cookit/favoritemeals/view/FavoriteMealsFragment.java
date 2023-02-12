@@ -24,6 +24,8 @@ import com.example.cookit.model.modelFirebase.RepositoryFirebase;
 import com.example.cookit.model.modelFirebase.UserModel;
 import com.example.cookit.model.retrofit.Repository;
 import com.example.cookit.network.APIResponse;
+import com.example.cookit.utalites.Utalites;
+import com.google.firebase.database.core.utilities.Utilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,7 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
     GridLayoutManager layoutManager;
     FavPresenterInterface favPresenterInterface;
     List<MealModel>favList= new ArrayList<MealModel>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +73,18 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
 
         recyclerView.setAdapter(favoriteAdapter);
         recyclerView.setLayoutManager(layoutManager);
-
+//        if(Utalites.FavUserMealsList!=null){
+//            if(Utalites.FavUserMealsList.size() == 0){
+//                group.setVisibility(View.VISIBLE);
+//                recyclerView.setVisibility(View.GONE);
+//            }else {
+//                group.setVisibility(View.GONE);
+//                recyclerView.setVisibility(View.VISIBLE);
+//                favList = Utalites.FavUserMealsList;
+//                favoriteAdapter.setList(Utalites.FavUserMealsList);
+//                favoriteAdapter.notifyDataSetChanged();
+//        }
+//        }
         favPresenterInterface.getAllStoredFavorites().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorComplete()
@@ -90,8 +104,6 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
                         updateFavoriteInFirebase(userModel);
                     }
                 });
-
-
 
     }
     void initUI(){

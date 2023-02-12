@@ -1,15 +1,18 @@
 package com.example.cookit.utalites;
 
+import com.example.cookit.model.MealModel;
 import com.example.cookit.model.modelFirebase.UserModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utalites {
 
-
+    public static List<MealModel> FavUserMealsList=new ArrayList<>();
     public static final String SHARDPREFERENCE = "SharedPreference";
     public static final String USERNAME = "USERNAME";
     public static final String EMAIL = "EMAIL";
     public static final String PASSWORD = "PASSWORD";
-
     public static String SKIP ;
     public static final String IMAGE = "IMAGE";
     public static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";

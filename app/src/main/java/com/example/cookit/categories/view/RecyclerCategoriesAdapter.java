@@ -1,13 +1,9 @@
 package com.example.cookit.categories.view;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,9 +23,7 @@ import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.authentication.signup.view.SignupActivity;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.utalites.Utalites;
-import com.example.cookit.view.MainActivity;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCategoriesAdapter.ViewHolder> {
@@ -55,7 +47,7 @@ public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCate
             view = v;
             imageView = v.findViewById(R.id.mealImage);
             name = v.findViewById(R.id.mealName);
-            cardItem = v.findViewById(R.id.mealItemCard);
+            cardItem = v.findViewById(R.id.planmealitem);
             fav = v.findViewById(R.id.mealFav);
         }
     }

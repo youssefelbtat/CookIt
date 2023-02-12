@@ -1,6 +1,7 @@
 package com.example.cookit.planmeals.view;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,9 @@ import com.example.cookit.model.retrofit.Repository;
 import com.example.cookit.network.APIResponse;
 import com.example.cookit.planmeals.presenter.PlanMealsPresenter;
 import com.example.cookit.planmeals.presenter.PlanPresenterInterface;
+import com.example.cookit.utalites.Utalites;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +68,7 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
 
         Init(view);
 
-        planPresenterInterface = new PlanMealsPresenter((Repository.getInstance(APIResponse.getInstance(),
+        planPresenterInterface = new PlanMealsPresenter((Repository.getInstance(APIResponse.getInstance(getContext()),
                 ConceretLocalSource.getInstance(getContext()),getContext()))
                 , RepositoryFirebase.getInstance(FirebaseSource.getInstance(getContext())
                 , SharedPreferenceSource.getInstance(getContext()),getContext()));
@@ -188,9 +192,21 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
                     System.out.println("The size of :"+e.size());
                     recyclePlanAdapter[i].setRecyclePlanAdapterList(e);
                     recyclePlanAdapter[i].notifyDataSetChanged();
-                    UserModel userModel =planPresenterInterface.getSavedData();
-                    userModel.setPlans(e);
-                    uploadPlanInFirebase(userModel);
+                    uploadToPlanTFire(daysWeak[i],e);
+
                 });
     }
+  void uploadToPlanTFire(String plan,List<MealModel> planList){
+      DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+      SharedPreferences sharedPreferences = getContext().getSharedPreferences(Utalites.SHARDPREFERENCE,getContext().MODE_PRIVATE);
+      SharedPreferences.Editor editor = sharedPreferences.edit();
+      UserModel userModel = new UserModel();
+      userModel.setUserName(sharedPreferences.getString(Utalites.USERNAME,"Null"));
+      userModel.setEmail(sharedPreferences.getString(Utalites.EMAIL,"Null"));
+      userModel.setPassWord(sharedPreferences.getString(Utalites.PASSWORD,"Null"));
+      userModel.setImage(sharedPreferences.getString(Utalites.IMAGE,"null"));
+      List<String> route = Arrays.asList(userModel.getEmail().split("\\."));
+      databaseReference.child("User").child(route.get(0)).child(plan).setValue(planList);
+  }
+
 }

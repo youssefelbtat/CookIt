@@ -147,7 +147,6 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
             userModel.setEmail(email.getText().toString());
             userModel.setPassWord(password.getText().toString());
             userModel.setFavorites(null);
-            userModel.setPlans(null);
 
             if (isUserExists(userModel)){
                 System.out.println("signup before "+userModel.getUserName());
@@ -234,7 +233,6 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
                         userModel.setEmail(user.getEmail());
                         userModel.setImage(user.getPhotoUrl().toString());
                         userModel.setFavorites(null);
-                        userModel.setPlans(null);
                         saveUserData(userModel);
                         System.out.println("ss to signup: "+ userModel.getEmail().toString()+"The name is : "+user.getDisplayName()+userModel.getImage());
                         Toast.makeText(SignupActivity.this, "Signed Successfully", Toast.LENGTH_SHORT).show();

@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
-import com.example.cookit.favoritemeals.view.OnFavClickListner;
 import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.model.MealModel;
 
@@ -47,7 +46,7 @@ public class RecyclePlanAdapter extends RecyclerView.Adapter<RecyclePlanAdapter.
 
             imageView = v.findViewById(R.id.mealImage);
             name = v.findViewById(R.id.mealName);
-            cardItem = v.findViewById(R.id.mealItemCard);
+            cardItem = v.findViewById(R.id.planmealitem);
 
         }
 
@@ -66,7 +65,7 @@ public class RecyclePlanAdapter extends RecyclerView.Adapter<RecyclePlanAdapter.
     @Override
     public RecyclePlanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.mealitem,parent,false);
+        View view = layoutInflater.inflate(R.layout.planmealsitem,parent,false);
         RecyclePlanAdapter.ViewHolder viewHolder = new RecyclePlanAdapter.ViewHolder(view);
         return viewHolder;
     }
