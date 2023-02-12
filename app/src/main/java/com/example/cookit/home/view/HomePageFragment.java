@@ -63,7 +63,8 @@ public class HomePageFragment extends Fragment implements HomeViewInterface,OnHo
         recycleCategoryAdepter = new RecycleCategoryAdepter(view.getContext(),new ArrayList<>());
          viewPagerAdepter = new ViewPagerAdepter(view.getContext(),new ArrayList<>(),this);
 
-        homePagePresenter=new HomePagePresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
+        homePagePresenter=new HomePagePresenter(this, Repository.getInstance(APIResponse.getInstance(getContext()
+        ), ConceretLocalSource.getInstance(getContext()),view.getContext()));
 
         mealRecyclerView.setLayoutManager(mealLayoutManager);
         mealRecyclerView.setAdapter(viewPagerAdepter);

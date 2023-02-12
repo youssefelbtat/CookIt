@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.authentication.signup.view.SignupActivity;
 import com.example.cookit.database.room.ConceretLocalSource;
 import com.example.cookit.itemPage.presenter.ItemPagePresenter;
 import com.example.cookit.itemPage.presenter.ItemPagePresenterInterface;
@@ -22,6 +24,7 @@ import com.example.cookit.model.IngredientModel;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.model.retrofit.Repository;
 import com.example.cookit.network.APIResponse;
+import com.example.cookit.utalites.Utalites;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -61,12 +64,15 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         model = (MealModel) intent.getSerializableExtra("MEAL_ITEM");
         init();
 
-       itemPagePresenterInterface = new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance()
+       itemPagePresenterInterface = new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(getApplicationContext())
                , ConceretLocalSource.getInstance(getApplicationContext()),this));
 
-       model.setFavorite(true);
-       model.setNameDay("Not");
-       addToFav_btn.setOnClickListener(event -> addToFavoriteOnClick(model));
+        model.setFavorite(true);
+        model.setNameDay("Not");
+       addToFav_btn.setOnClickListener(event -> {
+
+               addToFavoriteOnClick(model);
+       });
 
         videoID=model.getStrYoutube().split("=");
        // System.out.println("The Meal Video:"+videoID[1]);

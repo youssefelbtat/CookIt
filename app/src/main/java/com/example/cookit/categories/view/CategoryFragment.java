@@ -62,7 +62,7 @@ public class CategoryFragment extends Fragment implements CategoriesViewInterfac
 
 
         gridLayoutManager=new GridLayoutManager(getContext(),2);
-        categoriesPresenter=new CategoriesPresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
+        categoriesPresenter=new CategoriesPresenter(this, Repository.getInstance(APIResponse.getInstance(getContext()), ConceretLocalSource.getInstance(getContext()),view.getContext()));
         recyclerCategoriesAdapter=new RecyclerCategoriesAdapter(getContext(),new ArrayList<>(),this);
         recyclerView.setAdapter(recyclerCategoriesAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);

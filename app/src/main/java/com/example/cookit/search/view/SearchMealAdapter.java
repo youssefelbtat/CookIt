@@ -1,6 +1,9 @@
 package com.example.cookit.search.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.authentication.signup.view.SignupActivity;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.utalites.Utalites;
 
 import java.util.List;
 
@@ -50,9 +55,31 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
 
 
         holder.btnFav.setOnClickListener( event -> {
-            list.get(position).setFavorite(true);
-            list.get(position).setNameDay("Not");
-            searchClickListener.addToFavoriteOnClick(list.get(position));
+            if(Utalites.SKIP == "skip"){
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Do you want to signup in application?");
+                builder.setTitle("Alert !");
+                builder.setCancelable(false);
+                builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(context, SignupActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+
+
+                builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    dialog.cancel();
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }else {
+                list.get(position).setFavorite(true);
+                list.get(position).setNameDay("Not");
+                searchClickListener.addToFavoriteOnClick(list.get(position));
+            }
         });
 
     }

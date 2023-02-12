@@ -63,7 +63,7 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
         layoutManager=new GridLayoutManager(getContext(),2);
         favoriteAdapter=new FavoriteMealsAdapter(getContext(),favList,this);
 
-        favPresenterInterface = new FavoriteMealsPresenter((Repository.getInstance(APIResponse.getInstance(),
+        favPresenterInterface = new FavoriteMealsPresenter((Repository.getInstance(APIResponse.getInstance(getContext()),
                 ConceretLocalSource.getInstance(getContext()),getContext()))
                 , RepositoryFirebase.getInstance(FirebaseSource.getInstance(getContext())
                 , SharedPreferenceSource.getInstance(getContext()),getContext()));

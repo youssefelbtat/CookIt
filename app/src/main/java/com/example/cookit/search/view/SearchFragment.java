@@ -78,10 +78,7 @@ public class SearchFragment extends Fragment implements SearchClickListener,Sear
         super.onViewCreated(view, savedInstanceState);
         init (view);
 
-
-
-        searchPresenterInterface = new SearchPresenter(this ,Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),getContext()));
-
+        searchPresenterInterface = new SearchPresenter(this ,Repository.getInstance(APIResponse.getInstance(getContext()), ConceretLocalSource.getInstance(getContext()),getContext()));
 
         layoutManager=new GridLayoutManager(getContext(),2);
 
