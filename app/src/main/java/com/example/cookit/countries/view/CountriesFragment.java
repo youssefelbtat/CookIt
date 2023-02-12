@@ -59,7 +59,7 @@ public class CountriesFragment extends Fragment implements CountriesViewInterfac
         }
 
         gridLayoutManager=new GridLayoutManager(getContext(),2);
-        countriesPresenter=new CountriesPresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(getContext()),view.getContext()));
+        countriesPresenter=new CountriesPresenter(this, Repository.getInstance(APIResponse.getInstance(getContext()), ConceretLocalSource.getInstance(getContext()),view.getContext()));
         recyclerCountriesAdapter=new RecyclerCountriesAdapter(getContext(),new ArrayList<>(),this);
         recyclerView.setAdapter(recyclerCountriesAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -60,7 +61,9 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         days=getResources().getStringArray(R.array.weekdays);
         checkedDays= new boolean[days.length];
         selectedDays = Arrays.asList(days);
-
+//        Intent intent = getIntent();
+//        model = (MealModel) intent.getSerializableExtra("MEAL_ITEM");
+//
         Bundle extra=getIntent().getExtras();
         if(extra!=null){
             mealNameItem = extra.getString("MEAL_NAME");
@@ -69,12 +72,15 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         init();
         pagepresenter=new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(), ConceretLocalSource.getInstance(ItemPageActivity.this),ItemPageActivity.this));
         pagepresenter.getMealItem(mealNameItem);
-
         /*
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
 
        itemPagePresenterInterface = new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance()
                , ConceretLocalSource.getInstance(getApplicationContext()),this));
+
+       model.setFavorite(true);
+       model.setNameDay("Not");
+       addToFav_btn.setOnClickListener(event -> addToFavoriteOnClick(model));
 
         videoID=model.getStrYoutube().split("=");
         System.out.println("The Meal Video:"+videoID[1]);
@@ -183,7 +189,6 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
 
     @Override
     public void ViewMealItem(List<MealModel> meal) {
-
         System.out.println("The View Mealllll: "+meal.get(0).getStrMeal());
         model=meal.get(0);
 

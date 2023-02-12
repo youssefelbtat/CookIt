@@ -181,6 +181,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
 
     @Override
     public void skipOnClick() {
+        Utalites.SKIP = "skip";
         Intent intent = new Intent(SignupActivity.this, MainActivity.class);
         startActivity(intent);
     }
