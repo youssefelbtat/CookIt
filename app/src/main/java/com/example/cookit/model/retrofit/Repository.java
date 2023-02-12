@@ -112,4 +112,9 @@ public class Repository implements RepositoryInterface{
     public Single<List<MealModel>> getAllStoredPlans() {
         return null;
     }
+
+    @Override
+    public void deleteAllMeals() {
+        localSource.deleteAllMeals();
+    }
 }

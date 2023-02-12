@@ -1,6 +1,7 @@
 package com.example.cookit.countries.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -95,6 +96,7 @@ public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCount
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(context, SignupActivity.class);
                             context.startActivity(intent);
+                            ((Activity)context).finish();
                         }
                     });
                     builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {

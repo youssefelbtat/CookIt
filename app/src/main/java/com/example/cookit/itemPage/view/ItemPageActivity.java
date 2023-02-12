@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -77,9 +78,32 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
 
 
         addToFav_btn.setOnClickListener(event -> {
-            model.setFavorite(true);
-            model.setNameDay("Not");
-            addToFavoriteOnClick(model);
+
+            if(Utalites.SKIP == "skip"){
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getApplicationContext());
+                builder.setMessage("Do you want to signup in application?");
+                builder.setTitle("Alert !");
+                builder.setCancelable(false);
+                builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                        getApplicationContext().startActivity(intent);
+                        ((Activity)getApplicationContext()).finish();
+                    }
+                });
+
+                builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    dialog.cancel();
+                });
+
+                android.app.AlertDialog alertDialog = builder.create();
+//                alertDialog.show();
+            }else {
+                model.setFavorite(true);
+                model.setNameDay("Not");
+                addToFavoriteOnClick(model);
+            }
         });
         /*
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
@@ -155,28 +179,51 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         backArrow.setOnClickListener(v->{this.finish();});
 
         addToPlane_btn.setOnClickListener(
-                v->{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ItemPageActivity.this);
-                    builder.setTitle(R.string.add_meal_to_plan_dialog_title);
-                    builder.setIcon(imageView.getDrawable());
-                    builder.setMultiChoiceItems(days, checkedDays, (dialog, which, isChecked) -> {
-                        checkedDays[which] = isChecked;
-                        String currentItem = selectedDays.get(which);
-                    });
-
-                    builder.setCancelable(false);
-                    builder.setPositiveButton("add", (dialog, which) -> {
-                        for (int i = 0; i < checkedDays.length; i++) {
-                            if (checkedDays[i]) {
-                                System.out.println("Selected days : "+ selectedDays.get(i));
+                v-> {
+                    if (Utalites.SKIP == "skip") {
+                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getApplicationContext());
+                        builder.setMessage("Do you want to signup in application?");
+                        builder.setTitle("Alert !");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                                getApplicationContext().startActivity(intent);
+                                ((Activity) getApplicationContext()).finish();
                             }
-                        }
-                    });
-                    builder.setNegativeButton("CANCEL", (dialog, which) -> {});
-                    builder.create();
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
+                        });
 
+                        builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
+                            dialog.cancel();
+                        });
+
+                        android.app.AlertDialog alertDialog = builder.create();
+//                alertDialog.show();
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ItemPageActivity.this);
+                        builder.setTitle(R.string.add_meal_to_plan_dialog_title);
+                        builder.setIcon(imageView.getDrawable());
+                        builder.setMultiChoiceItems(days, checkedDays, (dialog, which, isChecked) -> {
+                            checkedDays[which] = isChecked;
+                            String currentItem = selectedDays.get(which);
+                        });
+
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("add", (dialog, which) -> {
+                            for (int i = 0; i < checkedDays.length; i++) {
+                                if (checkedDays[i]) {
+                                    System.out.println("Selected days : " + selectedDays.get(i));
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("CANCEL", (dialog, which) -> {
+                        });
+                        builder.create();
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+
+                    }
                 }
         );
     }

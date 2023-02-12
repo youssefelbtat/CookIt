@@ -96,7 +96,11 @@ public class APIResponse implements RemoteSource{
         Single<IngredientResponse> ingredientResponseSingle= mealService.getAllIngredient();
         ingredientResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .onErrorComplete()
-                .subscribe(item -> networkDelegate.onSuccessIngredients(item.getIngredients()));
+                .subscribe(item ->{
+                networkDelegate.onSuccessIngredients(item.getIngredients());
+
+
+                });
 
     }
 

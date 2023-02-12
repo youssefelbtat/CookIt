@@ -77,4 +77,16 @@ public class ConceretLocalSource implements LocalSource{
     public Single<List<MealModel>> getAllStoredPlans() {
         return null;
     }
+
+    @Override
+    public void deleteAllMeals() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mealDao.deleteAllMeals();
+            }
+        }).start();
+
+    }
 }

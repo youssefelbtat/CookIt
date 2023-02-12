@@ -1,6 +1,7 @@
 package com.example.cookit.categories.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -107,6 +108,7 @@ public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCate
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(context, SignupActivity.class);
                         context.startActivity(intent);
+                        ((Activity)context).finish();
                     }
                 });
 

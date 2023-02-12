@@ -26,4 +26,7 @@ public interface MealDao {
     void insertPlan (MealModel mealModel);
     @Delete
     void deletePlan (MealModel mealModel);
+    @Query("DELETE FROM Meals")
+    public void deleteAllMeals() ;
+
 }
