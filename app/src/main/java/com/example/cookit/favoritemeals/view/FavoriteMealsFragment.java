@@ -1,5 +1,6 @@
 package com.example.cookit.favoritemeals.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -73,18 +74,27 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
 
         recyclerView.setAdapter(favoriteAdapter);
         recyclerView.setLayoutManager(layoutManager);
-//        if(Utalites.FavUserMealsList!=null){
-//            if(Utalites.FavUserMealsList.size() == 0){
-//                group.setVisibility(View.VISIBLE);
-//                recyclerView.setVisibility(View.GONE);
-//            }else {
-//                group.setVisibility(View.GONE);
-//                recyclerView.setVisibility(View.VISIBLE);
-//                favList = Utalites.FavUserMealsList;
-//                favoriteAdapter.setList(Utalites.FavUserMealsList);
-//                favoriteAdapter.notifyDataSetChanged();
-//        }
-//        }
+
+        showData();
+
+
+    }
+    void initUI(){
+        recyclerView= recyclerView.findViewById(R.id.favItemsRecyclerView);
+        group=group.findViewById(R.id.group);
+    }
+
+
+    @Override
+    public void removeFromFav(MealModel meal) {
+        favPresenterInterface.removeFromFavorite(meal);
+
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void showData() {
+
         favPresenterInterface.getAllStoredFavorites().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorComplete()
@@ -104,23 +114,6 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
                         updateFavoriteInFirebase(userModel);
                     }
                 });
-
-    }
-    void initUI(){
-        recyclerView= recyclerView.findViewById(R.id.favItemsRecyclerView);
-        group=group.findViewById(R.id.group);
-    }
-
-
-    @Override
-    public void removeFromFav(MealModel meal) {
-        favPresenterInterface.removeFromFavorite(meal);
-
-    }
-
-    @Override
-    public void showData(List<MealModel> meals) {
-
     }
 
     @Override
@@ -131,10 +124,10 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
     @Override
     public void onRemoveFavClick(MealModel mealModel) {
         removeFromFav(mealModel);
+        favoriteAdapter.removeFavorite(mealModel);
+        favoriteAdapter.notifyDataSetChanged();
         UserModel userModel =favPresenterInterface.getSavedData();
         userModel.setFavorites(favoriteAdapter.remove(mealModel));
         updateFavoriteInFirebase(userModel);
-        favoriteAdapter.removeFavorite(mealModel);
-        favoriteAdapter.notifyDataSetChanged();
     }
 }

@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.model.retrofit.Ingredient;
 
@@ -50,14 +52,17 @@ public class SearchIngredientAdepter extends RecyclerView.Adapter<SearchIngredie
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.categoryitem,parent,false);
+        View view = layoutInflater.inflate(R.layout.searchitem,parent,false);
         ViewHolder viewHolder = new SearchIngredientAdepter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.imageView.setImageResource(R.drawable.egypt);
+        Glide.with(context).load("https://www.themealdb.com/images/ingredients/"+list.get(position).getStrIngredient()+".png")
+                .apply(new RequestOptions().override(60,60)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);
         holder.name.setText(list.get(position).getStrIngredient());
         holder.cardItem.setOnClickListener(event ->
                 searchClickListener.ingredientItemOnclick(list.get(position).getStrIngredient()));

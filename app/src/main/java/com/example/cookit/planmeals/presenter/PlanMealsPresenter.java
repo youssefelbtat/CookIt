@@ -40,5 +40,10 @@ public class PlanMealsPresenter implements PlanPresenterInterface {
         return repositoryFirebaseInterface.getSavedUserData();
     }
 
+    @Override
+    public void addToFavorite(MealModel mealModel) {
+        repositoryInterface.insertFavorite(mealModel);
+    }
+
 
 }
