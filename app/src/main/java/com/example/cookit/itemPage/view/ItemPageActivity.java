@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -62,7 +65,9 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         days=getResources().getStringArray(R.array.weekdays);
         checkedDays= new boolean[days.length];
         selectedDays = Arrays.asList(days);
-
+//        Intent intent = getIntent();
+//        model = (MealModel) intent.getSerializableExtra("MEAL_ITEM");
+//
         Bundle extra=getIntent().getExtras();
         if(extra!=null){
             mealNameItem = extra.getString("MEAL_NAME");
@@ -71,15 +76,43 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         init();
         pagepresenter=new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(this), ConceretLocalSource.getInstance(ItemPageActivity.this),ItemPageActivity.this));
         pagepresenter.getMealItem(mealNameItem);
+
+
+        addToFav_btn.setOnClickListener(event -> {
+
+            if(Utalites.SKIP == "skip"){
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getApplicationContext());
+                builder.setMessage("Do you want to signup in application?");
+                builder.setTitle("Alert !");
+                builder.setCancelable(false);
+                builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                        getApplicationContext().startActivity(intent);
+                        ((Activity)getApplicationContext()).finish();
+                    }
+                });
+
+                builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    dialog.cancel();
+                });
+
+                android.app.AlertDialog alertDialog = builder.create();
+//                alertDialog.show();
+            }else {
+                model.setFavorite(true);
+                model.setNameDay("Not");
+                addToFavoriteOnClick(model);
+            }
+        });
         /*
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
 
-       itemPagePresenterInterface = new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance()
+       itemPagePresenterInterface = new ItemPagePresenter(this, Repository.getInstance(APIResponse.getInstance(getApplicationContext())
                , ConceretLocalSource.getInstance(getApplicationContext()),this));
 
-       model.setFavorite(true);
-       model.setNameDay("Not");
-       addToFav_btn.setOnClickListener(event -> addToFavoriteOnClick(model));
+
 
         videoID=model.getStrYoutube().split("=");
         System.out.println("The Meal Video:"+videoID[1]);
@@ -147,14 +180,35 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
         backArrow.setOnClickListener(v->{this.finish();});
 
         addToPlane_btn.setOnClickListener(
-                v->{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ItemPageActivity.this);
-                    builder.setTitle(R.string.add_meal_to_plan_dialog_title);
-                    builder.setIcon(imageView.getDrawable());
-                    builder.setMultiChoiceItems(days, checkedDays, (dialog, which, isChecked) -> {
-                        checkedDays[which] = isChecked;
-                        String currentItem = selectedDays.get(which);
-                    });
+                v-> {
+                    if (Utalites.SKIP == "skip") {
+                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getApplicationContext());
+                        builder.setMessage("Do you want to signup in application?");
+                        builder.setTitle("Alert !");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                                getApplicationContext().startActivity(intent);
+                                ((Activity) getApplicationContext()).finish();
+                            }
+                        });
+
+                        builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
+                            dialog.cancel();
+                        });
+
+                        android.app.AlertDialog alertDialog = builder.create();
+//                alertDialog.show();
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ItemPageActivity.this);
+                        builder.setTitle(R.string.add_meal_to_plan_dialog_title);
+                        builder.setIcon(imageView.getDrawable());
+                        builder.setMultiChoiceItems(days, checkedDays, (dialog, which, isChecked) -> {
+                            checkedDays[which] = isChecked;
+                            String currentItem = selectedDays.get(which);
+                        });
 
                     builder.setCancelable(false);
                     builder.setPositiveButton("add", (dialog, which) -> {
@@ -171,6 +225,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
 
+                    }
                 }
         );
     }
@@ -190,11 +245,6 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     public void ViewMealItem(List<MealModel> meal) {
         System.out.println("The View Mealllll: "+meal.get(0).getStrMeal());
         model=meal.get(0);
-
-        addToFav_btn.setOnClickListener(event -> {
-            model.setFavorite(true);
-            model.setNameDay("Not");
-            addToFavoriteOnClick(model);});
 
         System.out.println("The Meal Name is ......."+model.getStrYoutube());
         if(!model.getStrYoutube().equals(""))

@@ -1,5 +1,6 @@
 package com.example.cookit.search.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -74,9 +75,9 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(context, SignupActivity.class);
                         context.startActivity(intent);
+                        ((Activity)context).finish();
                     }
                 });
-
 
                 builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
                     dialog.cancel();

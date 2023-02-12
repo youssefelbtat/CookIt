@@ -2,6 +2,7 @@ package com.example.cookit.profile.view;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,12 +27,18 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.authentication.signup.view.SignupActivity;
 import com.example.cookit.database.firebase.FirebaseSource;
+import com.example.cookit.database.room.AppDataBase;
+import com.example.cookit.database.room.ConceretLocalSource;
+import com.example.cookit.database.room.MealDao;
 import com.example.cookit.database.sharedpreference.SharedPreferenceSource;
 import com.example.cookit.model.modelFirebase.RepositoryFirebase;
 import com.example.cookit.model.modelFirebase.UserModel;
+import com.example.cookit.model.retrofit.Repository;
+import com.example.cookit.network.APIResponse;
 import com.example.cookit.profile.presenter.profilePresenter;
 import com.example.cookit.profile.presenter.profilePresenterInterface;
 import com.example.cookit.utalites.Utalites;
+import com.example.cookit.view.MainActivity;
 import com.google.firestore.v1.TargetOrBuilder;
 
 import java.util.ArrayList;
@@ -75,7 +82,8 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
         init(view);
 
         profilePresenterInterface = new profilePresenter(RepositoryFirebase.getInstance(FirebaseSource.getInstance(getContext())
-                , SharedPreferenceSource.getInstance(getContext()), getContext()));
+                , SharedPreferenceSource.getInstance(getContext()), getContext()), Repository.getInstance(APIResponse.getInstance(getContext()),
+                        ConceretLocalSource.getInstance(getContext()),getContext()));
 
         editProfile.setOnClickListener(event -> editProfile());
 
@@ -178,10 +186,12 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
         userModel.setImage(null);
         updateUserData(userModel);
 
+        profilePresenterInterface.deleteAllMeals();
+
         Intent intent = new Intent(getContext(), SignupActivity.class);
         startActivity(intent);
 
-
+        getActivity().finish();
 
     }
     @Override
@@ -211,40 +221,84 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
 
     @Override
     public void editImageOnClick() {
-        ArrayList<String> MemberList = new ArrayList<>();
-        MemberList.add("Upload Image");
-        MemberList.add("Delete Image");
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setItems(MemberList.toArray(new String[2]), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                if (i == 0) {
-                    imageChooser();
-
-                } else {
-                    image = null;
-                    userModel = getSavedUserData();
-                    userModel.setImage(image);
-                    updateUserData(userModel);
-                    updateUserFirebaseData(userModel);
-                    profileImage.setImageResource(R.drawable.ic_launcher_background);
+        if (Utalites.SKIP == "skip") {
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+            builder.setMessage("Do you want to signup in application?");
+            builder.setTitle("Alert !");
+            builder.setCancelable(false);
+            builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(getContext(), SignupActivity.class);
+                    getContext().startActivity(intent);
+                    ((Activity) getContext()).finish();
                 }
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+            });
 
+            builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
+                dialog.cancel();
+            });
+
+            android.app.AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        } else {
+            ArrayList<String> MemberList = new ArrayList<>();
+            MemberList.add("Upload Image");
+            MemberList.add("Delete Image");
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setItems(MemberList.toArray(new String[2]), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    if (i == 0) {
+                        imageChooser();
+
+                    } else {
+                        image = null;
+                        userModel = getSavedUserData();
+                        userModel.setImage(image);
+                        updateUserData(userModel);
+                        updateUserFirebaseData(userModel);
+                        profileImage.setImageResource(R.drawable.ic_launcher_background);
+                    }
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+        }
     }
 
     @Override
     public void editProfile() {
-        if (edit) {
-            edit = false;
-            group.setVisibility(View.GONE);
-        } else {
-            edit = true;
-            group.setVisibility(View.VISIBLE);
+        if(Utalites.SKIP == "skip"){
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+            builder.setMessage("Do you want to signup in application?");
+            builder.setTitle("Alert !");
+            builder.setCancelable(false);
+            builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(getContext(), SignupActivity.class);
+                    getContext().startActivity(intent);
+                    ((Activity)getContext()).finish();
+                }
+            });
+
+            builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
+                dialog.cancel();
+            });
+
+            android.app.AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+        }else {
+            if (edit) {
+                edit = false;
+                group.setVisibility(View.GONE);
+            } else {
+                edit = true;
+                group.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

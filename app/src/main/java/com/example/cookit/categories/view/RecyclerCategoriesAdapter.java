@@ -99,6 +99,7 @@ public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCate
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(context, SignupActivity.class);
                         context.startActivity(intent);
+                        ((Activity)context).finish();
                     }
                 });
 

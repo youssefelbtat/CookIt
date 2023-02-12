@@ -33,5 +33,7 @@ public interface RepositoryInterface {
     void removePlan(MealModel mealModel);
     Single<List<MealModel>> getAllStoredPlans(String day);
 
+    public void deleteAllMeals() ;
+
 
 }
