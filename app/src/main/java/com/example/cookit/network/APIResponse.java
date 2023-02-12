@@ -101,12 +101,14 @@ public class APIResponse implements RemoteSource{
     }
 
     @Override
-    public void getMealsByName(NetworkDelegate networkDelegate, String name) {
-
-        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByName(name);
+    public void getMealsByFirstChar(NetworkDelegate networkDelegate, String name) {
+        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByFirstChar(name);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .onErrorComplete()
-                .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
+                .subscribe(item ->{
+                    networkDelegate.onSuccessMeals(item.getMealsModel());
+                } );
+
     }
 
     @Override
@@ -136,5 +138,12 @@ public class APIResponse implements RemoteSource{
                 .onErrorComplete()
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
 
+    }
+
+    @Override
+    public void getMealsByName(NetworkDelegate networkDelegate, String name) {
+        Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByName(name);
+        mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
     }
 }

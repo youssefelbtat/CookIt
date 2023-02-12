@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ItemViewInterface {
 
-    void ViewMealItem(MealModel meal);
+    void ViewMealItem(List<MealModel> meal);
 
     void addMealToPlan(MealModel Meal);
 

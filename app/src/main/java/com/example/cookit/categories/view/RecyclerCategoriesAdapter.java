@@ -8,6 +8,7 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
+import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.authentication.signup.view.SignupActivity;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.utalites.Utalites;
 import com.example.cookit.view.MainActivity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCategoriesAdapter.ViewHolder> {
@@ -66,6 +69,7 @@ public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCate
         this.onCategoriesClickListenterInterface = onCategoriesClickListenterInterface;
     }
 
+
     @NonNull
     @Override
     public RecyclerCategoriesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -83,6 +87,14 @@ public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCate
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(holder.imageView);
+        holder.cardItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent =new Intent(context, ItemPageActivity.class);
+                myIntent.putExtra("MEAL_NAME",list.get(position).getStrMeal());
+                context.startActivity(myIntent);
+            }
+        });
 
         holder.fav.setOnClickListener(event -> {
             if(Utalites.SKIP == "skip"){

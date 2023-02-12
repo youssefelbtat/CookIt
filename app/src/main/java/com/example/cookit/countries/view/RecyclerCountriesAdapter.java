@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.authentication.signup.view.SignupActivity;
+import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.utalites.Utalites;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCountriesAdapter.ViewHolder> {
@@ -75,6 +78,11 @@ public class RecyclerCountriesAdapter extends RecyclerView.Adapter<RecyclerCount
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(holder.imageView);
+            holder.cardItem.setOnClickListener(e->{
+                Intent myIntent =new Intent(context, ItemPageActivity.class);
+                myIntent.putExtra("MEAL_NAME",list.get(position).getStrMeal());
+                context.startActivity(myIntent);
+            });
 
             holder.fav.setOnClickListener(event -> {
                 if(Utalites.SKIP == "skip"){

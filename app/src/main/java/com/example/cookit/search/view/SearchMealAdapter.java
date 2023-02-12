@@ -2,6 +2,7 @@ package com.example.cookit.search.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.authentication.signup.view.SignupActivity;
+import com.example.cookit.itemPage.view.ItemPageActivity;
 import com.example.cookit.model.MealModel;
 import com.example.cookit.utalites.Utalites;
 
@@ -52,6 +54,14 @@ public class SearchMealAdapter extends RecyclerView.Adapter<SearchMealAdapter.Vi
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(holder.meal_image);
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent =new Intent(context, ItemPageActivity.class);
+                myIntent.putExtra("MEAL_NAME",list.get(holder.getAbsoluteAdapterPosition()).getStrMeal());
+                context.startActivity(myIntent);
+            }
+        });
 
 
         holder.btnFav.setOnClickListener( event -> {

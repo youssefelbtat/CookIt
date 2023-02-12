@@ -64,6 +64,11 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
+    public void getMealsByFirstChar(NetworkDelegate networkDelegate, String name) {
+        remoteSource.getMealsByFirstChar(networkDelegate,name);
+    }
+
+    @Override
     public void getMealsByCategories(NetworkDelegate networkDelegate, String category) {
         remoteSource.getMealsByCategories(networkDelegate,category);
     }
