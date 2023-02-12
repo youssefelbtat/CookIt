@@ -10,17 +10,13 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
 
     private Context context;
     private FirebaseSource firebaseSource;
-
     private SharedPreferenceSource sharedPreferenceSource;
-
     private static RepositoryFirebase repository = null;
-
     public RepositoryFirebase(FirebaseSource firebaseSource,SharedPreferenceSource sharedPreferenceSource, Context context) {
         this.context = context;
         this.firebaseSource = firebaseSource;
         this.sharedPreferenceSource = sharedPreferenceSource ;
     }
-
     public static RepositoryFirebase getInstance(FirebaseSource firebaseSource,SharedPreferenceSource sharedPreferenceSource, Context context){
         if (repository == null){
             repository = new RepositoryFirebase(firebaseSource,sharedPreferenceSource,context);

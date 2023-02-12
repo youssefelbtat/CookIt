@@ -1,7 +1,13 @@
 package com.example.cookit.categories.view;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +18,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cookit.R;
 import com.example.cookit.itemPage.view.ItemPageActivity;
+import com.example.cookit.authentication.signup.view.SignupActivity;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.utalites.Utalites;
+import com.example.cookit.view.MainActivity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -86,9 +97,31 @@ public class RecyclerCategoriesAdapter extends RecyclerView.Adapter<RecyclerCate
         });
 
         holder.fav.setOnClickListener(event -> {
-            list.get(position).setFavorite(true);
-            list.get(position).setNameDay("Not");
-            onCategoriesClickListenterInterface.addToFavoriteOnClick(list.get(position));
+            if(Utalites.SKIP == "skip"){
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Do you want to signup in application?");
+                builder.setTitle("Alert !");
+                builder.setCancelable(false);
+                builder.setPositiveButton("yes, Signup", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(context, SignupActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+
+
+                builder.setNegativeButton("No, thanks", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    dialog.cancel();
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }else {
+                list.get(position).setFavorite(true);
+                list.get(position).setNameDay("Not");
+                onCategoriesClickListenterInterface.addToFavoriteOnClick(list.get(position));
+            }
         });
     }
 

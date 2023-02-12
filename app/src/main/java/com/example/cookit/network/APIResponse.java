@@ -1,11 +1,14 @@
 package com.example.cookit.network;
 
+import android.content.Context;
+
 import com.example.cookit.model.MealModel;
 import com.example.cookit.model.MealModelResponse;
 import com.example.cookit.model.retrofit.CategoryResponse;
 import com.example.cookit.model.retrofit.CountryResponse;
 import com.example.cookit.model.retrofit.IngredientResponse;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,22 +29,30 @@ public class APIResponse implements RemoteSource{
    MealService mealService;
     private static APIResponse apiResponse = null;
 
-    public APIResponse( ) {
+    public APIResponse(Context context) {
 
-        Retrofit retrofit = new Retrofit.Builder()
+        File cacheDirectory = new File(context.getCacheDir(), "offline_cache_directory");
+        Cache cache = new Cache(cacheDirectory,100 *1024 * 1024);
+
+        OkHttpClient okHttpClient = new OkHttpClient
+                .Builder().cache(cache).build();
+
+        Retrofit.Builder retrofitB = new Retrofit.Builder()
                 .baseUrl(url)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .build();
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create());
+
+        Retrofit retrofit = retrofitB.build();
 
         mealService = retrofit.create(MealService.class);
 
     }
 
-    public static APIResponse getInstance(){
+    public static APIResponse getInstance(Context context){
 
         if (apiResponse == null){
-            apiResponse = new APIResponse();
+            apiResponse = new APIResponse(context);
         }
 
         return apiResponse;
@@ -50,6 +64,7 @@ public class APIResponse implements RemoteSource{
         List<MealModel> list=new ArrayList<>();
         Flowable<MealModelResponse> mealModelResponseSingle= mealService.getRandomMeals();
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
                 .repeat(10)
                 .doOnNext(e-> list.addAll(e.getMealsModel()))
                 .doOnComplete(()->networkDelegate.onSuccessMeals(list))
@@ -61,6 +76,7 @@ public class APIResponse implements RemoteSource{
 
         Single<CategoryResponse> categoryResponseSingle= mealService.getAllCategories();
         categoryResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
                 .subscribe(item -> networkDelegate.onSuccessCategories(item.getCategories()));
     }
 
@@ -69,6 +85,7 @@ public class APIResponse implements RemoteSource{
 
                 Single<CountryResponse> countryResponseSingle= mealService.getAllCountries();
                 countryResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                        .onErrorComplete()
                         .subscribe(item -> networkDelegate.onSuccessCountries(item.getCountries()));
 
     }
@@ -78,6 +95,7 @@ public class APIResponse implements RemoteSource{
 
         Single<IngredientResponse> ingredientResponseSingle= mealService.getAllIngredient();
         ingredientResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
                 .subscribe(item -> networkDelegate.onSuccessIngredients(item.getIngredients()));
 
     }
@@ -98,6 +116,7 @@ public class APIResponse implements RemoteSource{
 
         Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByCategories(category);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
 
     }
@@ -107,6 +126,7 @@ public class APIResponse implements RemoteSource{
 
         Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByCountries(country);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
     }
 
@@ -115,6 +135,7 @@ public class APIResponse implements RemoteSource{
 
         Single<MealModelResponse> mealModelResponseSingle= mealService.getMealsByIngredients(ingredient);
         mealModelResponseSingle.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .onErrorComplete()
                 .subscribe(item -> networkDelegate.onSuccessMeals(item.getMealsModel()));
 
     }
