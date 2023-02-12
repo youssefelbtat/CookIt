@@ -18,4 +18,6 @@ public interface LocalSource {
     void insertPlan(MealModel mealModel);
     void removePlan(MealModel mealModel);
     Single<List<MealModel>> getAllStoredPlans();
+
+    public void deleteAllMeals() ;
 }

@@ -8,4 +8,6 @@ public interface profilePresenterInterface {
 
     void updateUserFirebaseData(UserModel userModel);
 
+    public void deleteAllMeals() ;
+
 }

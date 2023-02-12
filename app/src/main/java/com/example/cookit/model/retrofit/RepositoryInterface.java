@@ -32,5 +32,7 @@ public interface RepositoryInterface {
     void removePlan(MealModel mealModel);
     Single<List<MealModel>> getAllStoredPlans();
 
+    public void deleteAllMeals() ;
+
 
 }
