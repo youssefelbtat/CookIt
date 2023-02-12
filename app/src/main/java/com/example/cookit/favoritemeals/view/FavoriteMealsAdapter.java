@@ -63,14 +63,6 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
                 onFavClickListner.onRemoveFavClick(model.get(position));
             }
         });
-//        holder.item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(context, ItemPageActivity.class);
-//                intent.putExtra("mealName",model.get(holder.getAdapterPosition()).getStrMeal());
-//                context.startActivity(intent);
-//            }
-//        });
 
     }
 

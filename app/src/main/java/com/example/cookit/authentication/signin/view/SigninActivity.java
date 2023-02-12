@@ -44,7 +44,6 @@ public class SigninActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("User");
 
-
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +73,7 @@ public class SigninActivity extends AppCompatActivity {
                     if(userModel1.getPassWord().equals(passWord_edt.getText().toString())
                             &&userModel1.getEmail().equals(userEmail)){
                         System.out.println("Successed");
+                        Utalites.SKIP =null;
                       addToShered(userModel1);
 
                         Intent intent = new Intent(SigninActivity.this, MainActivity.class);

@@ -8,7 +8,7 @@ import java.util.List;
 public interface FavViewInterface {
     void removeFromFav(MealModel meal);
 
-    public void showData(List<MealModel> meals);
+    public void showData();
 
     public void updateFavoriteInFirebase(UserModel userModel);
 
