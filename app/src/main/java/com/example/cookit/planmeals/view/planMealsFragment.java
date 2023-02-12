@@ -1,5 +1,6 @@
 package com.example.cookit.planmeals.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cookit.R;
+import com.example.cookit.database.firebase.FirebaseSource;
 import com.example.cookit.database.room.ConceretLocalSource;
+import com.example.cookit.database.sharedpreference.SharedPreferenceSource;
 import com.example.cookit.favoritemeals.presenter.FavoriteMealsPresenter;
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.modelFirebase.RepositoryFirebase;
+import com.example.cookit.model.modelFirebase.UserModel;
 import com.example.cookit.model.retrofit.Repository;
 import com.example.cookit.network.APIResponse;
 import com.example.cookit.planmeals.presenter.PlanMealsPresenter;
@@ -60,7 +65,9 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
         Init(view);
 
         planPresenterInterface = new PlanMealsPresenter((Repository.getInstance(APIResponse.getInstance(),
-                ConceretLocalSource.getInstance(getContext()),getContext())));
+                ConceretLocalSource.getInstance(getContext()),getContext()))
+                , RepositoryFirebase.getInstance(FirebaseSource.getInstance(getContext())
+                , SharedPreferenceSource.getInstance(getContext()),getContext()));
 
 
       /*
@@ -158,6 +165,12 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
     public void ViewData(List<MealModel> Meals) {
 
     }
+
+    @Override
+    public void uploadPlanInFirebase(UserModel userModel) {
+        planPresenterInterface.uploadPlanInFirebase(userModel);
+    }
+
     public void updateData(int i,MealModel meal){
         recyclePlanAdapter[i].removePlan(meal);
         recyclePlanAdapter[i].notifyDataSetChanged();
@@ -175,6 +188,9 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
                     System.out.println("The size of :"+e.size());
                     recyclePlanAdapter[i].setRecyclePlanAdapterList(e);
                     recyclePlanAdapter[i].notifyDataSetChanged();
+                    UserModel userModel =planPresenterInterface.getSavedData();
+                    userModel.setPlans(e);
+                    uploadPlanInFirebase(userModel);
                 });
     }
 }

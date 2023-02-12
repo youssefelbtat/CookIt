@@ -17,4 +17,6 @@ public interface RepositoryFirebaseInterface {
 
     void updateFavoriteInFirebase(UserModel userModel);
 
+    void uploadPlanInFirebase(UserModel userModel);
+
 }

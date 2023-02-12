@@ -1,23 +1,26 @@
 package com.example.cookit.planmeals.presenter;
 
 import com.example.cookit.model.MealModel;
+import com.example.cookit.model.modelFirebase.RepositoryFirebaseInterface;
+import com.example.cookit.model.modelFirebase.UserModel;
 import com.example.cookit.model.retrofit.RepositoryInterface;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
 public class PlanMealsPresenter implements PlanPresenterInterface {
     private RepositoryInterface repositoryInterface;
 
-    public PlanMealsPresenter(RepositoryInterface repositoryInterface){
+    private RepositoryFirebaseInterface repositoryFirebaseInterface;
+
+    public PlanMealsPresenter(RepositoryInterface repositoryInterface,RepositoryFirebaseInterface repositoryFirebaseInterface){
         this.repositoryInterface = repositoryInterface ;
+        this.repositoryFirebaseInterface=repositoryFirebaseInterface;
     }
 
     @Override
     public Single<List<MealModel>> getAllPlanedMeals(String day) {
-        System.out.println("Get all planeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee "+repositoryInterface.getAllStoredPlans(day));
         return repositoryInterface.getAllStoredPlans( day);
     }
 
@@ -26,4 +29,16 @@ public class PlanMealsPresenter implements PlanPresenterInterface {
         repositoryInterface.removePlan(mealModel);
 
     }
+
+    @Override
+    public void uploadPlanInFirebase(UserModel userModel) {
+        repositoryFirebaseInterface.uploadPlanInFirebase(userModel);
+    }
+
+    @Override
+    public UserModel getSavedData() {
+        return repositoryFirebaseInterface.getSavedUserData();
+    }
+
+
 }

@@ -227,8 +227,19 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
                     Toast.makeText(SignupActivity.this, " Successfully", Toast.LENGTH_SHORT).show();
                     FirebaseUser user=firebaseAuth.getCurrentUser();
                     if(user!=null){
-                        System.out.println("ss to signup: "+ user.getEmail().toString()+"The name is : "+user.getDisplayName());
-                        Toast.makeText(SignupActivity.this, "The Email is : "+user.getEmail()+"The name is : "+user.getDisplayName(), Toast.LENGTH_SHORT).show();
+
+                        UserModel userModel = new UserModel();
+                        userModel.setUserName(user.getDisplayName());
+                        userModel.setEmail(user.getEmail());
+                        userModel.setImage(user.getPhotoUrl().toString());
+                        userModel.setFavorites(null);
+                        userModel.setPlans(null);
+                        saveUserData(userModel);
+                        System.out.println("ss to signup: "+ userModel.getEmail().toString()+"The name is : "+user.getDisplayName()+userModel.getImage());
+                        Toast.makeText(SignupActivity.this, "Signed Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
 
                 }else{

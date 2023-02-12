@@ -1,9 +1,11 @@
 package com.example.cookit.model.modelFirebase;
 
 import com.example.cookit.model.MealModel;
+import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.List;
 
+@IgnoreExtraProperties
 public class UserModel {
     String image;
     String userName;

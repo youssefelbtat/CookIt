@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.example.cookit.database.firebase.FirebaseSource;
 import com.example.cookit.database.sharedpreference.SharedPreferenceSource;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RepositoryFirebase implements RepositoryFirebaseInterface {
 
@@ -14,6 +16,8 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
     private SharedPreferenceSource sharedPreferenceSource;
 
     private static RepositoryFirebase repository = null;
+
+
 
     public RepositoryFirebase(FirebaseSource firebaseSource,SharedPreferenceSource sharedPreferenceSource, Context context) {
         this.context = context;
@@ -71,6 +75,11 @@ public class RepositoryFirebase implements RepositoryFirebaseInterface {
 
     @Override
     public void updateFavoriteInFirebase(UserModel userModel) {
+        firebaseSource.insertUser(userModel);
+    }
+
+    @Override
+    public void uploadPlanInFirebase(UserModel userModel) {
         firebaseSource.insertUser(userModel);
     }
 

@@ -1,6 +1,9 @@
 package com.example.cookit.utalites;
 
+import com.example.cookit.model.modelFirebase.UserModel;
+
 public class Utalites {
+
 
     public static final String SHARDPREFERENCE = "SharedPreference";
     public static final String USERNAME = "USERNAME";
