@@ -56,7 +56,7 @@ public class SearchCountryAdepter extends RecyclerView.Adapter<SearchCountryAdep
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.categoryitem,parent,false);
+        View view = layoutInflater.inflate(R.layout.searchitem,parent,false);
         ViewHolder viewHolder = new SearchCountryAdepter.ViewHolder(view);
         return viewHolder;
     }
@@ -66,7 +66,8 @@ public class SearchCountryAdepter extends RecyclerView.Adapter<SearchCountryAdep
         Glide.with(context).load(countriesFlags[position])
                 .apply(new RequestOptions().override(60,60)
                         .placeholder(R.drawable.ic_launcher_background)
-                        .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);        holder.name.setText(list.get(position).getStrArea());
+                        .error(R.drawable.ic_launcher_foreground)).into(holder.imageView);
+        holder.name.setText(list.get(position).getStrArea());
         holder.cardItem.setOnClickListener(event ->
                 searchClickListener.countryItemOnClick(list.get(position).strArea));
     }
