@@ -29,7 +29,7 @@ public class FirebaseSource implements FirebaseSourseInterface  {
     private static FirebaseSource firebaseSource = null;
     private DatabaseReference databaseReference;
 
-    private boolean exists =false ;
+    private boolean exists ;
     private boolean  isSucced=false;
 
     private FirebaseSource(Context context) {
@@ -55,24 +55,33 @@ public class FirebaseSource implements FirebaseSourseInterface  {
     public boolean isUserExists(UserModel userModel) {
 
         List<String> route = Arrays.asList(userModel.getEmail().split("\\."));
-        databaseReference.child("User").orderByChild("email").equals(userModel.getEmail());
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
 
-        ValueEventListener eventListener = new ValueEventListener() {
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.exists()) {
-                    exists = false;
+
+                UserModel userModel1= dataSnapshot.child(route.get(0)).getValue(UserModel.class);
+                if (userModel1 != null) {
+                    if (userModel1.getEmail().equals(userModel.getEmail())) {
+                        System.out.println("sssssssssssssssssssssssssssss" + userModel1.getEmail());
+                        exists = false;
+                    }
                 }else {
-                    exists = true ;
+                    System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+                    exists = true;
+                    System.out.println(exists);
+
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        };
-        databaseReference.addListenerForSingleValueEvent(eventListener);
+        });
 
+        System.out.println("tttttttttttttttttttttttttt"+exists);
         return exists;
     }
 
