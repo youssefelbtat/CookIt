@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.cookit.R;
 import com.example.cookit.database.room.ConceretLocalSource;
@@ -284,5 +285,6 @@ public class SearchFragment extends Fragment implements SearchClickListener,Sear
     @Override
     public void addToFavoriteOnClick(MealModel mealModel) {
         addToFavorite(mealModel);
+        Toast.makeText(getContext(), "Meal is added to favorite", Toast.LENGTH_SHORT).show();
     }
 }

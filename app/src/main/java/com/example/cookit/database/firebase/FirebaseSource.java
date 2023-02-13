@@ -48,7 +48,6 @@ public class FirebaseSource implements FirebaseSourseInterface  {
     public void insertUser(UserModel userModel) {
         List<String> route = Arrays.asList(userModel.getEmail().split("\\."));
         databaseReference.child("User").child(route.get(0)).setValue(userModel);
-
     }
 
 
@@ -56,7 +55,7 @@ public class FirebaseSource implements FirebaseSourseInterface  {
     public boolean isUserExists(UserModel userModel) {
 
         List<String> route = Arrays.asList(userModel.getEmail().split("\\."));
-        databaseReference.child("User").child(route.get(0));
+        databaseReference.child("User").orderByChild("email").equals(userModel.getEmail());
 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override

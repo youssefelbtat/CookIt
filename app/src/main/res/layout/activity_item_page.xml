@@ -65,7 +65,7 @@
             android:id="@+id/add_to_favorite"
             android:layout_width="30dp"
             android:layout_height="32dp"
-            android:background="@drawable/add_favorite_solid_icon"
+            android:background="@drawable/add_favorite_outline_icon"
             app:layout_constraintBottom_toBottomOf="@+id/add_to_calender"
             app:layout_constraintEnd_toEndOf="@+id/itemPageMealCountry"
             app:layout_constraintTop_toTopOf="@+id/add_to_calender"

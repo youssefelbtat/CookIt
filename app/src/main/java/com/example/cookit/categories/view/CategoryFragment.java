@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cookit.R;
 import com.example.cookit.categories.presenter.CategoriesPresenter;
@@ -91,5 +92,6 @@ public class CategoryFragment extends Fragment implements CategoriesViewInterfac
     @Override
     public void addToFavoriteOnClick(MealModel mealModel) {
         addToFavorite(mealModel);
+        Toast.makeText(getContext(), "Meal is added to favorite", Toast.LENGTH_SHORT).show();
     }
 }

@@ -238,6 +238,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     @Override
     public void addToFavoriteOnClick(MealModel mealModel) {
         addToFavorite(mealModel);
+        Toast.makeText(getApplicationContext(), "Meal is added to favorite", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -249,6 +250,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     @Override
     public void addMealToPlan(MealModel Meal) {
         pagepresenter.addToPlan(Meal);
+        Toast.makeText(getApplicationContext(), "Meal is added to plan", Toast.LENGTH_SHORT).show();
 
     }
     void addTop(int i){
