@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.cookit.R;
 import com.example.cookit.database.firebase.FirebaseSource;
@@ -121,6 +122,7 @@ public class planMealsFragment extends Fragment implements OnPlanClickListner,On
     @Override
     public void removeMealFromPlaned(MealModel meal) {
         planPresenterInterface.removeFromPlan(meal);
+        Toast.makeText(getContext(), "Meal is added to plan", Toast.LENGTH_SHORT).show();
         updateData(0,meal);
         updateData(1,meal);
         updateData(2,meal);

@@ -48,9 +48,6 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
     EditText userName , email ,password ,confirmPassword;
     Button signup ;
 
-    private static final String EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-    private static final String PASSWORD = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,15})";
     SignUpPresenterInterface signUpPresenterInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,15 +146,9 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
             userModel.setFavorites(null);
 
             if (isUserExists(userModel)){
-                System.out.println("signup before "+userModel.getUserName());
-                System.out.println("signup before "+userModel.getEmail());
-                System.out.println("signup before "+userModel.getPassWord());
-                insertUserData(userModel);
-                System.out.println("signup After "+userModel.getUserName());
-                System.out.println("signup After "+userModel.getEmail());
-                System.out.println("signup After "+userModel.getPassWord());
-                saveUserData(userModel);
 
+                insertUserData(userModel);
+                saveUserData(userModel);
 
                 Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                 startActivity(intent);
