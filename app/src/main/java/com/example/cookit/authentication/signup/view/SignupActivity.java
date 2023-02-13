@@ -190,7 +190,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
     private void initgoogle(){
         firebaseAuth=FirebaseAuth.getInstance();
         GoogleSignInOptions googleSignInOptions=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("199536267599-ip4379ku3admraq02eu85dtooq9cv546.apps.googleusercontent.com")
+                .requestIdToken((getString(R.string.default_web_client_id)))
                 .requestEmail()
                 .build();
 
