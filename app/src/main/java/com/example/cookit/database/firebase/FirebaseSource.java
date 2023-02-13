@@ -79,7 +79,6 @@ public class FirebaseSource implements FirebaseSourseInterface  {
             }
         });
 
-        System.out.println("tttttttttttttttttttttttttt"+exists);
         return exists;
     }
 

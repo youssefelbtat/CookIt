@@ -43,6 +43,7 @@ public class SigninActivity extends AppCompatActivity implements SigninOnclickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        getSupportActionBar().hide();
         init();
         signinPresenterInterface=new SigninPresenter(this, RepositoryFirebase.getInstance(FirebaseSource.getInstance(this)
                 , SharedPreferenceSource.getInstance(this),this));

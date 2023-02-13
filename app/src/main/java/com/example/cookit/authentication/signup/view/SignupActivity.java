@@ -54,21 +54,16 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         signupWithGoogle_btn=findViewById(R.id.google_img_btn);
-        firebaseAuth=FirebaseAuth.getInstance();
-        GoogleSignInOptions googleSignInOptions=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        googleSignInClient= GoogleSignIn.getClient(this,googleSignInOptions);
+        getSupportActionBar().hide();
+        init();
+        initgoogle();
+
         signupWithGoogle_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signup();
             }
         });
-
-        init();
-
 
         signUpPresenterInterface = new SignupPresenter(RepositoryFirebase.getInstance(FirebaseSource.getInstance(this)
                 , SharedPreferenceSource.getInstance(this),this));
@@ -90,6 +85,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
         confirmPassword = findViewById(R.id.editTextConfirmPassword);
         signup = findViewById(R.id.btnSignup);
     }
+
 
     @Override
     public void onSuccessSignUpWithGoogle() {
@@ -185,14 +181,22 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         if(requestCode==RC_SIGN_IN){
             Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
 
     }
+    private void initgoogle(){
+        firebaseAuth=FirebaseAuth.getInstance();
+        GoogleSignInOptions googleSignInOptions=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("199536267599-ip4379ku3admraq02eu85dtooq9cv546.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
 
+        googleSignInClient= GoogleSignIn.getClient(this,googleSignInOptions);
+        googleSignInClient.revokeAccess();
+    }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
         System.out.println("Hello from handleSignInResult Auth........");
@@ -238,6 +242,8 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
                     Toast.makeText(SignupActivity.this, " Filed", Toast.LENGTH_SHORT).show();
                 }
             }
+
+
         });
     }
 

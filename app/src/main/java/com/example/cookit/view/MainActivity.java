@@ -34,12 +34,11 @@ public class MainActivity extends AppCompatActivity {
         init();
          bottomNavView=findViewById(R.id.bottomNavView);
          bottomNavView.setBackground(null);
-        System.out.println(Utalites.SKIP);
+
          if(Utalites.SKIP=="skip"){
              floatingActionButton.setEnabled(false);
              bottomNavView.getMenu().getItem(2).setEnabled(false);
              bottomNavView.getMenu().getItem(3).setEnabled(false);
-             bottomNavView.getMenu().getItem(4).setEnabled(false);
          }
          else if(!Utalites.isNetworkAvailable(this)){
              bottomNavView.getMenu().getItem(4).setEnabled(false);
@@ -66,14 +65,23 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+
+
+        floatingActionButton.setOnClickListener(v->{
+            NavController navController1 = Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment);
+            navController1.navigateUp();
+            navController1.navigate(R.id.planMealsFragment);
+        });
+
         NavController navController= Navigation.findNavController(this,R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavView,navController);
         bottomNavView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_global_planMealsFragment);
+                Navigation.findNavController(v).navigate(R.id.nav_host_fragment);
             }
         });
+
 
 
     }
@@ -84,4 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
                 .build();
     }
+
+
 }

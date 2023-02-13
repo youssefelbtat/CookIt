@@ -141,7 +141,7 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
         editUserName.setText(userModel.getUserName());
         image = userModel.getImage();
         if (image.equals("null")) {
-            profileImage.setImageResource(R.drawable.ic_launcher_background);
+            profileImage.setImageResource(R.drawable.dfuser);
         } else {
             Glide.with(getContext()).load(Uri.parse(userModel.getImage())).into(profileImage);
         }
@@ -267,7 +267,7 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
                         userModel.setImage(image);
                         updateUserData(userModel);
                         updateUserFirebaseData(userModel);
-                        profileImage.setImageResource(R.drawable.ic_launcher_background);
+                        profileImage.setImageResource(R.drawable.dfuser);
                         Toast.makeText(getContext(), "Your picture is deleted", Toast.LENGTH_SHORT).show();
                     }
                 }
