@@ -136,9 +136,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
                         intent.setData(CalendarContract.Events.CONTENT_URI);
                         intent.putExtra(CalendarContract.Events.TITLE,"Day Plan");
                         intent.putExtra(CalendarContract.Events.DESCRIPTION,"You set "+mealName.getText()+" In your Plan In "+checkedDays[which]);
-//                        intent.putExtra(CalendarContract.Events.ALL_DAY,"true");
-                        intent.putExtra(CalendarContract.Events.DTSTART,calendar);
-                        intent.putExtra(CalendarContract.Events.DTEND,calendar);
+                        intent.putExtra(CalendarContract.Events.ALL_DAY,"true");
 
                         if(intent.resolveActivity(getPackageManager())!=null){
                             startActivity(intent);
