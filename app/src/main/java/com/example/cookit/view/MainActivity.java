@@ -34,12 +34,11 @@ public class MainActivity extends AppCompatActivity {
         init();
          bottomNavView=findViewById(R.id.bottomNavView);
          bottomNavView.setBackground(null);
-        System.out.println(Utalites.SKIP);
+
          if(Utalites.SKIP=="skip"){
              floatingActionButton.setEnabled(false);
              bottomNavView.getMenu().getItem(2).setEnabled(false);
              bottomNavView.getMenu().getItem(3).setEnabled(false);
-             bottomNavView.getMenu().getItem(4).setEnabled(false);
          }
          else if(!Utalites.isNetworkAvailable(this)){
              bottomNavView.getMenu().getItem(4).setEnabled(false);
@@ -84,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
     }
     void init(){
         new NetworkRequest.Builder()
@@ -92,4 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
                 .build();
     }
+
+
 }
