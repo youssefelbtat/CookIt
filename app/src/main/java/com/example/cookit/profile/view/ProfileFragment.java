@@ -171,6 +171,8 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
                     updateUserData(userModel);
                     updateUserFirebaseData(userModel);
                     Glide.with(getView()).load(Uri.parse(userModel.getImage())).into(profileImage);
+                    Toast.makeText(getContext(), "Your picture is updated", Toast.LENGTH_SHORT).show();
+
                 }
             }
         }
@@ -190,6 +192,8 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
 
         Intent intent = new Intent(getContext(), SignupActivity.class);
         startActivity(intent);
+        Toast.makeText(getContext(), "you logged out", Toast.LENGTH_SHORT).show();
+
 
         getActivity().finish();
 
@@ -201,6 +205,8 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
         userName.setText(editUserName.getText().toString());
         updateUserData(userModel);
         updateUserFirebaseData(userModel);
+        Toast.makeText(getContext(), "Your userName is updated", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -216,6 +222,8 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
             userModel.setPassWord(confirmPassword.getText().toString());
             updateUserData(userModel);
             updateUserFirebaseData(userModel);
+            Toast.makeText(getContext(), "Your password is updated", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -260,6 +268,7 @@ public class ProfileFragment extends Fragment implements ProfileViewInterface , 
                         updateUserData(userModel);
                         updateUserFirebaseData(userModel);
                         profileImage.setImageResource(R.drawable.dfuser);
+                        Toast.makeText(getContext(), "Your picture is deleted", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

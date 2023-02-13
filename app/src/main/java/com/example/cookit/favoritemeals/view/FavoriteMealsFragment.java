@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.cookit.R;
 import com.example.cookit.database.firebase.FirebaseSource;
@@ -126,6 +127,7 @@ public class FavoriteMealsFragment extends Fragment implements FavViewInterface 
         removeFromFav(mealModel);
         favoriteAdapter.removeFavorite(mealModel);
         favoriteAdapter.notifyDataSetChanged();
+        Toast.makeText(getContext(), "Meal is deleted from favorite", Toast.LENGTH_SHORT).show();
         UserModel userModel =favPresenterInterface.getSavedData();
         userModel.setFavorites(favoriteAdapter.remove(mealModel));
         updateFavoriteInFirebase(userModel);

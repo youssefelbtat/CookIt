@@ -136,9 +136,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
                         intent.setData(CalendarContract.Events.CONTENT_URI);
                         intent.putExtra(CalendarContract.Events.TITLE,"Day Plan");
                         intent.putExtra(CalendarContract.Events.DESCRIPTION,"You set "+mealName.getText()+" In your Plan In "+checkedDays[which]);
-//                        intent.putExtra(CalendarContract.Events.ALL_DAY,"true");
-                        intent.putExtra(CalendarContract.Events.DTSTART,calendar);
-                        intent.putExtra(CalendarContract.Events.DTEND,calendar);
+                        intent.putExtra(CalendarContract.Events.ALL_DAY,"true");
 
                         if(intent.resolveActivity(getPackageManager())!=null){
                             startActivity(intent);
@@ -240,6 +238,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     @Override
     public void addToFavoriteOnClick(MealModel mealModel) {
         addToFavorite(mealModel);
+        Toast.makeText(getApplicationContext(), "Meal is added to favorite", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -251,6 +250,7 @@ public class ItemPageActivity extends AppCompatActivity implements ItemViewInter
     @Override
     public void addMealToPlan(MealModel Meal) {
         pagepresenter.addToPlan(Meal);
+        Toast.makeText(getApplicationContext(), "Meal is added to plan", Toast.LENGTH_SHORT).show();
 
     }
     void addTop(int i){
