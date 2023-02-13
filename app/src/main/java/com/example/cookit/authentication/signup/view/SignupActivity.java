@@ -145,10 +145,8 @@ public class SignupActivity extends AppCompatActivity implements SignUpViewInter
             userModel.setPassWord(password.getText().toString());
             userModel.setFavorites(null);
 
-          //  System.out.println("isisiisisisiisi"+isUserExists(userModel));
             if (isUserExists(userModel)){
 
-                System.out.println("enteeeeeeeeeeeeeeeeeeeeeeeeeeer");
                 insertUserData(userModel);
                 saveUserData(userModel);
 

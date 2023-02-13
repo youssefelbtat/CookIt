@@ -65,11 +65,9 @@ public class FirebaseSource implements FirebaseSourseInterface  {
                 UserModel userModel1= dataSnapshot.child(route.get(0)).getValue(UserModel.class);
                 if (userModel1 != null) {
                     if (userModel1.getEmail().equals(userModel.getEmail())) {
-                        System.out.println("sssssssssssssssssssssssssssss" + userModel1.getEmail());
                         exists = false;
                     }
                 }else {
-                    System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
                     exists = true;
                     System.out.println(exists);
 
