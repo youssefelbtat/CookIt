@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:199536267599:android:c9adaf645c42dd205af53a",
+        "mobilesdk_app_id": "1:199536267599:android:97fe8842607ee2535af53a",
         "android_client_info": {
           "package_name": "com.example.cookit"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "199536267599-ns3cca5v5k29b61eakndhc6tdr0a1sep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cookit",
+            "certificate_hash": "fdf1c6f4221d954c04f3d3cac2d17bee739cdd50"
+          }
+        },
         {
           "client_id": "199536267599-ip4379ku3admraq02eu85dtooq9cv546.apps.googleusercontent.com",
           "client_type": 3
