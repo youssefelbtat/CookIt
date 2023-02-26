@@ -39,8 +39,8 @@
 
 # our team : 
 - Youssef Ramadan Elbtat. 
-    Linkedin: https://www.linkedin.com/in/joe-elbtat
-    Github:   https://github.com/joeelbtat
+    Linkedin: https://www.linkedin.com/in/youssefelbtat
+    Github:   https://github.com/youssefelbtat
 
 -Fatma Hassan Gouda.
     Linkedin: https://www.linkedin.com/in/fatma-hassan-51482b1a6
